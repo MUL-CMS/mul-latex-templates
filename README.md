@@ -1,0 +1,2 @@
+# MUL LaTeX templates
+
