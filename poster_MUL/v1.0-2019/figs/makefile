@@ -47,4 +47,4 @@ all:	$(GPITARGET) $(JPGTARGET) $(PNGTARGET) $(SVGTARGET) $(PDFTARGET)
 #	touch ../$(MAIN).tex	
 	
 clean:	
-	rm -f *.aux *.dvi *-inc.eps *.log *.tex
+	rm -f *.aux *.dvi *-inc.eps *.log *.tex *converted-to*

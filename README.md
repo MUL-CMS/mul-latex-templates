@@ -23,10 +23,10 @@ A provided utility `select-used-fig` selects from a given subfolder only those f
 *   `select-used-figs`  
     lists available `log` files in the present directory
 
-*   `select-used-figs <file.log>`
+*   `select-used-figs <file.log>`  
     selects unused figures subfolder `figs` based on `<file.log>` and copies them to `figs-unused`
 
-*   `select-used-figs <file.log> <subfolder>`
+*   `select-used-figs <file.log> <subfolder>`  
     selects unused figures subfolder `<subfolder>` based on `<file.log>` and copies them to `<subfolder>-unused`
 
 Why not to delete the files directly? Because each of us has to make the final decision what (and if) to delete. The utility helps you _to select_ the unused figures (but maybe you want to keep certain source data etc.)
@@ -35,7 +35,7 @@ Why not to delete the files directly? Because each of us has to make the final d
 
 ## poster_MUL
 
-*   v1.0-2019 (current)
+*   v1.0-2019 (current)  
     pdfLaTeX using `tikz`
 
 *   v0.1-pre2019  

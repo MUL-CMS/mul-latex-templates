@@ -1,0 +1,181 @@
+% Package dh_math.cls
+% (c) 2007 David Holec
+%
+% This package introduces some abbreviations for typesetting maily
+% mathematical text.
+\ProvidesPackage{dh_math}[2007/04/11 v0.1 David's package for typesetting mathematics.]
+%
+%
+% Verbosity of the package
+\newcounter{dh_math@verbose}%
+\DeclareOption{verbose}{\setcounter{dh_math@verbose}{1}}%
+\DeclareOption{silent}{\setcounter{dh_math@verbose}{0}}%
+%
+% implicit options: silent
+\ExecuteOptions{silent}%
+\ProcessOptions%
+%
+% it requires the ifthen.sty package for logical operations
+\RequirePackage{ifthen,bm}%
+%
+%
+% derivative and partial derivative
+\newcommand{\p}{\partial}%
+\ifthenelse{\isundefined{\d}}%
+ {\newcommand{\d}{\mbox{d}}}%
+ {\ifthenelse{\value{dh_math@verbose}=0}%
+  {\relax}%
+  {\PackageWarning{dh_math}{Redefining command \noexpand\d}}%
+  \renewcommand{\d}{\mbox{d}}%
+ }%
+\newcommand{\pderiv}[3][]{%
+ \ifthenelse{\equal{#1}{}}%
+ {\frac{\p #2}{\p #3}}%
+ {\frac{\p^#1 #2}{\p #3^#1}}%
+}%
+\newcommand{\deriv}[3][]{%
+ \ifthenelse{\equal{#1}{}}%
+ {\frac{\d #2}{\d #3}}%
+ {\frac{\d^#1 #2}{\d #3^#1}}%
+}%
+%
+%
+% the sign function
+\newcommand{\sgn}{\mathop{\rm sgn}}%
+%
+%
+% complex numbers
+\newcommand{\I}{\mathrm{i}}%
+ \newcommand{\e}{\mathrm{e}}%
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}%
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}%
+%
+%
+% caligraphical symbols
+\newcommand{\E}{{\cal E}}%
+%
+%
+% general abbreviations
+\newcommand{\eps}{\varepsilon}%
+\newcommand{\vph}{\varphi}%
+\newcommand{\Beps}{\Bvarepsilon}%
+%
+%
+% easier brackets
+\renewcommand{\(}{\left(}%
+\renewcommand{\)}{\right)}%
+\renewcommand{\[}{\left[}%
+\renewcommand{\]}{\right]}%
+%
+%
+% fractions from Yeti
+\newcommand\fracd{\@ifstar\@fracds\@fracd}
+\newcommand\@fracd[2]{{\displaystyle{#1\over#2}}}
+\newcommand\@fracds[2]{{\displaystyle{\strut#1\over\strut#2}}}
+%
+%
+% bold greek symbols
+\DeclareSymbolFont{boldletters}{OML}{mdput}{b}{it}%
+\DeclareSymbolFont{boldBigletters}{OML}{mdput}{b}{it}%
+\DeclareMathSymbol{\Balpha}{\mathord}{boldletters}{"0B}%
+\DeclareMathSymbol{\Bbeta}{\mathord}{boldletters}{"0C}%
+\DeclareMathSymbol{\Bgamma}{\mathord}{boldletters}{"0D}%
+\DeclareMathSymbol{\Bdelta}{\mathord}{boldletters}{"0E}%
+\DeclareMathSymbol{\Bepsilon}{\mathord}{boldletters}{"0F}%
+\DeclareMathSymbol{\Bzeta}{\mathord}{boldletters}{"10}%
+\DeclareMathSymbol{\Beta}{\mathord}{boldletters}{"11}%
+\DeclareMathSymbol{\Btheta}{\mathord}{boldletters}{"12}%
+\DeclareMathSymbol{\Biota}{\mathord}{boldletters}{"13}%
+\DeclareMathSymbol{\Bkappa}{\mathord}{boldletters}{"14}%
+\DeclareMathSymbol{\Blambda}{\mathord}{boldletters}{"15}%
+\DeclareMathSymbol{\Bmu}{\mathord}{boldletters}{"16}%
+\DeclareMathSymbol{\Bnu}{\mathord}{boldletters}{"17}%
+\DeclareMathSymbol{\Bxi}{\mathord}{boldletters}{"18}%
+\DeclareMathSymbol{\Bpi}{\mathord}{boldletters}{"19}%
+\DeclareMathSymbol{\Brho}{\mathord}{boldletters}{"1A}%
+\DeclareMathSymbol{\Bsigma}{\mathord}{boldletters}{"1B}%
+\DeclareMathSymbol{\Btau}{\mathord}{boldletters}{"1C}%
+\DeclareMathSymbol{\Bupsilon}{\mathord}{boldletters}{"1D}%
+\DeclareMathSymbol{\Bphi}{\mathord}{boldletters}{"1E}%
+\DeclareMathSymbol{\Bchi}{\mathord}{boldletters}{"1F}%
+\DeclareMathSymbol{\Bpsi}{\mathord}{boldletters}{"20}%
+\DeclareMathSymbol{\Bomega}{\mathord}{boldletters}{"21}%
+\DeclareMathSymbol{\Bvarepsilon}{\mathord}{boldletters}{"22}%
+\DeclareMathSymbol{\Bvartheta}{\mathord}{boldletters}{"23}%
+\DeclareMathSymbol{\Bvarpi}{\mathord}{boldletters}{"24}%
+\DeclareMathSymbol{\Bvarrho}{\mathord}{boldletters}{"25}%
+\DeclareMathSymbol{\Bvarsigma}{\mathord}{boldletters}{"26}%
+\DeclareMathSymbol{\Bvarphi}{\mathord}{boldletters}{"27}%
+\DeclareMathSymbol{\BGamma}{\mathalpha}{boldBigletters}{"00}%
+\DeclareMathSymbol{\BDelta}{\mathalpha}{boldBigletters}{"01}%
+\DeclareMathSymbol{\BTheta}{\mathalpha}{boldBigletters}{"02}%
+\DeclareMathSymbol{\BLambda}{\mathalpha}{boldBigletters}{"03}%
+\DeclareMathSymbol{\BXi}{\mathalpha}{boldBigletters}{"04}%
+\DeclareMathSymbol{\BPi}{\mathalpha}{boldBigletters}{"05}%
+\DeclareMathSymbol{\BSigma}{\mathalpha}{boldBigletters}{"06}%
+\DeclareMathSymbol{\BUpsilon}{\mathalpha}{boldBigletters}{"07}%
+\DeclareMathSymbol{\BPhi}{\mathalpha}{boldBigletters}{"08}%
+\DeclareMathSymbol{\BPsi}{\mathalpha}{boldBigletters}{"09}%
+\DeclareMathSymbol{\BOmega}{\mathalpha}{boldBigletters}{"0A}%
+%
+%
+% new declaration of the \vec command - vectors are in bold instead of arrows over them
+\DeclareMathAlphabet{\mathvec}{OT1}{mdput}{bx}{it}%
+\let\oldvec\vec%
+\ifthenelse{\value{dh_math@verbose}=0}%
+ {\relax}%
+ {\PackageWarning{dh_math}{Redefining command \noexpand\vec ^^J (the old definition remains available through the command \noexpand\oldvec)^^J}}%
+\renewcommand{\vec}[1]{%
+\ifthenelse{\equal{#1}{\alpha}}{\Balpha}{%
+\ifthenelse{\equal{#1}{\beta}}{\Bbeta}{%
+\ifthenelse{\equal{#1}{\gamma}}{\Bgamma}{%
+\ifthenelse{\equal{#1}{\delta}}{\Bdelta}{%
+\ifthenelse{\equal{#1}{\epsilon}}{\Bepsilon}{%
+\ifthenelse{\equal{#1}{\zeta}}{\Bzeta}{%
+\ifthenelse{\equal{#1}{\eta}}{\Beta}{%
+\ifthenelse{\equal{#1}{\theta}}{\Btheta}{%
+\ifthenelse{\equal{#1}{\iota}}{\Biota}{%
+\ifthenelse{\equal{#1}{\kappa}}{\Bkappa}{%
+\ifthenelse{\equal{#1}{\lambda}}{\Blambda}{%
+\ifthenelse{\equal{#1}{\mu}}{\Bmu}{%
+\ifthenelse{\equal{#1}{\nu}}{\Bnu}{%
+\ifthenelse{\equal{#1}{\xi}}{\Bxi}{%
+\ifthenelse{\equal{#1}{\pi}}{\Bpi}{%
+\ifthenelse{\equal{#1}{\rho}}{\Brho}{%
+\ifthenelse{\equal{#1}{\sigma}}{\Bsigma}{%
+\ifthenelse{\equal{#1}{\tau}}{\Btau}{%
+\ifthenelse{\equal{#1}{\upsilon}}{\Bupsilon}{%
+\ifthenelse{\equal{#1}{\phi}}{\Bphi}{%
+\ifthenelse{\equal{#1}{\chi}}{\Bchi}{%
+\ifthenelse{\equal{#1}{\psi}}{\Bpsi}{%
+\ifthenelse{\equal{#1}{\omega}}{\Bomega}{%
+\ifthenelse{\equal{#1}{\varepsilon}}{\Bvarepsilon}{%
+\ifthenelse{\equal{#1}{\vartheta}}{\Bvartheta}{%
+\ifthenelse{\equal{#1}{\varpi}}{\Bvarpi}{%
+\ifthenelse{\equal{#1}{\varrho}}{\Bvarrho}{%
+\ifthenelse{\equal{#1}{\varsigma}}{\Bvarsigma}{%
+\ifthenelse{\equal{#1}{\varphi}}{\Bvarphi}{%
+\ifthenelse{\equal{#1}{\Gamma}}{\BGamma}{%
+\ifthenelse{\equal{#1}{\Delta}}{\BDelta}{%
+\ifthenelse{\equal{#1}{\Theta}}{\BTheta}{%
+\ifthenelse{\equal{#1}{\Lambda}}{\BLambda}{%
+\ifthenelse{\equal{#1}{\Xi}}{\BXi}{%
+\ifthenelse{\equal{#1}{\Pi}}{\BPi}{%
+\ifthenelse{\equal{#1}{\Sigma}}{\BSigma}{%
+\ifthenelse{\equal{#1}{\Upsilon}}{\BUpsilon}{%
+\ifthenelse{\equal{#1}{\Phi}}{\BPhi}{%
+\ifthenelse{\equal{#1}{\Psi}}{\BPsi}{%
+\ifthenelse{\equal{#1}{\Omega}}{\BOmega}{%
+% {\mathvec #1}%
+{\bm{#1}}%
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}%
+}
+%
+%
+% Sans serif math font - taken from the Arev Sans package by Stephen Hartke
+\DeclareMathAlphabet{\mathSans}{OML}{zavm}{m}{it}%
+%
+\endinput
+%
+% end of dh_math.sty
+%%%%%%%%%%%%%%%%%%%%
