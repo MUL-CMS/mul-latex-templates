@@ -2,6 +2,7 @@
 
 A collection of LaTeX templates to be used for our presentations, posters, thesis, official letters etc.
 
+
 ## Usage
 
 LaTeX source codes can be compiled using provided `makefile`. These make use of `latexmk` utility.
@@ -15,6 +16,7 @@ LaTeX source codes can be compiled using provided `makefile`. These make use of 
 By default, the figures are expected to be in folder `figs` while graphics (logos, corporate identity, etc.) in `graphics`.
 
 Don't forget to modify the name of your main document in the `makefile`!
+
 
 ### Clean unused figures
 
@@ -33,14 +35,6 @@ Why not to delete the files directly? Because each of us has to make the final d
 
 
 
-## poster_MUL
-
-*   v1.0-2019 (current)  
-    pdfLaTeX using `tikz`
-
-*   v0.1-pre2019  
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`
-
 
 ## talk_MUL
 
@@ -48,7 +42,7 @@ Why not to delete the files directly? Because each of us has to make the final d
     pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
     (Department of Materials Science design)
 
-*   v1.00-2019 (current)  
+*   v1.00-2019  
     pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
     (Department of Materials Science design)
 
@@ -67,3 +61,27 @@ Why not to delete the files directly? Because each of us has to make the final d
 *   v0.1-2008-2012  
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (old Department of Physical Metallurgy and Materials Testing design)
+
+
+
+
+## poster_MUL
+
+*   v1.0-2019 (current)  
+    pdfLaTeX using `tikz`
+
+*   v0.1-pre2019  
+    LaTeX + `dvips` + `ps2pdf` using `pstricks`
+
+
+
+## letter_MUL
+
+*   v1.0-2019 (current)  
+    pdfLaTeX  
+    (Department of Materials Science design)  
+    credits to: Dominik
+
+*   v0.1-2012-2018  
+    LaTeX + `dvips` + `ps2pdf`  
+    (Department of Physical Metallurgy and Materials Testing design)

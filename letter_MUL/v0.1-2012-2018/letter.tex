@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,
+  margin=2cm,
+  bottom=3cm,
+  top=2cm,
+  headheight=2.5cm,
+  headsep=0.8cm,
+  footskip=0.5cm,
+  foot=1.8cm]{geometry}
+\usepackage[dvips]{graphicx,xcolor}
+\usepackage{bm,amsmath,fancyhdr,ifthen}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5eX}
+
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{0pt}
+\chead{
+  \ifthenelse{\value{page}=1}
+    {\unitlength=1mm\begin{picture}(20,0)
+      \put(0,-28){\includegraphics[height=30mm]{logo_MU.eps}}
+     \end{picture}}
+%     {\sffamily\today\hfill Response to Referees' comments\hfill\color{teal}\thepage}
+}
+\cfoot{\footnotesize\sffamily \textbf{\color{teal}Priv.-Doz. Mgr. David Holec, PhD.}\\
+Franz-Josef-Stra\ss{}e 18, A-8700 Leoben, \hfill Tel.: +43-3842-402-4211, Fax: +43-3842-402-4202,\hfill david.holec@unileoben.ac.at}
+\pagestyle{fancy}
+
+\begin{document}
+\mbox{}\hfill\parbox{5.6cm}{
+\parindent=-5mm
+Priv.-Doz. Mgr. David Holec, PhD.\par
+Department of Materials Science\par
+Montanuniverst\"at Leoben\par
+Franz-Josef-Stra\ss{}e 18\par
+A-8700 Leoben\par
+Austria}\bigskip
+
+{\sffamily\bfseries\large\color{teal} TO}\\
+
+\bigskip\bigskip
+
+\today\bigskip\bigskip
+
+
+
+
+Sincerely yours,\bigskip\bigskip
+
+ \hspace*{9.5cm}\includegraphics[width=3cm]{signature_DH.eps}
+
+\hspace*{10cm}David Holec
+\end{document}
