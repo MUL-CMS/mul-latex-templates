@@ -1,13 +1,13 @@
 MAIN = dh_poster
 $bibtex_use = 0
 
-.PHONY: clean figs
+.PHONY: clean figs graphics
 
-all:	figs $(MAIN).pdf
+all:	$(MAIN).pdf
 
 pdf:	$(MAIN).pdf
 
-%.pdf:	%.tex figs
+%.pdf:	%.tex figs graphics
 	latexmk -bibtex -pdf $<
 # 
 # %.ps:	%.dvi	
