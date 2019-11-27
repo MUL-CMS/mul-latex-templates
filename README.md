@@ -85,3 +85,15 @@ Why not to delete the files directly? Because each of us has to make the final d
 *   v0.1-2012-2018  
     LaTeX + `dvips` + `ps2pdf`  
     (Department of Physical Metallurgy and Materials Testing design)
+
+
+
+## thesis_MUL
+
+*   v1.1 (current)  
+    pdfLaTeX  
+    capable of including publications in pdf
+
+*   v1.0  
+    LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX  
+    basic template without pdfs
