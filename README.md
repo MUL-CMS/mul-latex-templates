@@ -41,3 +41,29 @@ Why not to delete the files directly? Because each of us has to make the final d
 *   v0.1-pre2019  
     LaTeX + `dvips` + `ps2pdf` using `pstricks`
 
+
+## talk_MUL
+
+*   v1.01-2019 (current)  
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
+    (Department of Materials Science design)
+
+*   v1.00-2019 (current)  
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
+    (Department of Materials Science design)
+
+*   v0.23-2016  
+    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
+    (Department of Physical Metallurgy and Materials Testing design)
+
+*   v0.22-2013  
+    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
+    (Department of Physical Metallurgy and Materials Testing design)
+
+*   v0.21-2013  
+    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
+    (Department of Physical Metallurgy and Materials Testing design)
+
+*   v0.1-2008-2012  
+    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
+    (old Department of Physical Metallurgy and Materials Testing design)
