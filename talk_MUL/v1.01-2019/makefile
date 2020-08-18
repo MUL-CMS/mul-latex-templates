@@ -1,16 +1,18 @@
 MAIN = template
 
-.PHONY:	clean
+.PHONY:	clean figs
 
-all:	$(MAIN).pdf
-
+all:	$(MAIN).pdf 
 
 %.pdf:	%.tex *.cls
 	latexmk -pdf $<
-# 	cp $< $(subst .tex,_1.tex,$<)
-# 	sed -i -e "s/utf8/utf8, trans/g" $(subst .tex,_1.tex,$<)
-# 	latexmk -pdf $(subst .tex,_1.tex,$<)
+
+figs:	
+	$(MAKE) MAIN=$(MAIN) -C figs
+	$(MAKE) MAIN=$(MAIN) -C graphics
 	
 clean:
 	rm *.nav *snm
 	latexmk -c
+	$(MAKE) -C figs $@
+	$(MAKE) -C graphics $@
