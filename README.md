@@ -62,8 +62,17 @@ Why not to delete the files directly? Because each of us has to make the final d
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (old Department of Physical Metallurgy and Materials Testing design)
 
+### drawing on slides using the `\framegrid` command
 
+To draw arbitrarily over the whole slide, one can use the `overdraw` environment. This allows you to paint even over the table of contents.
 
+```
+\begin{overdraw}
+    \framegrid
+    \node[red, very thick, fill=red!50!white] (2,2) rectangle (3,3);
+\end{overdraw}
+```
+This will show a grid over the whole slide. Furthermore it will plot a red rectangle on the slide 
 
 ## poster_MUL
 
@@ -72,8 +81,6 @@ Why not to delete the files directly? Because each of us has to make the final d
 
 *   v0.1-pre2019  
     LaTeX + `dvips` + `ps2pdf` using `pstricks`
-
-
 
 ## letter_MUL
 
