@@ -1,4 +1,5 @@
 \documentclass[utf8]{beamerDMS}
+\usepackage{xcolor}
 
 \title[Short title]{Very long title of the whole presentation which could span over more lines}
 \author[First A. {\sl et al.}]{First Author\aff{1,2}, Second Author\aff{2} and Last Author\aff{3}} 
@@ -58,4 +59,35 @@ normal text afterwards\dots
   \put(11,3){\includegraphics[width=5mm]{graphics/logo_MUL_M}}
 \end{picture}
 \end{frame}
+
+\subsection{How to use \texttt{framegrid}}
+\begin{frame}{Abra abra kadabra}
+	\onslide<1->
+		content...
+		And eve ever more content
+		\begin{figure}
+			\centering
+			\includegraphics[height=4cm]{figs/david}
+			\caption{This is David. Lets' make him new his glasses with \texttt{framegrid}}
+		\end{figure}
+	\onslide<2>
+		\begin{overdraw}
+			\framegrid
+		\end{overdraw}
+	\onslide<3>
+	\begin{overdraw}
+		\framegrid
+		\draw [red, very thick] (9.4, 6.5) circle (0.25);
+		\draw [red, very thick] (10.15, 6.5) circle (0.25);
+		\draw [red, very thick] (9.65, 6.5) -- (9.9, 6.5);
+	\end{overdraw}
+	\onslide<4>
+	\begin{overdraw}
+		\draw [red, very thick] (9.4, 6.5) circle (0.25);
+		\draw [red, very thick] (10.15, 6.5) circle (0.25);
+		\draw [red, very thick] (9.65, 6.5) -- (9.9, 6.5);
+	\end{overdraw}
+
+\end{frame}
+
 \end{document}
