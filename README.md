@@ -104,3 +104,6 @@ This will show a grid over the whole slide. Furthermore it will plot a red recta
 *   v1.0  
     LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX  
     basic template without pdfs
+
+# Office templates
+The templates are also available for the MS-Office suite. They're in the `office-templates` branch
