@@ -1,50 +1,58 @@
 .PHONY:	clean
 
 GPISOURCE=$(wildcard *.gpi)
-GPITARGET=$(GPISOURCE:.gpi=.eps)
+GPITARGET=$(GPISOURCE:.gpi=.pdf)
 
-#JPGSOURCE=$(wildcard *.jpg)
-#JPGTARGET=$(JPGSOURCE:.jpg=.eps)
-
-#PNGSOURCE=$(wildcard *.png)
-#PNGTARGET=$(PNGSOURCE:.png=.eps)
+EPSSOURCE=$(wildcard *.eps)
+EPSTARGET=$(EPSSOURCE:.eps=.pdf)
 
 SVGSOURCE=$(wildcard *.svg)
 SVGTARGET=$(SVGSOURCE:.svg=.pdf)
 
-#PDFSOURCE=$(wildcard *.pdf)
-#PDFTARGET=$(PDFSOURCE:.pdf=.eps)
+all:	$(GPITARGET) $(EPSTARGET) $(SVGTARGET)
 
-all:	$(GPITARGET) $(JPGTARGET) $(PNGTARGET) $(SVGTARGET) $(PDFTARGET)
-
-%.eps: 	%.gpi
+%.pdf: 	%.gpi
 	gnuplot $<
 	latex $(subst gpi,tex,$<)
 	dvips -o $@ $(subst gpi,dvi,$<)
+	ps2pdf -dEPSCrop $(subst gpi,eps,$<)
 	touch ../$(MAIN).tex
 
-#%.eps:	%.jpg
-# 	(jpeg2ps $< > $@)
-#	convert $< eps2:$@
-#	touch ../$(MAIN).tex
+%.pdf: 	%.eps
+	ps2pdf -dEPSCrop $<
+	touch ../$(MAIN).tex
 
-#%.eps:	%.png
-# 	(jpeg2ps $< > $@)
-#	convert $< eps2:$@
-#	touch ../$(MAIN).tex
-	
+# %.pdf:	%.svg
+# 	inkscape $< --export-pdf=$@
+# 	touch ../$(MAIN).tex	
+
 %.pdf:	%.svg
-# 	(jpeg2ps $< > $@)
-#	inkscape $< -E $@ --export-ps-level=3
-	inkscape $< --export-pdf=$@
-	touch ../$(MAIN).tex	
-	
-#%.eps:	%.pdf
-# 	(jpeg2ps $< > $@)
-#	pdf2ps $<
-#	ps2eps -f $(subst pdf,ps,$<)
-#	rm $(subst pdf,ps,$<)
-#	touch ../$(MAIN).tex	
-	
+	$(eval NLAYERS:=$(shell grep 'id=\"layer' $< | wc -l))
+	@cp $< __tmp_svg__.svg
+	@echo $< > __filename__
+
+	@if [ "$(NLAYERS)" = "0" ]; then \
+		FILENAME=`cat __filename__`; \
+		FNAME=$${FILENAME%.svg}; \
+	 	inkscape -A $${FNAME}.pdf $${FNAME}.svg; \
+	else \
+		grep 'id="layer' __tmp_svg__.svg > __layers__; \
+	        FILENAME=`cat __filename__`; \
+		FNAME=$${FILENAME%.svg}; \
+		sed -i -e 's/"//g' __layers__; \
+		sed -i -e 's/id=//g' __layers__; \
+		for i in `cat __layers__`; do \
+			xmlstarlet ed -P -N svg=http://www.w3.org/2000/svg -u "//*/svg:g[@id=\"$$i\"]/@style" -v display:none __tmp_svg__.svg > __tmp_svg__0.svg; \
+			mv __tmp_svg__0.svg __tmp_svg__.svg; \
+		done; \
+		for i in `cat __layers__`; do \
+			echo "$$FILENAME, $${i}"; \
+			xmlstarlet ed -P -N svg=http://www.w3.org/2000/svg -u "//*/svg:g[@id=\"$$i\"]/@style" -v display:inline __tmp_svg__.svg > __tmp_svg__0.svg; \
+			mv __tmp_svg__0.svg __tmp_svg__.svg; \
+			inkscape -A $${FNAME}_$${i#layer}.pdf __tmp_svg__.svg; \
+		done; \
+	fi
+	@rm __layers__ __filename__ __tmp_svg__*
+
 clean:	
 	rm -f *.aux *.dvi *-inc.eps *.log *.tex *converted-to*
