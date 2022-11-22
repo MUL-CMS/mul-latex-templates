@@ -39,26 +39,26 @@ Why not to delete the files directly? Because each of us has to make the final d
 ## talk_MUL
 
 *   v1.01-2019 (current)  
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
     (Department of Materials Science design)
 
-*   v1.00-2019  
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`  
+*   v1.00-2019
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
     (Department of Materials Science design)
 
-*   v0.23-2016  
+*   v0.23-2016
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (Department of Physical Metallurgy and Materials Testing design)
 
-*   v0.22-2013  
+*   v0.22-2013
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (Department of Physical Metallurgy and Materials Testing design)
 
-*   v0.21-2013  
+*   v0.21-2013
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (Department of Physical Metallurgy and Materials Testing design)
 
-*   v0.1-2008-2012  
+*   v0.1-2008-2012
     LaTeX + `dvips` + `ps2pdf` using `pstricks`  
     (old Department of Physical Metallurgy and Materials Testing design)
 
@@ -76,7 +76,14 @@ This will show a grid over the whole slide. Furthermore it will plot a red recta
 
 ## poster_MUL
 
-*   v1.0-2019 (current)  
+*   v2.0-2022 (current)
+    updated design:
+      - horizontal box titles
+      - author photo (and dates for thesis posters)
+      - "WHERE RESEARCH MEETS FUTURE" banner
+      credits to: Lukas Löfler
+
+*   v1.0-2019
     pdfLaTeX using `tikz`
 
 *   v0.1-pre2019  
@@ -84,25 +91,24 @@ This will show a grid over the whole slide. Furthermore it will plot a red recta
 
 ## letter_MUL
 
-*   v1.0-2019 (current)  
-    pdfLaTeX  
-    (Department of Materials Science design)  
-    credits to: Dominik
+*   v1.0-2019 (current)
+    pdfLaTeX
+    (Department of Materials Science design)
+    credits to: Dominik Gehringer
 
-*   v0.1-2012-2018  
-    LaTeX + `dvips` + `ps2pdf`  
+*   v0.1-2012-2018
+    LaTeX + `dvips` + `ps2pdf`
     (Department of Physical Metallurgy and Materials Testing design)
-
 
 
 ## thesis_MUL
 
-*   v1.1 (current)  
-    pdfLaTeX  
+*   v1.1 (current)
+    pdfLaTeX
     capable of including publications in pdf
 
 *   v1.0  
-    LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX  
+    LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX
     basic template without pdfs
 
 # Office templates
