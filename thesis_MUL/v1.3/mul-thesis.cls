@@ -67,7 +67,7 @@
 \if\@multhesis@twopages0%
   \typeout{[mul-thesis] Using single page layout.}%
   \fancyhead[R]{\rightmark}%
-  \fancyfoot[C]{\thepage}%
+  \fancyfoot[R]{\thepage}%
 \else%
   \typeout{[mul-thesis] Using both-sided page layout.}%
   \fancyhead[RO,LE]{\rightmark}%
