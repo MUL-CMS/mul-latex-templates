@@ -1,0 +1,36 @@
+\newChapter{My Papers}
+
+
+% 1. CREATE CUSTOM BBL FILE
+%
+% To create the reference list, compile the thesis with only this chapter. Include below ALL the papers you want to include:
+% \cite{my-Glechner2018-yg}
+% \cite{Veprek2010}
+%
+%
+%
+% 2. SAFE CUSTOM BBL FILE
+%
+% Rename the thus created thesis.bbl as my_refs.bbl
+%
+%
+% 3. EDIT CUSTOM BBL FILE
+%
+% Open my_refs.bbl and do following:
+% a) Change '\begin{thebibliography}{2}' to '\begin{enumerate}'
+% b) Change '\end{thebibliography}%' to '\end{enumerate}'
+% c) Replace ALL '\bibitem[format]{label}' commands with simple '\item'; Note these can be multiline commands, e.g.
+%       \bibitem [{\citenamefont {Glechner}\ \emph {et~al.}(2018)\citenamefont
+%         {Glechner}, \citenamefont {Mayrhofer}, \citenamefont {Holec}, \citenamefont
+%         {Fritze}, \citenamefont {Lewin}, \citenamefont {Paneta}, \citenamefont
+%         {Primetzhofer}, \citenamefont {Kolozsv{\'a}ri},\ and\ \citenamefont
+%         {Riedl}}]{my-Glechner2018-yg}%
+%
+%
+% 4. UNCOMMENT the line below and compile the thesis with ALL chapters
+\input{my_refs.bbl}
+
+% PS: You can always add more papers from your current thesis.bbl simply by copying them into the my_refs.bbl (the
+% whole section starting from \bibentry and ending above the next \bibentry; don't forget to replace \bibentry[]{}
+% with \item
+\endinput
