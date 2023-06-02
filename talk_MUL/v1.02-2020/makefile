@@ -2,7 +2,7 @@ MAIN = template
 
 .PHONY:	clean figs
 
-all:	$(MAIN).pdf 
+all:	figs graphics $(MAIN).pdf 
 
 %.pdf:	%.tex *.cls
 	latexmk -pdf $<

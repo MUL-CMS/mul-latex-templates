@@ -31,10 +31,11 @@ all:	$(GPITARGET) $(EPSTARGET) $(SVGTARGET)
 	@cp $< __tmp_svg__.svg
 	@echo $< > __filename__
 
-	@if [ "$(NLAYERS)" = "0" ]; then \
+	@if [ "$(NLAYERS)" = "0"  -o "$(NLAYERS)" = "1" ]; then \
 		FILENAME=`cat __filename__`; \
 		FNAME=$${FILENAME%.svg}; \
-	 	inkscape -A $${FNAME}.pdf $${FNAME}.svg; \
+	 	inkscape -o $${FNAME}.pdf $${FNAME}.svg; \
+		@rm __filename__ __tmp_svg__* \
 	else \
 		grep 'id="layer' __tmp_svg__.svg > __layers__; \
 	        FILENAME=`cat __filename__`; \
@@ -49,10 +50,10 @@ all:	$(GPITARGET) $(EPSTARGET) $(SVGTARGET)
 			echo "$$FILENAME, $${i}"; \
 			xmlstarlet ed -P -N svg=http://www.w3.org/2000/svg -u "//*/svg:g[@id=\"$$i\"]/@style" -v display:inline __tmp_svg__.svg > __tmp_svg__0.svg; \
 			mv __tmp_svg__0.svg __tmp_svg__.svg; \
-			inkscape -A $${FNAME}_$${i#layer}.pdf __tmp_svg__.svg; \
+			inkscape -o $${FNAME}_$${i#layer}.pdf __tmp_svg__.svg; \
 		done; \
+		@rm __layers__ __filename__ __tmp_svg__* \
 	fi
-	@rm __layers__ __filename__ __tmp_svg__*
 
 clean:	
 	rm -f *.aux *.dvi *-inc.eps *.log *.tex *converted-to*
