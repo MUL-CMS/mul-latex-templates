@@ -138,8 +138,9 @@
 
 
 
-
-\newcommand{\showdate}{ \vspace*{\dateSkip} {\raggedright \parbox{\textwidth}{\strut \raggedleft \today \strut}} \vspace*{\dateSkip} }
+\newcommand{\mulDate}{\today}
+\renewcommand{\date}[1]{\renewcommand{\mulDate}{#1}}
+\newcommand{\showdate}{ \vspace*{\dateSkip} {\raggedright \parbox{\textwidth}{\strut \raggedleft \mulDate \strut}} \vspace*{\dateSkip} }
 
 \newcommand{\subject}[1]{{\vspace*{\subjectSkip} {\raggedright \parbox{\textwidth}{ \fontsize{11pt}{\baselineskip}\fontfamily{phv}\fontseries{m} \fontshape{sc} \selectfont \color{mul-turquoise} #1 }} }   \vspace*{\subjectSkip}}
 
