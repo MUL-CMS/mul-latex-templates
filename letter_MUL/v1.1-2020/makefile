@@ -1,4 +1,4 @@
-MAIN = letter
+MAIN = letter_of_recommendation
 $bibtex_use = 0
 
 .PHONY: clean
