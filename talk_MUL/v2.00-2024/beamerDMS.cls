@@ -261,14 +261,14 @@
 	\AtBeginSection{%
 		\def\DMS@conference{\thesection{}~\insertsection}%
 		\begin{frame}{\insertsection}%
-		\vspace*{-2mm}\mbox{}\vfill%
-		\tableofcontents[currentsection, subsectionstyle=hide]%
-		\vfill\mbox{}%
-	\end{frame}%
-}%
-\AtBeginSubsection{%
-	\def\DMS@conference{\thesection.\thesubsection{}~\insertsubsection}%
-}%
+			\vspace*{-2mm}\mbox{}\vfill%
+			\tableofcontents[currentsection, subsectionstyle=hide]%
+			\vfill\mbox{}%
+		\end{frame}%
+	}%
+	\AtBeginSubsection{%
+		\def\DMS@conference{\thesection.\thesubsection{}~\insertsubsection}%
+	}%
 }%
 \newcommand{\insertconference}{\DMS@conference}%
 \newcommand{\aff}[1]{\textsuperscript{#1}}%
