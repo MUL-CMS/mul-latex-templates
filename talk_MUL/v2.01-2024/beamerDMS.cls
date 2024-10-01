@@ -14,7 +14,7 @@
 % \setbeamercovered{transparent}
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{beamerDMS}[2023/02/22 v2.00  Beamer with a MUL/DMS layout]%
+\ProvidesClass{beamerDMS}[2024/10/01 v2.01  Beamer with a MUL/DMS layout]%
 % 
 \RequirePackage{ifthen}%
 \RequirePackage{tikz}%
