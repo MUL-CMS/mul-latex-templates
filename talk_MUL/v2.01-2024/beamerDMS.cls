@@ -1,4 +1,5 @@
 % Author: David Holec, david.holec@unileoben.ac.at
+%%% TODO: update design
 %
 %%% TODO: Add here version history
 % The template is primarily used for making presentations in two modes given as an option to the class:
@@ -259,8 +260,8 @@
 \newcommand{\conference}[1]{\def\DMS@conference{#1}\setboolean{DMSLecture}{false}}%
 \renewcommand{\lecture}[1]{\def\DMS@conference{#1}\setboolean{DMSLecture}{true}%
 	\AtBeginSection{%
-		\def\DMS@conference{\thesection{}~\insertsection}%
-		\begin{frame}{\insertsection}%
+		\def\DMS@conference{\thesection{}~\insertsectionhead}%
+		\begin{frame}{\insertsectionhead}%
 			\vspace*{-2mm}\mbox{}\vfill%
 			\tableofcontents[currentsection, subsectionstyle=hide]%
 			\vfill\mbox{}%
