@@ -38,7 +38,29 @@ Why not to delete the files directly? Because each of us has to make the final d
 
 ## talk_MUL
 
-*   v1.01-2019 (current)  
+*   v2.10-2024 (current)
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
+    (Department of Materials Science design)
+    - list of ToDos for next class update
+
+*   v2.01-2024
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
+    (Department of Materials Science design)
+    - update of `\framegrid` command
+
+*   v2.00-2024
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
+    (Department of Materials Science design)
+    - new format: 16/9
+    - new options: `emptyFootings` and `fullFootings`
+    - major clean up
+
+*   v1.02-2020
+    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
+    (Department of Materials Science design)
+    - new environment `overdraw`
+
+*   v1.01-2019
     pdfLaTeX using `tikz`, structure with `figs` and `graphics`
     (Department of Materials Science design)
 
@@ -91,7 +113,11 @@ This will show a grid over the whole slide. Furthermore it will plot a red recta
 
 ## letter_MUL
 
-*   v1.0-2019 (current)
+*   v2.0-2020 (current)
+    pdfLaTeX
+    - major update based on re-branding in 2025
+
+*   v1.0-2019
     pdfLaTeX
     (Department of Materials Science design)
     credits to: Dominik Gehringer
@@ -103,9 +129,17 @@ This will show a grid over the whole slide. Furthermore it will plot a red recta
 
 ## thesis_MUL
 
-*   v1.1 (current)
+*   v1.3 (2023, current)
     pdfLaTeX
-    capable of including publications in pdf
+    - update of ToC
+    
+*   v1.2 (2022)
+    pdfLaTeX
+    - update of blobs to allow for more papers
+
+*   v1.1
+    pdfLaTeX
+    - capable of including publications in pdf
 
 *   v1.0  
     LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX
