@@ -8,13 +8,13 @@
 % | Class options and internal booleans |
 % +-------------------------------------+
 %
-% whether to typeset address condensed
+% whether to typeset the address condensed
 \newboolean{MULcondensedAddress}%
 \setboolean{MULcondensedAddress}{false}%
 \DeclareOption{condensedAddress}{\setboolean{MULcondensedAddress}{true}}%
 \DeclareOption{normalAddress}{\setboolean{MULcondensedAddress}{false}}%
 % 
-% wheter and how to print page numbers
+% whether and how to print page numbers
 \newboolean{MULpageNumbers}%
 \setboolean{MULpageNumbers}{true}%
 \newboolean{MULpageNumbersMofN}%
@@ -29,7 +29,7 @@
   \setboolean{MULpageNumbersMofN}{true}%
 }%
 %
-% whether to print header on every page or not
+% whether to print the header on every page or not
 \newboolean{MULheaderEveryPage}%
 \setboolean{MULheaderEveryPage}{true}%
 \DeclareOption{headerEveryPage}{\setboolean{MULheaderEveryPage}{true}}%
@@ -48,7 +48,7 @@
 % | Load class and necessary dependencies |
 % +---------------------------------------+
 %
-% pass all other options to class and load it
+% pass all other options to the class and load it
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 % default behavior
 \ExecuteOptions{normalAddress, pageNumbres, headerOnlyFirstPage}%
@@ -93,8 +93,8 @@
 \setlength{\parindent}{0pt}%
 \setlength{\parskip}{1.5eX}%
 %
-% define skips after subject, reciever and date
-\def\recieverSkip{-0.5em}%
+% define skips after subject, receiver and date
+\def\receiverSkip{-0.5em}%
 \def\dateSkip{1em}%
 \def\subjectSkip{1em}%
 %
@@ -128,18 +128,18 @@
 }%
 \newcommand{\printNonEmpty}[1]{%
   \checkIfText{#1}%
-  {#1 \\}% if #1 is not empty
+  {#1 \newline}% if #1 is not empty
   {}% if #1 is empty
 }%
 \newcommand{\printLink}[1][]{%
   \ifthenelse{\isempty{#1}}%
   {}% if #1 is empty
-  {\href{#1}{#1} \\}% if #1 is not empty
+  {\href{#1}{#1}}% if #1 is not empty
 }%
 \newcommand{\printMail}[1][]{%
   \ifthenelse{\isempty{#1}}%
   {}% if #1 is empty
-  {\href{mailto:#1}{#1} \\}% if #1 is not empty
+  {\href{mailto:#1}{#1}}% if #1 is not empty
 }%
 %
 \newcommand{\headleft}{%
@@ -163,7 +163,7 @@
         }%
         \ifthenelse{\boolean{MULcondensedAddress}}{\fontseries{mc}}{\fontseries{m}}\selectfont%
         \MULaddress \\%
-        \printMail{\MULmail}%
+        \printMail{\MULmail \\}%
         \printLink{\MULweb}%
     }%
   \end{minipage}%
@@ -228,12 +228,12 @@
 % +-------------------+
 % | Letter components |
 % +-------------------+
-% reciever
-\newcommand{\reciever}[1]{%
+% receiver
+\newcommand{\receiver}[1]{%
   \parbox{\textwidth}{%
     \color{mul-text}{#1}%
   }%
-  \vspace*{\recieverSkip}\par%
+  \vspace*{\receiverSkip}\par%
 }%
 % date
 \newcommand{\MULplaceInDate}{Leoben, }%
