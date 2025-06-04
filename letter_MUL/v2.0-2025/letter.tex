@@ -1,0 +1,75 @@
+% ====================================================================
+%  Sample Letter using the 'mul-letter' LaTeX Class
+%
+%  Class Options:
+%
+%  Address Layout:
+%    - condensedAddress     % Compact address and heading formatting
+%    - normalAddress        % (default) Standard address formatting
+%
+%  Page Numbering:
+%    - noPageNumbres        % Disable page numbers
+%    - pageNumbres          % (default) Enable page numbers
+%    - pageNumbresMofN      % Show page numbers as "M/N"
+%
+%  Header Display:
+%    - headerEveryPage      % Header appears on every page
+%    - headerOnlyFirstPage  % (default) Header appears only on the first page
+%
+%  Folding Marks:
+%    - foldmarkHalf         % Folding guide at half of page height
+%    - foldmarkThird        % Folding guides at thirds of page height
+%
+%  Notes:
+%    - Options can be combined as needed.
+%    - Default font: Helvetica (phv).
+%    - Header/footer includes logos (requires logo-mul.pdf, logo-dms.pdf, logo-footer.pdf).
+% ====================================================================
+
+\documentclass{mul-letter}
+
+\usepackage{lipsum}
+
+\begin{document}
+
+%  Header and Contact Info:
+%    \head{<heading>}           % Set additional heading (e.g., person, institute; default: none)
+%    \department{<name>}        % Set department name (default: Department of Materials Science)
+%    \address{<address>}        % Set address (default: Franz-Josef-Straße 18, 8700 Leoben, Austria)
+%    \mail{<email>}             % Set contact email (default: none)
+%    \web{<url>}                % Set website URL (default: http://materials.unileoben.ac.at)
+\head{Priv.-Doz. Mgr. David Holec, PhD}
+\mail{david.holec@unileoben.ac.at}
+\web{http://cms.unileoben.ac.at}
+
+%  Letter Metadata:
+%    \date{<date>}              % Override \today as the date
+%    \placeInDate{<place>}      % Sets city (or text) before the date (default: Leoben)
+%
+%  Letter Layout:
+%    \reciever{<address>}       % Address block of the recipient
+%    \showdate                  % Typesets the configured date
+%    \subject{<subject>}        % Letter subject (small caps, colored)
+
+\reciever{{
+    To: Prof. Albus Percival Wulfric Brian Dumbledore\\
+    Headmaster\\
+    Hogwarts School of Witchcraft and Wizardry
+}}
+\showdate       
+\subject{Letter of Support for Mr. Harry Potter}
+
+I am writing to offer my highest recommendation for \textbf{Harry Potter}, whose courage, resourcefulness, and innate sense of justice have impressed me deeply. 
+In both academic and practical settings, Harry consistently demonstrates a rare blend of magical aptitude and moral clarity well beyond his years. 
+His leadership during moments of real danger has not only inspired his peers but also reflected the kind of character that Hogwarts strives to cultivate. 
+I believe he is uniquely suited for any responsibility you may be considering for him and will continue to grow into a wizard of great honor and purpose.
+
+\lipsum{15}{16}
+\lipsum{15}{16}
+
+Sincerely yours,\bigskip\bigskip
+
+% \hspace*{9.5cm}\includegraphics[width=3cm]{signature_DH}
+
+\hspace*{10cm}David Holec
+\end{document}
