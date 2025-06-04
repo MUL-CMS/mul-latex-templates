@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="568.00116"
+   height="34.142025"
+   viewBox="0 0 568.00116 34.142026"
+   sodipodi:docname="footer.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath78">
+      <path
+         d="M 74.559998,31.040001 H 240.32001 V 189.11999 H 74.559998 Z"
+         clip-rule="evenodd"
+         id="path76" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath90">
+      <path
+         d="M 312.32001,1056.96 H 481.28 v 22.08 H 312.32001 Z"
+         clip-rule="evenodd"
+         id="path88" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath102">
+      <path
+         d="m 112.96,1044.48 h 568.00002 v 1.28 H 112.96 Z"
+         clip-rule="evenodd"
+         id="path100" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath114">
+      <path
+         d="M 573.28003,84.160004 H 698.88 V 120.48 H 573.28003 Z"
+         clip-rule="evenodd"
+         id="path112" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath126">
+      <path
+         d="M 573.28003,120.48 H 698.88 v 36.16 H 573.28003 Z"
+         clip-rule="evenodd"
+         id="path124" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.95957656"
+     inkscape:cx="104.7337"
+     inkscape:cy="-10.942327"
+     inkscape:window-width="1920"
+     inkscape:window-height="1128"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10">
+    <inkscape:page
+       x="0"
+       y="0"
+       id="page8"
+       width="568.00116"
+       height="34.142025" />
+  </sodipodi:namedview>
+  <g
+     id="g10"
+     inkscape:groupmode="layer"
+     inkscape:label="Page 1"
+     transform="translate(-112.95944,-1044.6199)">
+    <g
+       id="g54" />
+    <g
+       id="g56" />
+    <path
+       style="fill:none;stroke:#bcdcd7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 112.96,1045.76 568.00002,-0.6401"
+       id="path1962" />
+    <g
+       id="g132" />
+    <g
+       id="g134" />
+    <g
+       id="g154" />
+    <g
+       id="g162" />
+    <g
+       id="g164" />
+    <g
+       id="g166" />
+    <g
+       id="g174" />
+    <g
+       id="g182" />
+    <g
+       id="g184" />
+    <g
+       id="g186" />
+    <g
+       id="g188" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#bcdcd7;fill-opacity:1"
+       x="313.29825"
+       y="1073.7219"
+       id="text385"><tspan
+         sodipodi:role="line"
+         id="tspan383"
+         x="313.29825"
+         y="1073.7219"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:'Funnel Display';-inkscape-font-specification:'Funnel Display Bold';fill:#bcdcd7;fill-opacity:1">Versetz’ Berge</tspan></text>
+  </g>
+</svg>
