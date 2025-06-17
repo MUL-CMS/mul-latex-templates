@@ -1,3 +1,71 @@
+% ====================================================================
+%  Sample Presentation using the 'mul-beamer' LaTeX Class
+%
+%  Class Options:
+%
+%  Sidebar Layout:
+%    - showSidebar            % (default) Show sidebar with table of contents
+%    - hideSidebar            % Hide the sidebar
+%
+%  Footing Layout:
+%    - defaultFootings        % (default) Author and short title centered
+%    - emptyFootings          % Minimal: slide number only
+%    - fullFootings           % Full: author/title, conference/date, slogan, slide number
+%
+%  Slide Numbering:
+%    - slideSingleNumber      % (default) Show current slide number only
+%    - slideTotalNumber       % Show slide numbers as "current / total"
+%
+%  Table of Contents:
+%    - showothersubsections   % (default) Show all sections and subsections
+%    - hideothersubsections   % Hide inactive subsections
+%
+%  Localization:
+%    - DElocalization         % (default) German labels and slogans
+%    - ENlocalization         % English labels and slogans
+%
+%  Conditional Content:
+%    - showResults            % Enables \showResults{} block
+%    - hideResults            % Hides \showResults{} block
+%
+%  Default Usage Example:
+%    \documentclass[
+%      beamer,
+%      slideSingleNumber,
+%      showothersubsections,
+%      showSidebar,
+%      DElocalization,
+%      defaultFootings
+%    ]{mul-beamer}
+%
+%  Custom Commands and Environments:
+%
+%    \aff{<num>}                     % Superscript affiliation number
+%    \institute[<short>]{<full>}     % Author affiliation (short shown in footings)
+%    \conference{<name>}             % Conference name (title slide + full footings)
+%    \lecture{<name>}                % Lecture name (also shows TOC at section starts)
+%    \additionsToTitlePage{<content>} % Append logos or extra info to title slide
+%    \literature{<bib>}              % Persistent literature note (until cleared)
+%    \Alert{<text>}                  % Secondary highlight (less than \alert{})
+%    \funneldisplay                  % Switch font to Funnel Display (if installed)
+%    \showResults{<content>}         % Conditionally displayed block
+%
+%    Environment:
+%      overdraw                     % Layered overlays using TikZ
+%        \begin{overdraw}
+%          \only<1>{Layer 1}
+%          \only<2>{Layer 2}
+%        \end{overdraw}
+%
+%    \framegrid                     % Grid overlay for layout development
+%
+%  Notes:
+%    - Options can be combined as needed.
+%    - Recommended for use with Montanuniversität Leoben branding.
+% ====================================================================
+%
+%
+%
 %% CONFERENCE presentation
 \documentclass[utf8, fullFootings, slideTotalNumber]{mul-beamer}
 \hypersetup{pdfpagemode=FullScreen}
