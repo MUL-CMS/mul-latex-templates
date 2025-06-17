@@ -1,15 +1,23 @@
-\documentclass[utf8, showSidebar]{mul-beamer}
-%% OTHER USEFUL SETTINGS
-%% no ToC for conference presentation
-%\documentclass[utf8, hideSidebar]{beamerDMS}
-%% printing slides
-% \documentclass[utf8, xcolor=table, trans, slideTotalNumber, emptyFootings, hideResults]{beamerDMS}
-%% presentation - basically defaults
-% \documentclass[utf8, xcolor=table, beamer, showResults]{beamerDMS}
-%% start in fullScreen
+%% CONFERENCE presentation
+\documentclass[utf8, fullFootings, slideTotalNumber]{mul-beamer}
+\hypersetup{pdfpagemode=FullScreen}
+
+%% CONFERENCE presentation with EN localization
+% \documentclass[utf8, fullFootings, ENlocalization, slideTotalNumber]{mul-beamer}
 % \hypersetup{pdfpagemode=FullScreen}
+
+%% Project REPORT
+% \documentclass[utf8, slideTotalNumber]{mul-beamer}
+
+%% LECTURE
+% \documentclass[utf8, xcolor=table, showSidebar, showResults]{mul-beamer}
+
+%% HANDOUTS
+% \documentclass[utf8, xcolor=table, trans, hideResults]{mul-beamer}
+
+%% OTHER USEFUL COMMANDS
 %% DMS logo instead of MUL on individual slides
-% \setFrameLogo{graphics/institute-logo}
+% \setFrameLogo{graphics/logo-dms.pdf}
 
 \title[Short title]{Very long title of the whole presentation which could span over more lines}
 \author[First A. {\sl et al.}]{First Author\aff{1,2}, Second Author\aff{2} and Last Author\aff{3}} 

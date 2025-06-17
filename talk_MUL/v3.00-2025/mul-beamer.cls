@@ -1,9 +1,8 @@
 % Author: David Holec, david.holec@unileoben.ac.at
-% \setbeamercovered{transparent}
 %
 \NeedsTeXFormat{LaTeX2e}%
 \ProvidesClass{mul-beamer}[2025/06/16 v3.00  Beamer with a MUL/DMS layout]%
-% 
+%
 %
 % +---------------------------+
 % | INTERNAL DESIGN VARIABLES |
@@ -41,12 +40,12 @@
 \DeclareOption{defaultFootings}{\MULOnlySlideNumbersfalse\MULDefaultFootingstrue}%
 % class option fullFootings
 \DeclareOption{fullFootings}{\MULOnlySlideNumbersfalse\MULDefaultFootingsfalse}%
-% 
+%
 % class option slideSingleNumber: slides numbered as #(slide)
 \DeclareOption{slideSingleNumber}{\def\frameNumber{\insertframenumber}}%
 % class option slideTotalNumber: slides numbered as #(slide)/#(total)
 \DeclareOption{slideTotalNumber}{\def\frameNumber{\insertframenumber/\inserttotalframenumber}}%
-% 
+%
 % class option hideothersubsections: only section titles are shown for inactive sections in ToC
 \DeclareOption{hideothersubsections}{\def\MULhideothersubsections{hideothersubsections}}%
 % class option showothersubsections: all subsections are shown in ToC
@@ -62,7 +61,7 @@
 \DeclareOption{ENlocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul-en}%
-	\def\MULsloganText{Move mountains}%
+	\def\MULsloganText{Move Mountains}%
 }%
 %
 % class option showResults
@@ -99,12 +98,12 @@
 \RequirePackage{marvosym}% for example signs
 \RequirePackage{tikz}%
 \RequirePackage{fontspec}%
-% 
+%
 %
 % +------------------+
 % | SLIDE COMPONENTS |
 % +------------------+
-% 
+%
 % load SIDEBAR with ToC
 \newlength{\MULsideBarWidth}%
 \setlength{\MULsideBarWidth}{2cm}%
@@ -173,8 +172,8 @@
 		\end{tikzpicture}%
 	\end{beamercolorbox}%
 }%
-% 
-% 
+%
+%
 % FRAME FOOTINGS
 \newlength{\footerConferenceLeftMargin}%
 \defbeamertemplate*{footline}{sidebar theme}{%
@@ -215,7 +214,7 @@
 	\fi%
 }%
 %
-% 
+%
 % TITLE PAGE
 % additional graphics and other elements to be included on the title page
 \def\MULtitleAdditions{}%
@@ -253,6 +252,7 @@
 % +--------+
 % | COLORS |
 % +--------+
+%
 \usecolortheme[RGB={0, 115, 126}]{structure}%
 \definecolor{MULgreen}{RGB}{0, 115, 126}%
 \definecolor{MULturquoise}{RGB}{0, 255, 254}%
@@ -279,8 +279,8 @@
 \setbeamercolor{section in toc shaded}{fg=normal text.fg!50}%
 % footings
 \setbeamercolor{author in head/foot}{fg=white, bg=MULgreen}%
-% 
-% 
+%
+%
 % +-------+
 % | FONTS |
 % +-------+
@@ -319,8 +319,8 @@
 \setbeamerfont{MULslogan in title}{size=\large, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in foot}{size=\scriptsize, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{foot}{size=\tiny, family=\sffamily}%
-% 
-% 
+%
+%
 % +--------------------------------+
 % | IDENTIFICATION OF PRESENTATION |
 % +--------------------------------+
@@ -334,7 +334,8 @@
 	\def\MULconference{#1}%
 	\MULLecturefalse%
 }%
-\renewcommand{\lecture}[1]{\def\MULconference{#1}\setboolean{MULLecture}{true}%
+\renewcommand{\lecture}[1]{
+	\MULLecturetrue%
 	\AtBeginSection{%
 		\def\MUL@conference{\thesection{}~\insertsectionhead}%
 		\begin{frame}{\insertsectionhead}%
@@ -368,7 +369,7 @@
   \def\shortinstitute{#1}%
   \origbeamerinstitute{#1}%
 }
-% 
+%
 %
 % +-----------------------+%
 % | CONVENIENCE FUNCTIONS |

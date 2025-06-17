@@ -1,5 +1,7 @@
+% Author: David Holec, david.holec@unileoben.ac.at
+%
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{mul-letter}[2025/06/03 v2.00 MUL Letter LaTeX class]%
+\ProvidesClass{mul-letter}[2025/06/03 v2.00  MUL Letter LaTeX class]%
 %
 %
 \RequirePackage{xifthen}%
