@@ -179,7 +179,7 @@
 \defbeamertemplate*{footline}{sidebar theme}{%
 	% exclude footing on the title page
 	\ifnum\insertframenumber>1%
-		\begin{beamercolorbox}[ht=0.04\paperheight, dp=0.014\paperheight, wd=\paperwidth]{author in head/foot}%
+		\begin{beamercolorbox}[ht=0.035\paperheight, dp=0.013\paperheight, wd=\paperwidth]{author in head/foot}%
 			% literature
 			\begin{tikzpicture}%
 				\path[use as bounding box] (0,0) rectangle (0,0);%
