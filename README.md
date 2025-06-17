@@ -37,8 +37,19 @@ Why not to delete the files directly? Because each of us has to make the final d
 
 
 ## talk_MUL
+*   v3.00-2025 (current)
+    XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
+    (University 2025 rebranding)
 
-*   v2.10-2024 (current)
+    - renaming beamerDMS to mul-beamer (consistency of the whole LaTeX suite)
+    - inclusion of Funnel Display (2025 MUL branding)
+    - change from pdflatex to xelatex to be able to use TTFs (see above)
+    - new option: defaultFootings (to complement emptyFootings and fullFootings)
+    - new option: DElocalization (default) vs ENlocalization (logos, slogan)
+    - change of indentation signs in itemize (from triangles to squares)
+    - overdraw is relative to the text area, not page (i.e. shifts with sidebar)
+
+*   v2.10-2024
     pdfLaTeX using `tikz`, structure with `figs` and `graphics`
     (Department of Materials Science design)
     - list of ToDos for next class update
