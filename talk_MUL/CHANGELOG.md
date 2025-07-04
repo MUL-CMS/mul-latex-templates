@@ -1,7 +1,12 @@
-*   v3.00-2025 (current)
+*   v3.01-2025 (current)
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
     (University 2025 rebranding)
-
+    - change of the ugly turquoise slogan in footings to whitish color
+    - corrected format of defaultFootings
+    
+*   v3.00-2025
+    XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
+    (University 2025 rebranding)
     - renaming beamerDMS to mul-beamer (consistency of the whole LaTeX suite)
     - inclusion of Funnel Display (2025 MUL branding)
     - change from pdflatex to xelatex to be able to use TTFs (see above)

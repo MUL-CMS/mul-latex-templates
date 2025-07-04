@@ -1,0 +1,183 @@
+% ====================================================================
+%  Sample Presentation using the 'mul-beamer' LaTeX Class
+%
+%  Class Options:
+%
+%  Sidebar Layout:
+%    - showSidebar            % (default) Show sidebar with table of contents
+%    - hideSidebar            % Hide the sidebar
+%
+%  Footing Layout:
+%    - defaultFootings        % (default) Author and short title centered
+%    - emptyFootings          % Minimal: slide number only
+%    - fullFootings           % Full: author/title, conference/date, slogan, slide number
+%
+%  Slide Numbering:
+%    - slideSingleNumber      % (default) Show current slide number only
+%    - slideTotalNumber       % Show slide numbers as "current / total"
+%
+%  Table of Contents:
+%    - showothersubsections   % (default) Show all sections and subsections
+%    - hideothersubsections   % Hide inactive subsections
+%
+%  Localization:
+%    - DElocalization         % (default) German labels and slogans
+%    - ENlocalization         % English labels and slogans
+%
+%  Conditional Content:
+%    - showResults            % Enables \showResults{} block
+%    - hideResults            % Hides \showResults{} block
+%
+%  Default Usage Example:
+%    \documentclass[
+%      beamer,
+%      slideSingleNumber,
+%      showothersubsections,
+%      showSidebar,
+%      DElocalization,
+%      defaultFootings
+%    ]{mul-beamer}
+%
+%  Custom Commands and Environments:
+%
+%    \aff{<num>}                     % Superscript affiliation number
+%    \institute[<short>]{<full>}     % Author affiliation (short shown in footings)
+%    \conference{<name>}             % Conference name (title slide + full footings)
+%    \lecture{<name>}                % Lecture name (also shows TOC at section starts)
+%    \additionsToTitlePage{<content>} % Append logos or extra info to title slide
+%    \literature{<bib>}              % Persistent literature note (until cleared)
+%    \Alert{<text>}                  % Secondary highlight (less than \alert{})
+%    \funneldisplay                  % Switch font to Funnel Display (if installed)
+%    \showResults{<content>}         % Conditionally displayed block
+%
+%    Environment:
+%      overdraw                     % Layered overlays using TikZ
+%        \begin{overdraw}
+%          \only<1>{Layer 1}
+%          \only<2>{Layer 2}
+%        \end{overdraw}
+%
+%    \framegrid                     % Grid overlay for layout development
+%
+%  Notes:
+%    - Options can be combined as needed.
+%    - Recommended for use with Montanuniversität Leoben branding.
+% ====================================================================
+%
+%
+%
+%% CONFERENCE presentation
+\documentclass[utf8, fullFootings, slideTotalNumber]{mul-beamer}
+\hypersetup{pdfpagemode=FullScreen}
+
+%% CONFERENCE presentation with EN localization
+% \documentclass[utf8, fullFootings, ENlocalization, slideTotalNumber]{mul-beamer}
+% \hypersetup{pdfpagemode=FullScreen}
+
+%% Project REPORT
+% \documentclass[utf8, slideTotalNumber]{mul-beamer}
+
+%% LECTURE
+% \documentclass[utf8, xcolor=table, showSidebar, showResults]{mul-beamer}
+
+%% HANDOUTS
+% \documentclass[utf8, xcolor=table, trans, hideResults]{mul-beamer}
+
+%% OTHER USEFUL COMMANDS
+%% DMS logo instead of MUL on individual slides
+% \setFrameLogo{graphics/logo-dms.pdf}
+
+\title[Short title]{Very long title of the whole presentation which could span over more lines}
+\author[First A. {\sl et al.}]{First Author\aff{1,2}, Second Author\aff{2} and Last Author\aff{3}} 
+\institute[Department of Materials Science]{
+  \aff{1}First address\\
+  \aff{2}Second address\\
+  \aff{3}Third address}
+\email{first.author@unileoben.ac.at}
+\lecture{Name of the course}
+% \conference{Name of the conference}
+\date{16 June 2025}
+\additionsToTitlePage{
+	\node[anchor=north west, shift={(0.04\paperheight,-0.04\paperheight)}] at (current page.north west) {
+		\includegraphics[width=0.084\paperwidth]{graphics/logo-partner.pdf}
+	};%
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introduction}
+\subsection{First Slide}
+\literature{
+  L. Huber, B. Grabowski, M. Militzer, J. Neugebauer, and J. Rottler, {\em Comput. Mater. Sci.} {\bf 118}, 259 (2016)\\
+  D. Holec, N. Abdoshahi, S. Mayer, and H. Clemens, {\em Materials} {\bf 12}, (2019)}
+\begin{frame}{Hokus pokus}
+\begin{block}{A Block}
+  This is \alert{a block}:
+  $$a^2+b^2=\Alert{c^2}\, \quad \sin\alpha=\frac{b}{c}$$
+\end{block}
+x
+\begin{minipage}{5cm}
+  \begin{itemize}
+    \item first one
+    \example second one
+    \item last one
+		\begin{itemize}[<*>]
+			\item basically
+			\item all
+		\end{itemize}
+  \end{itemize}
+\end{minipage}
+\begin{minipage}{5cm}
+  \begin{block}{}
+    \includegraphics[height=1cm]{graphics/logo-mul_M}
+  \end{block}
+\end{minipage}
+
+normal text afterwards\dots
+\includegraphics[height=2cm]{figs/david}
+\includegraphics[height=2cm]{figs/structures}
+
+\unitlength=1cm
+\begin{picture}(0,0)
+  \put(0,0){\includegraphics[width=3mm]{graphics/logo-mul_M}}
+  \put(11,0){\includegraphics[width=5mm]{graphics/logo-mul_M}}
+  \put(11,3){\includegraphics[width=5mm]{graphics/logo-mul_M}}
+\end{picture}
+\end{frame}
+
+\literature{}
+\subsection{How to use \texttt{framegrid}}
+\begin{frame}{Abra abra kadabra}
+	\onslide<1->
+		content...
+		And eve ever more content
+		\begin{figure}
+			\centering
+			\includegraphics[height=4cm]{figs/david}
+			\caption{This is David. Lets' make him new his glasses with \texttt{framegrid}}
+		\end{figure}
+	\onslide<2>
+		\begin{overdraw}
+			\framegrid
+		\end{overdraw}
+	\onslide<3>
+	\begin{overdraw}
+		\framegrid
+		\draw [red, very thick] (6.8, 5.7) circle (0.25);
+		\draw [red, very thick] (7.55, 5.7) circle (0.25);
+		\draw [red, very thick] (7.05, 5.7) -- (7.3, 5.7);
+	\end{overdraw}
+	\onslide<4>
+	\begin{overdraw}
+		\draw [red, very thick] (6.8, 5.7) circle (0.25);
+		\draw [red, very thick] (7.55, 5.7) circle (0.25);
+		\draw [red, very thick] (7.05, 5.7) -- (7.3, 5.7);
+	\end{overdraw}
+
+\end{frame}
+
+\end{document}
