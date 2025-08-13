@@ -1,3 +1,5 @@
+    - new background title image for CMS
+    
 *   v3.01-2025 (current)
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
     (University 2025 rebranding)
