@@ -5,6 +5,7 @@
     (University 2025 rebranding)
     - change of the ugly turquoise slogan in footings to whitish color
     - corrected format of defaultFootings
+    - CMS backgroung image on title page
     
 *   v3.00-2025
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`

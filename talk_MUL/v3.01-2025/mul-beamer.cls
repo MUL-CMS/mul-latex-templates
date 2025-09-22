@@ -224,7 +224,7 @@
 	\begin{tikzpicture}[overlay, remember picture]%
 		\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
 		% background, logo and slogan
-		\node at (current page.center) {\includegraphics[width=\paperwidth]{graphics/background_title.jpg}};%
+		\node at (current page.center) {\includegraphics[width=\paperwidth]{graphics/background_title_cms.jpg}};%
 		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogo}};%
 		\node[anchor=south west, shift={(0.00\paperheight, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MULsloganTitleColor}\MULsloganText}};%
 		% title
