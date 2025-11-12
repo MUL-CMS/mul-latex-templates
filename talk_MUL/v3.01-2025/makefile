@@ -2,6 +2,8 @@ MAIN = template
 
 .PHONY:	clean figs
 
+build:	all
+
 all:	$(MAIN).pdf
 
 %.pdf:	%.tex *.cls

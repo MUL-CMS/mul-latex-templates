@@ -179,7 +179,7 @@
 \defbeamertemplate*{footline}{sidebar theme}{%
 	% exclude footing on the title page
 	\ifnum\insertframenumber>1%
-		\begin{beamercolorbox}[ht=0.035\paperheight, dp=0.013\paperheight, wd=\paperwidth]{author in head/foot}%
+		\begin{beamercolorbox}[ht=0.035\paperheight, dp=0.018\paperheight, wd=\paperwidth]{author in head/foot}%
 			% literature
 			\begin{tikzpicture}%
 				\path[use as bounding box] (0,0) rectangle (0,0);%
@@ -265,8 +265,8 @@
 \definecolor{plotpurple}{RGB}{148, 103, 189}%
 \definecolor{plotbrown}{RGB}{140, 86, 75}%
 \colorlet{MULsloganTitleColor}{MULgreen}%
-% \colorlet{MULsloganSlideColor}{MULturquoise}%
-\colorlet{MULsloganSlideColor}{white!90!black}%
+\colorlet{MULsloganSlideColor}{MULturquoise}%
+% \colorlet{MULsloganSlideColor}{white!90!black}%
 %
 % alerted text
 \setbeamercolor{alerted text}{fg=red!80!black}%

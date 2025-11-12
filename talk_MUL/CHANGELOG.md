@@ -1,6 +1,12 @@
-    - new background title image for CMS
-    
-*   v3.01-2025 (current)
+*   v3.02-2025 (current)
+    XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
+    (University 2025 rebranding)
+    - new background title image for CMS, lighther version
+    - new slogan style on title page ("scientific template")
+    - change from turquoise to greyish slogan on slides
+    - default localization: English
+
+*   v3.01-2025
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
     (University 2025 rebranding)
     - change of the ugly turquoise slogan in footings to whitish color
