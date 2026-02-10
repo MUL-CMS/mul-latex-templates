@@ -224,7 +224,7 @@
 % blobs
 \newcommand\blob{}%
 \newcommand\lblob{}%
-\if\@multhesis@blob1{
+\if\@multhesis@blob1
   \renewcommand\blob{
   \setlength{\unitlength}{30mm}
   \begin{picture}(0,0)
