@@ -515,6 +515,8 @@ project/
 ├── MUL_poster.cls
 ├── poster_flow.tex
 ├── poster_grid.tex
+├── figs/
+│   └── (your images)
 ├── graphics/
 │   ├── logos/
 │   │   ├── logo_rgb_EN_white_v1.pdf
@@ -522,7 +524,6 @@ project/
 │   │   └── ...
 │   ├── placeholder_image.png
 │   ├── qrcode.pdf
-│   └── (your images)
 ├── fonts/
 │   ├── Host_Grotesk/
 │   │   └── HostGrotesk-*.ttf
