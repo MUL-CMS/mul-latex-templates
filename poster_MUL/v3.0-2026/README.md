@@ -184,7 +184,7 @@ Grid geometry:
 % Single column box
 \GridBox{0}{0}{6}{10}{
     \vGap
-    \Header{Introduction}
+    \Section{Introduction}
     \vGap
     \Para{Lorem ipsum dolor sit amet...}
 }
@@ -192,7 +192,7 @@ Grid geometry:
 % Two-column box starting at column 3
 \GridBox{14}{0}{13}{10}{
     \vGap
-    \Header{Results}
+    \Section{Results}
     \vGap
     \begin{minipage}[t]{\ColumnWidth}
         \Para{Left column text...}
@@ -257,7 +257,7 @@ Automatically selects the column with the most available vertical space.
 % Auto-placed single-column box
 \FlowBox{1}{
     \vGap
-    \Header{Introduction}
+    \Section{Introduction}
     \vGap
     \Para{Lorem ipsum dolor sit amet...}
 }
@@ -265,7 +265,7 @@ Automatically selects the column with the most available vertical space.
 % Auto-placed two-column box
 \FlowBox{2}{
     \vGap
-    \Header{Results}
+    \Section{Results}
     \vGap
     \begin{minipage}[t]{\ColumnWidth}
         \Para{Left column...}
@@ -297,12 +297,12 @@ Forces placement to start at a specific column (1–4).
 
 These commands work inside both `\GridBox` and `\FlowBox`.
 
-### `\Header{<text>}`
+### `\Section{<text>}`
 
 Renders a section heading in turquoise.
 
 ```latex
-\Header{Methods and Materials}
+\Section{Methods and Materials}
 ```
 
 ### `\Para{<text>}`
@@ -386,7 +386,7 @@ Inserts a vertical gap of `\VGap` (15 mm). Use between content blocks for consis
 
 ```latex
 \vGap
-\Header{Section Title}
+\Section{Section Title}
 \vGap
 \Para{Content...}
 ```
@@ -482,21 +482,21 @@ For manual formatting when needed:
 \begin{PosterBody}
     \FlowBox{1}{
         \vGap
-        \Header{Introduction}
+        \Section{Introduction}
         \vGap
         \Para{This is the introduction to my research.}
     }
 
     \FlowBox{1}{
         \vGap
-        \Header{Methods}
+        \Section{Methods}
         \vGap
         \Image[][graphics/my_figure.png]
     }
 
     \FlowBox{2}{
         \vGap
-        \Header{Results}
+        \Section{Results}
         \vGap
         \Highlight{Key result: 42\% improvement observed.}
     }
