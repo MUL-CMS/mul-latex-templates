@@ -1,0 +1,216 @@
+% ============================================================
+% FLOW poster example
+% ============================================================
+%
+% This example uses the FLOW layout system.
+%
+% FLOW automatically places content vertically across columns.
+% Use this file if you want:
+%     - minimal manual positioning
+%     - automatic balancing across columns
+%
+% For manual, coordinate-based placement, see:
+%     poster_grid.tex
+% ============================================================
+
+\documentclass{MUL_poster}
+
+% ============================================================
+% Global poster setup
+% ============================================================
+\Colors{Digital}    % Use 'Print' or 'Digital'. TechGreen is substituted in print mode.
+\FontMode{Regular}  % Use 'Regular' or 'Experimental'.
+\Language{EN}       % Use 'EN' or 'DE'. Switches logos and footer claim text.
+
+\begin{document}
+\null
+
+% ============================================================
+% 1. Header ribbon
+% ============================================================
+% The top-left MUL logo is drawn by the class.
+% The optional top-right image/logo is configured here.
+% ============================================================
+\Title{Header max.2 lines -- Box can be increased\par to the right if no logo or photo is used}
+\HeaderImage{graphics/placeholder_image.png}{\TopRightImageWidth}{\TopRightImageHeight}% Optional; replace path/size or comment out.
+
+% ============================================================
+% 2. Author section below the header ribbon
+% ============================================================
+% \Authors{}      % Empty command places a slim empty/white banner.
+% \Affiliations{} % Empty command places a slim empty/white banner.
+% If neither command is used, the author/affiliation section is omitted.
+% ============================================================
+\Authors{Author One\textsuperscript{1}, Author Two\textsuperscript{2}, Author\textsuperscript{3}}
+\Affiliations{%
+    \textsuperscript{1}University of Happy Research, Smokey Valley, Rainbow City, Guatamateria\\
+    \textsuperscript{2}here we go\\
+    \textsuperscript{3}There we are
+}
+
+% ============================================================
+% 3. Optional intro ribbon
+% ============================================================
+% \Intro{} % Empty command places a slim Turquoise banner.
+% If the command is omitted, the intro ribbon is omitted.
+% ============================================================
+\Intro{%
+    Here is the optional intro to the work. It should be no more than two, maximum three lines long.\par
+    Here is the optional intro to the work. It should be no more than two, maximum three lines long.\par
+    Here is the optional intro to the work. It should be no more than two, maximum three lines long.
+}
+
+% Measure and draw the complete top region: header, authors, and intro.
+\BuildHeader
+
+% Optional GRID overlay for manual GRID layout -- especially for the Footer area.
+% Comment out for final export.
+% \ShowGrid
+
+% ============================================================
+% 4. Poster body: FLOW layout example
+% ============================================================
+% FLOW syntax:
+%
+%     \FlowBox{<span>}{<content>}
+%     \FlowBox{<span>}[<start column>]{<content>}
+%
+% Examples:
+%     \FlowBox{1}{...}       automatic one-column box
+%     \FlowBox{2}{...}       automatic two-column box
+%     \FlowBox{2}[3]{...}    two-column box forced to start in column 3
+% ============================================================
+\begin{PosterBody}
+    \FlowBox{1}{
+        \vGap
+        \Section{Here is the Header (max 2 lines)}
+        \vGap
+        \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
+    }
+
+    \FlowBox{1}{
+        \vGap
+        \Section{Here is the Header (max 2 lines)}
+        \vGap
+        \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
+    }
+
+    \FlowBox{2}{
+        \vGap
+        \Section{Here is the Header of the work (max 2 Columns) \\(max 2 lines)}
+        \vGap
+        \begin{minipage}[t]{\ColumnWidth}
+            \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit}
+        \end{minipage}%
+        \hspace{\ColumnGap}%
+        \begin{minipage}[t]{\ColumnWidth}
+            \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.}
+        \end{minipage}
+    }
+
+    \FlowBox{1}{
+        \vGap
+        \Highlight{Important text highlights are given their own text field, which is filled with 70\% transparency of the Turquoise color.}
+        \vGap
+        \Image
+    }
+
+    \FlowBox{2}[3]{
+        \vGap
+        \Image[][graphics/placeholder_image.png]
+        \vGap
+        \begin{minipage}[t]{\ColumnWidth}
+            \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.}
+        \end{minipage}%
+        \hspace{\ColumnGap}%
+        \begin{minipage}[t]{\ColumnWidth}
+            \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.}
+        \end{minipage}
+    }
+
+    \FlowBox{4}{
+        \Rule[1]
+        \vspace{4pt}
+        \Rule[2]
+        \vspace{4pt}
+        \Rule[3]
+        \vspace{4pt}
+        \Rule[4]
+    }
+
+% --------------------------------------------------------
+% \FooterGridBox uses a separate Y-coordinate system that makes 
+% the \Rule visually align with the one from the PowerPoint template
+% --------------------------------------------------------
+
+\FooterGridBox{0}{0}{27}{1}{
+    \Rule  
+}
+
+\FooterGridBox{0}{1}{13}{4.1}{
+    {\HeadingStyle References\par}
+    \vspace{5mm}
+    \References{
+        \textbf{[1].} Aaker, D. A. ''Managing Brand Equity: Capitalizing on the value of a Brand Name."
+        \emph{The Free Press, New York}, 1991.\par
+        \textbf{[2].} Aaker, D. A. ''Managing Brand Equity: Capitalizing on the value of a Brand Name."
+        \emph{The Free Press, New York}, 1991.\par
+        \textbf{[3].} Aaker, D. A. ''Managing Brand Equity: Capitalizing on the value of a Brand Name."
+        \emph{The Free Press, New York}, 1991.
+    }
+    \vspace{10mm}
+    {\Text Acknowledegments, sponsors etc.\par}
+}
+
+\FooterGridBox{14}{1}{6}{4.1}{
+    \vspace{5mm}
+    \begin{minipage}[t]{0.3\linewidth}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.30\linewidth}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.30\linewidth}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \end{minipage}\par
+    \vspace{5mm}
+    \Text\centering sponsor logos etc.
+}
+
+\FooterGridBox{21}{1}{4}{4.1}{
+    \vspace{5mm}
+    \Text Contact information:\par
+    QR code\par
+    www.example.com\par
+    contact@example.com\par
+}
+
+\FooterGridBox{25.25}{1}{1.75}{4.1}{
+    \vspace{5mm}
+    \Image[][graphics/qrcode.pdf]
+}
+\end{PosterBody}
+
+% ============================================================
+% Optional footer ribbon left text (department)
+% ============================================================
+\makeatletter
+\def\MUL@FooterLeft@EN{%
+    \color{White}Materials %
+    \color{LightGreen}Science%
+}
+\def\MUL@FooterLeft@DE{%
+    \color{White}Material %
+    \color{LightGreen}Wissenschaften%
+}
+\renewcommand{\MUL@FooterLeftText}{%
+    \csname MUL@FooterLeft@\MUL@Language\endcsname
+}
+\makeatother
+
+% ============================================================
+% 6. Decorative bottom ribbon with MUL claim text on the right
+% ============================================================
+\BuildBottomRibbon
+
+\end{document}
