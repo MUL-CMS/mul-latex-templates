@@ -1,4 +1,4 @@
-MAIN = poster
+MAIN = poster_flow
 $bibtex_use = 0
 
 .PHONY: clean figs graphics
@@ -8,7 +8,7 @@ all:	$(MAIN).pdf
 pdf:	$(MAIN).pdf
 
 %.pdf:	%.tex figs graphics
-	latexmk -bibtex -pdf $<
+	latexmk -lualatex $<
 # 
 # %.ps:	%.dvi	
 # 	dvips -Ppdf -G0 $<
