@@ -6,8 +6,8 @@ Two layout modes are provided:
 
 | Mode | File | Description |
 | --- | --- | --- |
-| **GRID** | `poster_grid.tex` | Manual coordinate-based placement using `\GridBox` |
-| **FLOW** | `poster_flow.tex` | Automatic vertical column balancing using `\FlowBox` |
+| **GRID** | `poster_grid.tex` | Manual coordinate-based placement using `\gridbox` |
+| **FLOW** | `poster_flow.tex` | Automatic vertical column balancing using `\flowbox` |
 
 ---
 
@@ -19,15 +19,13 @@ lualatex poster_flow.tex
 lualatex poster_grid.tex
 ```
 
-I STRONGLY encourage checking the QR code for its intended functionality and replace it.
-
 ---
 
 ## Global Setup
 
-These three commands must appear before `\begin{document}`:
+These three (four) commands must appear before `\begin{document}`:
 
-### `\Colors{<mode>}`
+### `\colors{<mode>}`
 
 Sets the color palette.
 
@@ -37,10 +35,10 @@ Sets the color palette.
 | `Print` | CMYK colors; TechGreen is substituted |
 
 ```latex
-\Colors{Digital}
+\colors{Digital}
 ```
 
-### `\FontMode{<mode>}`
+### `\fontmode{<mode>}`
 
 Selects the typography set.
 
@@ -50,10 +48,10 @@ Selects the typography set.
 | `Experimental` | Host Grotesk body text; Funnel Display headings; Host Grotesk math italics |
 
 ```latex
-\FontMode{Regular}
+\fontmode{Regular}
 ```
 
-### `\Language{<lang>}`
+### `\lang{<lang>}`
 
 Sets the poster language. Affects the MUL logo variant and the footer claim text.
 
@@ -63,100 +61,111 @@ Sets the poster language. Affects the MUL logo variant and the footer claim text
 | `DE` | Versetz' Berge |
 
 ```latex
-\Language{EN}
+\lang{EN}
+```
+
+### `\qrset{<EN path>}{<DE path>}`
+
+Registers language-specific QR code files. The appropriate file is automatically selected based on the current `\lang` setting. Sensible defaults are provided, so this command is only needed when using custom QR code files.
+
+```latex
+% Default (already built in — no need to call explicitly):
+\qrset{graphics/qr/qrcode_EN.pdf}{graphics/qr/qrcode_DE.pdf}
+% Custom QR codes:
+\qrset{graphics/qr/my_project_EN.pdf}{graphics/qr/my_project_DE.pdf}
 ```
 
 ---
 
 ## Header Region
 
-All header commands are placed after `\begin{document}\null` and before `\BuildHeader`.
+All header commands are placed after `\begin{document}\null` and before `\buildheader`.
 
-### `\Title{<text>}`
+### `\title{<text>}`
 
 Sets the poster title (max 2 lines recommended). Use `\par` for manual line breaks.
 
 ```latex
-\Title{My Poster Title\par A Second Line if Needed}
+\title{My Poster Title\par A Second Line if Needed}
 ```
 
-### `\HeaderImage{<path>}{<width>}{<height>}`
+### `\headerimage{<path>}{<width>}{<height>}`
 
 Places an optional image or logo in the top-right corner of the header ribbon. Comment out or omit entirely if not needed.
 
 ```latex
-\HeaderImage{graphics/my_logo.png}{\TopRightImageWidth}{\TopRightImageHeight}
+\headerimage{graphics/my_logo.png}{\headerimgwidth}{\headerimgheight}
 ```
 
-The predefined lengths `\TopRightImageWidth` and `\TopRightImageHeight` provide sensible defaults. You may also specify explicit dimensions:
+The predefined lengths `\headerimgwidth` and `\headerimgheight` provide sensible defaults. You may also specify explicit dimensions:
 
 ```latex
-\HeaderImage{graphics/my_logo.png}{60mm}{55mm}
+\headerimage{graphics/my_logo.png}{60mm}{55mm}
 ```
 
-### `\Authors{<text>}`
+### `\authors{<text>}`
 
 Sets the author line. Use `\textsuperscript{}` for affiliation markers.
 
 ```latex
-\Authors{A. Smith\textsuperscript{1}, B. Jones\textsuperscript{2}}
+\authors{A. Smith\textsuperscript{1}, B. Jones\textsuperscript{2}}
 ```
 
-- Passing an empty argument (`\Authors{}`) renders a slim white banner with no text.
+- Passing an empty argument (`\authors{}`) renders a slim white banner with no text.
 - Omitting the command entirely removes the author section.
 
-### `\Affiliations{<text>}`
+### `\affiliations{<text>}`
 
 Sets affiliation lines. Use `\\` to separate entries.
 
 ```latex
-\Affiliations{%
+\affiliations{%
     \textsuperscript{1}University of Example, City, Country\\
     \textsuperscript{2}Institute of Research, Town, Country
 }
 ```
 
-### `\Intro{<text>}`
+### `\intro{<text>}`
 
 Adds an optional turquoise intro ribbon below the author block (max 2–3 lines recommended). Use `\par` for line breaks.
 
 ```latex
-\Intro{%
+\intro{%
     This poster presents our findings on the effects of temperature
     on composite materials under cyclic loading.
 }
 ```
 
-- Passing an empty argument (`\Intro{}`) renders a slim turquoise banner.
+- Passing an empty argument (`\intro{}`) renders a slim turquoise banner.
 - Omitting the command removes the intro ribbon entirely.
 
-### `\BuildHeader`
+### `\buildheader`
 
 Required. Measures and draws the complete top region (header, authors, intro). Call this once, after all header commands.
 
 ```latex
-\BuildHeader
+\buildheader
 ```
 
 ---
 
 ## Poster Body
 
-All content goes inside the `PosterBody` environment:
+All content goes inside the `posterbody` environment:
 
 ```latex
-\begin{PosterBody}
+\begin{posterbody}
     % content here
-\end{PosterBody}
+\end{posterbody}
 ```
 
 ---
 
 ## GRID Layout
 
-Use `\GridBox` for manual coordinate-based placement.
+Use `\gridbox` for manual coordinate-based placement.
 
-### `\GridBox{<x>}{<y>}{<width>}{<height>}{<content>}`
+### `\gridbox{<x>}{<y>}{<width>}{<height>}{<content>}`
 
 | Parameter | Description |
 | --- | --- |
@@ -182,24 +191,24 @@ Grid geometry:
 
 ```latex
 % Single column box
-\GridBox{0}{0}{6}{10}{
-    \vGap
-    \Section{Introduction}
-    \vGap
-    \Para{Lorem ipsum dolor sit amet...}
+\gridbox{0}{0}{6}{10}{
+    \vgap
+    \sect{Introduction}
+    \vgap
+    \para{Lorem ipsum dolor sit amet...}
 }
 
 % Two-column box starting at column 3
-\GridBox{14}{0}{13}{10}{
-    \vGap
-    \Section{Results}
-    \vGap
-    \begin{minipage}[t]{\ColumnWidth}
-        \Para{Left column text...}
+\gridbox{14}{0}{13}{10}{
+    \vgap
+    \sect{Results}
+    \vgap
+    \begin{minipage}[t]{\colwidth}
+        \para{Left column text...}
     \end{minipage}%
-    \hspace{\ColumnGap}%
-    \begin{minipage}[t]{\ColumnWidth}
-        \Para{Right column text...}
+    \hspace{\colgap}%
+    \begin{minipage}[t]{\colwidth}
+        \para{Right column text...}
     \end{minipage}
 }
 ```
@@ -207,31 +216,31 @@ Grid geometry:
 Fractional coordinates are allowed:
 
 ```latex
-\GridBox{0}{10.5}{6}{5.5}{...}
+\gridbox{0}{10.5}{6}{5.5}{...}
 ```
 
-### `\ShowGrid`
+### `\showgrid`
 
-Enables a visual grid overlay showing cell coordinates. Place after `\BuildHeader`. Comment out for final export.
+Enables a visual grid overlay showing cell coordinates. Place after `\buildheader`. Comment out for final export.
 
 ```latex
-\BuildHeader
-\ShowGrid
+\buildheader
+\showgrid
 ```
 
-### `\FooterGridBox{<x>}{<y>}{<width>}{<height>}{<content>}`
+### `\footergridbox{<x>}{<y>}{<width>}{<height>}{<content>}`
 
-Works like `\GridBox` but uses a separate Y-coordinate system anchored to the footer area. `y = 0` starts at the top of the footer content region.
+Works like `\gridbox` but uses a separate Y-coordinate system anchored to the footer area. `y = 0` starts at the top of the footer content region.
 
 ```latex
-\FooterGridBox{0}{0}{27}{1}{
-    \Rule
+\footergridbox{0}{0}{27}{1}{
+    \prule
 }
 
-\FooterGridBox{0}{1}{13}{4.1}{
-    {\HeadingStyle References\par}
+\footergridbox{0}{1}{13}{4.1}{
+    {\headingstyle References\par}
     \vspace{5mm}
-    \References{
+    \references{
         \textbf{[1].} Author, "Title." \emph{Journal}, 2024.\par
         \textbf{[2].} Author, "Title." \emph{Journal}, 2023.
     }
@@ -242,9 +251,9 @@ Works like `\GridBox` but uses a separate Y-coordinate system anchored to the fo
 
 ## FLOW Layout
 
-Use `\FlowBox` for automatic placement across columns.
+Use `\flowbox` for automatic placement across columns.
 
-### `\FlowBox{<span>}{<content>}`
+### `\flowbox{<span>}{<content>}`
 
 Automatically selects the column with the most available vertical space.
 
@@ -255,153 +264,168 @@ Automatically selects the column with the most available vertical space.
 
 ```latex
 % Auto-placed single-column box
-\FlowBox{1}{
-    \vGap
-    \Section{Introduction}
-    \vGap
-    \Para{Lorem ipsum dolor sit amet...}
+\flowbox{1}{
+    \vgap
+    \sect{Introduction}
+    \vgap
+    \para{Lorem ipsum dolor sit amet...}
 }
 
 % Auto-placed two-column box
-\FlowBox{2}{
-    \vGap
-    \Section{Results}
-    \vGap
-    \begin{minipage}[t]{\ColumnWidth}
-        \Para{Left column...}
+\flowbox{2}{
+    \vgap
+    \sect{Results}
+    \vgap
+    \begin{minipage}[t]{\colwidth}
+        \para{Left column...}
     \end{minipage}%
-    \hspace{\ColumnGap}%
-    \begin{minipage}[t]{\ColumnWidth}
-        \Para{Right column...}
+    \hspace{\colgap}%
+    \begin{minipage}[t]{\colwidth}
+        \para{Right column...}
     \end{minipage}
 }
 ```
 
-### `\FlowBox{<span>}[<start column>]{<content>}`
+### `\flowbox{<span>}[<start column>]{<content>}`
 
 Forces placement to start at a specific column (1–4).
 
 ```latex
 % Two-column box forced to start at column 3
-\FlowBox{2}[3]{
-    \vGap
-    \Image[][graphics/results_plot.png]
+\flowbox{2}[3]{
+    \vgap
+    \img[][graphics/results_plot.png]
 }
 ```
 
-> Note: The footer area in FLOW posters still uses `\FooterGridBox` for precise placement.
+> Note: The footer area in FLOW posters still uses `\footergridbox` for precise placement.
 
 ---
 
 ## Content Commands
 
-These commands work inside both `\GridBox` and `\FlowBox`.
+These commands work inside both `\gridbox` and `\flowbox`.
 
-### `\Section{<text>}`
+### `\sect{<text>}`
 
 Renders a section heading in turquoise.
 
 ```latex
-\Section{Methods and Materials}
+\sect{Methods and Materials}
 ```
 
-### `\Para{<text>}`
+### `\para{<text>}`
 
 Renders a justified body-text paragraph.
 
 ```latex
-\Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+\para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
 sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.}
 ```
 
-### `\Image`, `\Image[<span>]`, `\Image[<span>][<path>]`, `\Image[<span>][<path>][<height>]`
+### `\img`, `\img[<span>]`, `\img[<span>][<path>]`, `\img[<span>][<path>][<height>]`
 
 Inserts an image with flexible width/height control.
 
 | Form | Width | File | Height |
 | --- | --- | --- | --- |
-| `\Image` | `\linewidth` | placeholder | auto |
-| `\Image[2]` | 2-column span | placeholder | auto |
-| `\Image[][my_fig.png]` | `\linewidth` | `my_fig.png` | auto |
-| `\Image[2][my_fig.png]` | 2-column span | `my_fig.png` | auto |
-| `\Image[][my_fig.png][80mm]` | `\linewidth` | `my_fig.png` | 80 mm (forced) |
+| `\img` | `\linewidth` | placeholder | auto |
+| `\img[2]` | 2-column span | placeholder | auto |
+| `\img[][my_fig.png]` | `\linewidth` | `my_fig.png` | auto |
+| `\img[2][my_fig.png]` | 2-column span | `my_fig.png` | auto |
+| `\img[][my_fig.png][80mm]` | `\linewidth` | `my_fig.png` | 80 mm (forced) |
 
 File paths are resolved in this order:
 
 1. Exact path as given
 2. `graphics/<path>`
-3. Falls back to `graphics/placeholder_image.png`
+3. Falls back to `graphics/placeholder_image.pdf`
 
 ```latex
-\Image                                  % placeholder, full width
-\Image[][graphics/my_chart.pdf]         % custom image, auto aspect ratio
-\Image[2][results.png]                  % two-column width, auto height
-\Image[][photo.jpg][100mm]              % forced height (may distort)
+\img                                  % placeholder, full width
+\img[][graphics/my_chart.pdf]         % custom image, auto aspect ratio
+\img[2][results.png]                  % two-column width, auto height
+\img[][photo.jpg][100mm]              % forced height (may distort)
 ```
 
-### `\Highlight{<text>}` / `\Highlight[<span>]{<text>}`
+### `\highlight{<text>}` / `\highlight[<span>]{<text>}`
 
 Renders text inside a turquoise (30% opacity) highlight box.
 
 ```latex
-\Highlight{Key finding: composite strength increased by 40\%.}
-\Highlight[2]{This highlight spans two poster columns.}
+\highlight{Key finding: composite strength increased by 40\%.}
+\highlight[2]{This highlight spans two poster columns.}
 ```
 
-### `\Rule` / `\Rule[<span>]`
+### `\prule` / `\prule[<span>]`
 
 Draws a horizontal turquoise rule (4 pt thick).
 
 ```latex
-\Rule          % full width of current box
-\Rule[2]       % spans two poster columns
+\prule          % full width of current box
+\prule[2]       % spans two poster columns
 ```
 
 Stacking multiple rules of different widths creates a decorative separator:
 
 ```latex
-\Rule[1]
+\prule[1]
 \vspace{4pt}
-\Rule[2]
+\prule[2]
 \vspace{4pt}
-\Rule[3]
+\prule[3]
 \vspace{4pt}
-\Rule[4]
+\prule[4]
 ```
 
-### `\References{<text>}`
+### `\references{<text>}`
 
 Renders text in the small reference style (14 pt).
 
 ```latex
-\References{
+\references{
     \textbf{[1].} Smith, A. "Paper Title." \emph{Journal}, 2024.\par
     \textbf{[2].} Jones, B. "Another Paper." \emph{Conf. Proc.}, 2023.
 }
 ```
 
-### `\vGap`
+### `\qr` / `\qr[<width>]`
 
-Inserts a vertical gap of `\VGap` (15 mm). Use between content blocks for consistent spacing.
+Inserts the language-appropriate QR code image, as registered by `\qrset`. Defaults to `\linewidth` if no width is given.
 
 ```latex
-\vGap
-\Section{Section Title}
-\vGap
-\Para{Content...}
+\qr              % full width of current box
+\qr[40mm]        % explicit width
+```
+
+The QR code file is selected automatically based on \lang{EN} or \lang{DE}. To use custom files, register them with \qrset in the preamble:
+
+```latex
+\qrset{graphics/qr/my_project_EN.pdf}{graphics/qr/my_project_DE.pdf}
+```
+
+### `\vgap`
+
+Inserts a vertical gap of `\vgaplen` (15 mm). Use between content blocks for consistent spacing.
+
+```latex
+\vgap
+\sect{Section Title}
+\vgap
+\para{Content...}
 ```
 
 ---
 
 ## Footer Ribbon
 
-### `\BuildBottomRibbon`
+### `\buildfooter`
 
-Required. Draws the decorative turquoise footer ribbon with the MUL claim text. Place after `\end{PosterBody}`.
+Required. Draws the decorative turquoise footer ribbon with the MUL claim text. Place after `\end{posterbody}`.
 
 ```latex
-\end{PosterBody}
-\BuildBottomRibbon
+\end{posterbody}
+\buildfooter
 \end{document}
 ```
 
@@ -433,14 +457,14 @@ These lengths can be used directly in your content for precise layout:
 
 | Length | Value | Description |
 | --- | --- | --- |
-| `\ColumnWidth` | 120 mm | Width of one poster column |
-| `\ColumnGap` | 20 mm | Gap between adjacent columns |
-| `\GridWidth` | 540 mm | Total body width (4 columns + 3 gaps) |
-| `\VGap` | 15 mm | Standard vertical spacing |
-| `\MarginLeft` | 27 mm | Left page margin |
-| `\MarginRight` | 27 mm | Right page margin |
-| `\GridUnitX` | 20 mm | Horizontal grid cell size |
-| `\GridUnitY` | 15 mm | Vertical grid cell size |
+| `\colwidth` | 120 mm | Width of one poster column |
+| `\colgap` | 20 mm | Gap between adjacent columns |
+| `\gridwidth` | 540 mm | Total body width (4 columns + 3 gaps) |
+| `\vgaplen` | 15 mm | Standard vertical spacing |
+| `\marginleft` | 27 mm | Left page margin |
+| `\marginright` | 27 mm | Right page margin |
+| `\gridunitx` | 20 mm | Horizontal grid cell size |
+| `\gridunity` | 15 mm | Vertical grid cell size |
 
 ---
 
@@ -450,15 +474,15 @@ For manual formatting when needed:
 
 | Command | Size | Usage |
 | --- | --- | --- |
-| `\TitleStyle` | 60 pt | White, display font, bold |
-| `\HeadingStyle` | 36 pt | Turquoise, display font |
-| `\IntroStyle` | 30 pt | White, text font |
-| `\AuthorStyle` | 30 pt | Black, text font, bold |
-| `\AffiliationStyle` | 20 pt | Black, text font |
-| `\BodyStyle` | 24 pt | Black, text font |
-| `\Text` | 24 pt | Alias for `\BodyStyle` |
-| `\ReferenceStyle` | 14 pt | Black, text font, small |
-| `\ClaimStyle` | 36 pt | Claim font |
+| `\titlestyle` | 60 pt | White, display font, bold |
+| `\headingstyle` | 36 pt | Turquoise, display font |
+| `\introstyle` | 30 pt | White, text font |
+| `\authorstyle` | 30 pt | Black, text font, bold |
+| `\affiliationstyle` | 20 pt | Black, text font |
+| `\bodystyle` | 24 pt | Black, text font |
+| `\bodyfont` | 24 pt | Alias for `\bodystyle` |
+| `\refstyle` | 14 pt | Black, text font, small |
+| `\claimstyle` | 36 pt | Claim font |
 
 ---
 
@@ -467,42 +491,42 @@ For manual formatting when needed:
 ```latex
 \documentclass{MUL_poster}
 
-\Colors{Digital}
-\FontMode{Regular}
-\Language{EN}
+\colors{Digital}
+\fontmode{Regular}
+\lang{EN}
 
 \begin{document}
 \null
 
-\Title{My Research Poster}
-\Authors{A. Researcher\textsuperscript{1}}
-\Affiliations{\textsuperscript{1}Montanuniversität Leoben, Austria}
-\BuildHeader
+\title{My Research Poster}
+\authors{A. Researcher\textsuperscript{1}}
+\affiliations{\textsuperscript{1}Montanuniversität Leoben, Austria}
+\buildheader
 
-\begin{PosterBody}
-    \FlowBox{1}{
-        \vGap
-        \Section{Introduction}
-        \vGap
-        \Para{This is the introduction to my research.}
+\begin{posterbody}
+    \flowbox{1}{
+        \vgap
+        \sect{Introduction}
+        \vgap
+        \para{This is the introduction to my research.}
     }
 
-    \FlowBox{1}{
-        \vGap
-        \Section{Methods}
-        \vGap
-        \Image[][graphics/my_figure.png]
+    \flowbox{1}{
+        \vgap
+        \sect{Methods}
+        \vgap
+        \img[][graphics/my_figure.png]
     }
 
-    \FlowBox{2}{
-        \vGap
-        \Section{Results}
-        \vGap
-        \Highlight{Key result: 42\% improvement observed.}
+    \flowbox{2}{
+        \vgap
+        \sect{Results}
+        \vgap
+        \highlight{Key result: 42\% improvement observed.}
     }
-\end{PosterBody}
+\end{posterbody}
 
-\BuildBottomRibbon
+\buildfooter
 \end{document}
 ```
 
@@ -522,8 +546,12 @@ project/
 │   │   ├── logo_rgb_EN_white_v1.pdf
 │   │   ├── logo_rgb_DE_white_v1.pdf
 │   │   └── ...
-│   ├── placeholder_image.png
-│   ├── qrcode.pdf
+│   ├── qr/
+│   │   ├── logo_qr.svg
+│   │   ├── qrcode_DE.pdf
+│   │   ├── qrcode_EN.pdf
+│   │   ├── readme_qr.md
+│   ├── placeholder_image.pdf
 ├── fonts/
 │   ├── Host_Grotesk/
 │   │   └── HostGrotesk-*.ttf
@@ -533,3 +561,33 @@ project/
 ```
 
 Fonts are resolved with a fallback chain: local project fonts → system-installed fonts → Calibri → Carlito. The template will compile even without the brand fonts installed.
+
+---
+
+## Create your own QR code
+
+The official MUL "Brandbook" (style guide) says that one can ask the university design team to provide custom QR codes. Or one could try to create ones own that looks very similar:
+
+### Website used:
+https://genqrcode.com/
+
+### Text input:
+Link to the website one wants to create the QR code for.
+
+### Design:
+Square shape > Diamond shape (third from last)
+Inner eye shape > default (first)
+Outer eye shape > default (first)
+
+### Frame:
+default (none)
+
+### Logo:
+The website accepts the provided graphics/qr/logo_qr.svg file.
+DO tick the "remove background" option.
+
+### Color:
+Square color > #FFFFFF (white)
+Background color > #00727D (MUL turquoise)
+Inner eye color > #FFFFFF (white)
+Outer eye color > #FFFFFF (white)

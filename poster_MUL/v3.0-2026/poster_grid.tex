@@ -6,39 +6,39 @@
 %  - full manual control
 %  - complex custom layouts
 %
-% For automatic placement, see:
-%   main_flow.tex
-% ============================================================
+% For more automatic placement, see:
+%   poster_flow.tex
 
 \documentclass{MUL_poster}
 
 % ============================================================
 % Global poster setup
 % ============================================================
-\Colors{Digital} % Use 'Print' or 'Digital', the TechGreen color is only for digital use and gets substituted if printed
-\FontMode{Regular} % Use 'Regular' or 'Experimental', regular uses Calibri, exp uses the new MUL fonts (use more space)
-\Language{EN} % Use 'EN' or 'DE', automatically switches all MUL logos, as well as the claim text in the footer ribbon
+\colors{Digital}    % Use 'Print' or 'Digital'. TechGreen is substituted in print mode.
+\fontmode{Regular}  % Use 'Regular' or 'Experimental'.
+\lang{EN}           % Use 'EN' or 'DE'. Switches logos and footer claim text.
+\qrset{graphics/qr/qrcode_EN.pdf}{graphics/qr/qrcode_DE.pdf} % Use this to enable automatic language switching for your QR codes: \qrset{graphics/qr/custom_qr_name_EN.pdf}{graphics/qr/custom_qr_name_DE.pdf}
 
 \begin{document}
 \null
 
 % ============================================================
 % 1. Header ribbon
-%    - top-left MUL logo is drawn by the class
-%    - title is set here
-%    - optional top-right image/logo is configured here
 % ============================================================
-\Title{Header max.2 lines -- Box can be increased\par to the right if no logo or photo is used}
-\HeaderImage{graphics/placeholder_image.png}{\TopRightImageWidth}{\TopRightImageHeight}% Optional; replace path/size or comment out.
+% The top-left MUL logo is drawn by the class.
+% The optional top-right image/logo is configured here.
+
+\title{Header max.2 lines -- Box can be increased\par to the right if no logo or photo is used}
+\headerimage{graphics/placeholder_image.pdf}{\headerimgwidth}{\headerimgheight}% Optional; replace path/size or comment out.
 
 % ============================================================
 % 2. Author section below the header ribbon
 % ============================================================
-% \Authors{} % empty command places just a slim empty/white banner, no commands ommits banner completely
-% \Affiliations{} % empty command places just a slim empty/white banner, no commands ommits banner completely
+% \authors{} % empty command places just a slim empty/white banner, no commands omits banner completely
+% \affiliations{} % empty command places just a slim empty/white banner, no commands omits banner completely
 
-\Authors{Author One\textsuperscript{1}, Author Two\textsuperscript{2}, Author\textsuperscript{3}}
-\Affiliations{%
+\authors{Author One\textsuperscript{1}, Author Two\textsuperscript{2}, Author\textsuperscript{3}}
+\affiliations{%
 \textsuperscript{1}University of Happy Research, Smokey Valley, Rainbow City, Guatamateria\\
 \textsuperscript{2}here we go\\
 \textsuperscript{3}There we are
@@ -48,23 +48,23 @@
 % 3. Optional intro ribbon
 % ============================================================
 
-% \Intro{} % empty command places just a slim Turquoise banner, no command ommits banner completely
+% \intro{} % empty command places just a slim Turquoise banner, no command omits banner completely
 
-\Intro{%
+\intro{%
 Here is the optional intro to the work. It should be no more than two, maximum three lines long.\par
 Here is the optional intro to the work. It should be no more than two, maximum three lines long.\par
 Here is the optional intro to the work. It should be no more than two, maximum three lines long.
 }
 
 % Measure and draw the complete top region: header, authors and intro.
-\BuildHeader
+\buildheader
 
 % Optional GRID overlay for manual GRID layout.
 % Comment out for final export.
-\ShowGrid
+\showgrid
 
 % ============================================================
-% PosterBody: GRID model example
+% 4. posterbody: GRID model example
 % ============================================================
 % Column 1 starts at x = 0
 % Column 2 starts at x = 7
@@ -79,78 +79,78 @@ Here is the optional intro to the work. It should be no more than two, maximum t
 % Each cell of the grid is 20mm in width and 15mm in height (both values chosen to easier match the PowerPoint template)
 % Fractional coordinates are technically allowed.
 
-\begin{PosterBody}
+\begin{posterbody}
 
-\GridBox{0}{0}{6}{10}{
-    \vGap
-    \Section{Here is the Header (max 2 lines)}
-    \vGap
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
+\gridbox{0}{0}{6}{10}{
+    \vgap
+    \sect{Here is the Header (max 2 lines)}
+    \vgap
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
 }
 
-\GridBox{7}{0}{6}{10}{
-    \vGap
-    \Section{Here is the Header (max 2 lines)}
-    \vGap
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
+\gridbox{7}{0}{6}{10}{
+    \vgap
+    \sect{Here is the Header (max 2 lines)}
+    \vgap
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum}
 }
 
-\GridBox{14}{0}{13}{10}{
-    \vGap
-    \Section{Here is the Header of the work (max 2 Colums) \\(max 2 lines)}
-    \vGap
-    \begin{minipage}[t]{\ColumnWidth}
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit}
+\gridbox{14}{0}{13}{10}{
+    \vgap
+    \sect{Here is the Header of the work (max 2 Colums) \\(max 2 lines)}
+    \vgap
+    \begin{minipage}[t]{\colwidth}
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit}
     \end{minipage}
-    \hspace{\ColumnGap}
-    \begin{minipage}[t]{\ColumnWidth}
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.}
-    \end{minipage}
-}
-
-\GridBox{0}{10}{6}{11}{
-    \vGap
-    \Highlight{Important text highlights are given their own text field, which is filled with 70\% transparency of the Turquoise color.}
-    \vGap
-    \Image[][]
-}
-
-\GridBox{14}{10}{13}{17}{
-    \vGap
-    \Image[][graphics/placeholder_image.png]
-    \vGap
-    \begin{minipage}[t]{\ColumnWidth}
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et .}
-    \end{minipage}
-    \hspace{\ColumnGap}
-    \begin{minipage}[t]{\ColumnWidth}
-    \Para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore .}
+    \hspace{\colgap}
+    \begin{minipage}[t]{\colwidth}
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.}
     \end{minipage}
 }
 
-\GridBox{0}{27}{27}{2}{
-    \Rule[1]
+\gridbox{0}{10}{6}{11}{
+    \vgap
+    \highlight{Important text highlights are given their own text field, which is filled with 70\% transparency of the Turquoise color.}
+    \vgap
+    \img[][]
+}
+
+\gridbox{14}{10}{13}{17}{
+    \vgap
+    \img[][graphics/placeholder_image.pdf]
+    \vgap
+    \begin{minipage}[t]{\colwidth}
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et .}
+    \end{minipage}
+    \hspace{\colgap}
+    \begin{minipage}[t]{\colwidth}
+    \para{Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore .}
+    \end{minipage}
+}
+
+\gridbox{0}{27}{27}{2}{
+    \prule[1]
     \vspace{4pt}
-    \Rule[2]
+    \prule[2]
     \vspace{4pt}
-    \Rule[3]
+    \prule[3]
     \vspace{4pt}
-    \Rule[4]
+    \prule[4]
 }
 
 % --------------------------------------------------------
-% \FooterGridBox uses a separate Y-coordinate system that makes 
-% the \Rule visually align with the one from the PowerPoint template
+% \footergridbox uses a separate Y-coordinate system that makes
+% the \prule visually align with the one from the PowerPoint template
 % --------------------------------------------------------
 
-\FooterGridBox{0}{0}{27}{1}{
-    \Rule  
+\footergridbox{0}{0}{27}{1}{
+    \prule
 }
 
-\FooterGridBox{0}{1}{13}{4.1}{
-    {\HeadingStyle References\par}
+\footergridbox{0}{1}{13}{4.1}{
+    {\headingstyle References\par}
     \vspace{5mm}
-    \References{
+    \references{
         \textbf{[1].} Aaker, D. A. ''Managing Brand Equity: Capitalizing on the value of a Brand Name."
         \emph{The Free Press, New York}, 1991.\par
         \textbf{[2].} Aaker, D. A. ''Managing Brand Equity: Capitalizing on the value of a Brand Name."
@@ -159,41 +159,41 @@ Here is the optional intro to the work. It should be no more than two, maximum t
         \emph{The Free Press, New York}, 1991.
     }
     \vspace{10mm}
-    {\Text Acknowledegments, sponsors etc.\par}
+    {\bodyfont Acknowledegments, sponsors etc.\par}
 }
 
-\FooterGridBox{14}{1}{6}{4.1}{
+\footergridbox{14}{1}{6}{4.1}{
     \vspace{5mm}
     \begin{minipage}[t]{0.3\linewidth}
-    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.pdf}
     \end{minipage}\hfill
     \begin{minipage}[t]{0.30\linewidth}
-    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.pdf}
     \end{minipage}\hfill
     \begin{minipage}[t]{0.30\linewidth}
-    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.png}
+    \includegraphics[width=\linewidth,height=\linewidth]{graphics/placeholder_image.pdf}
     \end{minipage}\par
     \vspace{5mm}
-    \Text\centering sponsor logos etc.
+    \bodyfont\centering sponsor logos etc.
 }
 
-\FooterGridBox{21}{1}{4}{4.1}{
+\footergridbox{21}{1}{4}{4.1}{
     \vspace{5mm}
-    \Text Contact information:\par
+    \bodyfont Contact information:\par
     QR code\par
     www.example.com\par
     contact@example.com\par
 }
 
-\FooterGridBox{25.25}{1}{1.75}{4.1}{
+\footergridbox{25.25}{1}{1.75}{4.1}{
     \vspace{5mm}
-    \Image[][graphics/qrcode.pdf]
+    \qr
 }
 
-\end{PosterBody}
+\end{posterbody}
 
 % ============================================================
-% Optional footer ribbon left text (department)
+% 5. Optional footer ribbon left text (department)
 % ============================================================
 
 \makeatletter
@@ -213,6 +213,6 @@ Here is the optional intro to the work. It should be no more than two, maximum t
 % ============================================================
 % 6. Decorative bottom ribbon with MUL claim text on the right
 % ============================================================
-\BuildBottomRibbon
+\buildfooter
 
 \end{document}

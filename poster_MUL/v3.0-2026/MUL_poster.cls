@@ -2,6 +2,73 @@
 \ProvidesClass{MUL_poster}[2026/05/01 MUL scientific poster class]
 
 % ============================================================
+% Command renaming summary (old → new)
+% ============================================================
+% SETUP:        \Colors        → \colors
+%               \FontMode      → \fontmode
+%               \Language       → \lang            (\language is a TeX primitive)
+%
+% HEADER:       \Title         → \title
+%               \Authors       → \authors
+%               \Affiliations  → \affiliations
+%               \Intro         → \intro
+%               \HeaderImage   → \headerimage
+%               \BuildHeader   → \buildheader
+%
+% BODY/LAYOUT:  PosterBody     → posterbody       (environment)
+%               \GridBox       → \gridbox
+%               \FlowBox       → \flowbox
+%               \FooterGridBox → \footergridbox
+%               \ShowGrid      → \showgrid
+%               \BuildBottomRibbon → \buildfooter
+%
+% CONTENT:      \Section       → \sect             (\section is LaTeX kernel)
+%               \Para          → \para
+%               \Image         → \img
+%               \Highlight     → \highlight
+%               \Rule          → \prule            (\rule is a LaTeX primitive)
+%               \References    → \references
+%               \vGap          → \vgap
+%
+% STYLES:       \TitleStyle       → \titlestyle
+%               \HeadingStyle     → \headingstyle
+%               \IntroStyle       → \introstyle
+%               \AuthorStyle      → \authorstyle
+%               \AffiliationStyle → \affiliationstyle
+%               \BodyStyle        → \bodystyle
+%               \Text             → \bodyfont       (\text is amsmath)
+%               \ReferenceStyle   → \refstyle
+%               \ClaimStyle       → \claimstyle
+%
+% FONT ALIASES: \TextFont          → \txtfont
+%               \TextLightFont     → \txtlightfont
+%               \TextMediumFont    → \txtmediumfont
+%               \TextSemiBoldFont  → \txtsemiboldfont
+%               \TextExtraBoldFont → \txtextraboldfont
+%               \DisplayFont       → \dispfont
+%               \DisplayLightFont  → \displightfont
+%               \DisplayMediumFont → \dispmediumfont
+%               \DisplaySemiBoldFont → \dispsemiboldfont
+%               \DisplayExtraBoldFont→ \dispextraboldfont
+%               \ClaimFont         → \claimfont
+%               \TitleWeight       → \titleweight
+%               \HeadingWeight     → \headingweight
+%               \AuthorWeight      → \authorweight
+%               \ClaimWeight       → \claimweight
+%
+% LENGTHS:      \MarginLeft          → \marginleft
+%               \MarginRight         → \marginright
+%               \ColumnWidth         → \colwidth
+%               \ColumnGap           → \colgap
+%               \GridWidth           → \gridwidth
+%               \VGap                → \vgaplen
+%               \GridUnitX           → \gridunitx
+%               \GridUnitY           → \gridunity
+%               \TopRightImageWidth  → \headerimgwidth
+%               \TopRightImageHeight → \headerimgheight
+% ============================================================
+
+% ============================================================
 % 0. Engine guard
 % ============================================================
 \LoadClass{article}
@@ -43,28 +110,28 @@
 % ------------------------------------------------------------
 % 2.2 Layout dimensions (derived from PowerPoint template)
 % ------------------------------------------------------------
-\newlength{\MarginLeft}          \setlength{\MarginLeft}{27mm}
-\newlength{\MarginRight}         \setlength{\MarginRight}{27mm}
+\newlength{\marginleft}          \setlength{\marginleft}{27mm}
+\newlength{\marginright}         \setlength{\marginright}{27mm}
 \newlength{\HeaderBandHeight}    \setlength{\HeaderBandHeight}{101.5mm}
 \newlength{\FooterBandHeight}    \setlength{\FooterBandHeight}{19mm}
 
-\newlength{\ColumnWidth}         \setlength{\ColumnWidth}{120mm}
-\newlength{\ColumnGap}           \setlength{\ColumnGap}{20mm}
-\newlength{\GridWidth}           \setlength{\GridWidth}{4\ColumnWidth+3\ColumnGap}
+\newlength{\colwidth}            \setlength{\colwidth}{120mm}
+\newlength{\colgap}              \setlength{\colgap}{20mm}
+\newlength{\gridwidth}           \setlength{\gridwidth}{4\colwidth+3\colgap}
 
 \newlength{\PrimaryLogoWidth}    \setlength{\PrimaryLogoWidth}{80.8mm}
 \newlength{\PrimaryLogoHeight}   \setlength{\PrimaryLogoHeight}{0.923\PrimaryLogoWidth}% ratio 880.5/954.0 {74.57mm}
 
-\newlength{\TopRightImageHeight} \setlength{\TopRightImageHeight}{\PrimaryLogoHeight}
-\newlength{\TopRightImageWidth}  \setlength{\TopRightImageWidth}{0.75\TopRightImageHeight}
+\newlength{\headerimgheight}     \setlength{\headerimgheight}{\PrimaryLogoHeight}
+\newlength{\headerimgwidth}      \setlength{\headerimgwidth}{0.75\headerimgheight}
 
-\newlength{\VGap}                \setlength{\VGap}{15mm}
-\newcommand{\vGap}{\vspace*{\VGap}}
+\newlength{\vgaplen}             \setlength{\vgaplen}{15mm}
+\newcommand{\vgap}{\vspace*{\vgaplen}}
 
 \newlength{\HighlightInset}      \setlength{\HighlightInset}{4mm}
 
-\newlength{\TitleLeftX}          \setlength{\TitleLeftX}{\MarginLeft+\PrimaryLogoWidth+15mm}
-\newlength{\TitleWidth}          \setlength{\TitleWidth}{\paperwidth-\TitleLeftX-\MarginRight}
+\newlength{\TitleLeftX}          \setlength{\TitleLeftX}{\marginleft+\PrimaryLogoWidth+15mm}
+\newlength{\TitleWidth}          \setlength{\TitleWidth}{\paperwidth-\TitleLeftX-\marginright}
 
 % ============================================================
 % 3. Color system
@@ -75,7 +142,7 @@
 % ------------------------------------------------------------
 
 % Digital variants: RGB / HEX-oriented values from the brandbook.
-\definecolor{digital_Turquoise}{RGB}{0,114,125}
+\definecolor{digital_Turquoise}{RGB}{0,114,125} % HEX: #00727d
 \definecolor{digital_GraphiteBlack}{RGB}{28,38,41}
 \definecolor{digital_White}{RGB}{255,255,255}
 \definecolor{digital_LightGreen}{RGB}{136,205,211}
@@ -91,7 +158,7 @@
 \definecolor{digital_GWDark}{RGB}{195,230,233}
 
 % Print variants: CMYK-oriented values as listed in the brandbook.
-\definecolor{print_Turquoise}{cmyk}{1.00,0.40,0.50,0.00}
+\definecolor{print_Turquoise}{cmyk}{1.00,0.40,0.50,0.00} % HEX: #00727d
 \definecolor{print_GraphiteBlack}{cmyk}{0.80,0.60,0.55,0.75}
 \definecolor{print_White}{cmyk}{0.00,0.00,0.00,0.00}
 \definecolor{print_LightGreen}{cmyk}{0.50,0.00,0.20,0.00}
@@ -142,7 +209,7 @@
     \colorlet{GWDark}{print_GWDark}%
 }
 
-\newcommand{\Colors}[1]{%
+\newcommand{\colors}[1]{%
     \ifcsname MUL@set#1Colors\endcsname
         \csname MUL@set#1Colors\endcsname
     \else
@@ -150,7 +217,7 @@
     \fi
 }
 
-\Colors{Digital}% default, unless an override is applied in the main poster file.
+\colors{Digital}% default, unless an override is applied in the main poster file.
 
 % ============================================================
 % 4. Font system
@@ -246,25 +313,25 @@
 }
 
 % ------------------------------------------------------------
-% 4.2 Public font aliases (switched by \FontMode)
+% 4.2 Public font aliases (switched by \fontmode)
 % ------------------------------------------------------------
-\newcommand{\TextFont}{\MUL@HostFont}
-\newcommand{\TextLightFont}{\MUL@HostLightFont}
-\newcommand{\TextMediumFont}{\MUL@HostMediumFont}
-\newcommand{\TextSemiBoldFont}{\MUL@HostSemiBoldFont}
-\newcommand{\TextExtraBoldFont}{\MUL@HostExtraBoldFont}
+\newcommand{\txtfont}{\MUL@HostFont}
+\newcommand{\txtlightfont}{\MUL@HostLightFont}
+\newcommand{\txtmediumfont}{\MUL@HostMediumFont}
+\newcommand{\txtsemiboldfont}{\MUL@HostSemiBoldFont}
+\newcommand{\txtextraboldfont}{\MUL@HostExtraBoldFont}
 
-\newcommand{\DisplayFont}{\MUL@FunnelFont}
-\newcommand{\DisplayLightFont}{\MUL@FunnelLightFont}
-\newcommand{\DisplayMediumFont}{\MUL@FunnelMediumFont}
-\newcommand{\DisplaySemiBoldFont}{\MUL@FunnelSemiBoldFont}
-\newcommand{\DisplayExtraBoldFont}{\MUL@FunnelExtraBoldFont}
-\newcommand{\ClaimFont}{\MUL@FunnelBoldFont}
+\newcommand{\dispfont}{\MUL@FunnelFont}
+\newcommand{\displightfont}{\MUL@FunnelLightFont}
+\newcommand{\dispmediumfont}{\MUL@FunnelMediumFont}
+\newcommand{\dispsemiboldfont}{\MUL@FunnelSemiBoldFont}
+\newcommand{\dispextraboldfont}{\MUL@FunnelExtraBoldFont}
+\newcommand{\claimfont}{\MUL@FunnelBoldFont}
 
-\newcommand{\TitleWeight}{\bfseries}
-\newcommand{\HeadingWeight}{\mdseries}
-\newcommand{\AuthorWeight}{\bfseries}
-\newcommand{\ClaimWeight}{\bfseries}
+\newcommand{\titleweight}{\bfseries}
+\newcommand{\headingweight}{\mdseries}
+\newcommand{\authorweight}{\bfseries}
+\newcommand{\claimweight}{\bfseries}
 
 % ------------------------------------------------------------
 % 4.3 Math font helpers
@@ -299,48 +366,48 @@
 % ------------------------------------------------------------
 % 4.4 Font mode switch
 % ------------------------------------------------------------
-%   \FontMode{Regular}      — Calibri everywhere, Times math and symbols
-%   \FontMode{Experimental} — Host Grotesk body, Funnel Display headings
+%   \fontmode{Regular}      — Calibri everywhere, Times math and symbols
+%   \fontmode{Experimental} — Host Grotesk body, Funnel Display headings
 % ------------------------------------------------------------
 \newcommand{\MUL@setRegularFonts}{%
-    \renewcommand{\TextFont}{\MUL@CalibriFont}%
-    \renewcommand{\TextLightFont}{\MUL@CalibriFont}%
-    \renewcommand{\TextMediumFont}{\MUL@CalibriFont}%
-    \renewcommand{\TextSemiBoldFont}{\MUL@CalibriFont}%
-    \renewcommand{\TextExtraBoldFont}{\MUL@CalibriFont}%
-    \renewcommand{\DisplayFont}{\MUL@CalibriFont}%
-    \renewcommand{\DisplayLightFont}{\MUL@CalibriFont}%
-    \renewcommand{\DisplayMediumFont}{\MUL@CalibriFont}%
-    \renewcommand{\DisplaySemiBoldFont}{\MUL@CalibriFont}%
-    \renewcommand{\DisplayExtraBoldFont}{\MUL@CalibriFont}%
-    \renewcommand{\ClaimFont}{\MUL@FunnelBoldFont}%
-    \renewcommand{\TitleWeight}{\bfseries}%
-    \renewcommand{\HeadingWeight}{\mdseries}%
-    \renewcommand{\AuthorWeight}{\bfseries}%
-    \renewcommand{\ClaimWeight}{\mdseries}%
+    \renewcommand{\txtfont}{\MUL@CalibriFont}%
+    \renewcommand{\txtlightfont}{\MUL@CalibriFont}%
+    \renewcommand{\txtmediumfont}{\MUL@CalibriFont}%
+    \renewcommand{\txtsemiboldfont}{\MUL@CalibriFont}%
+    \renewcommand{\txtextraboldfont}{\MUL@CalibriFont}%
+    \renewcommand{\dispfont}{\MUL@CalibriFont}%
+    \renewcommand{\displightfont}{\MUL@CalibriFont}%
+    \renewcommand{\dispmediumfont}{\MUL@CalibriFont}%
+    \renewcommand{\dispsemiboldfont}{\MUL@CalibriFont}%
+    \renewcommand{\dispextraboldfont}{\MUL@CalibriFont}%
+    \renewcommand{\claimfont}{\MUL@FunnelBoldFont}%
+    \renewcommand{\titleweight}{\bfseries}%
+    \renewcommand{\headingweight}{\mdseries}%
+    \renewcommand{\authorweight}{\bfseries}%
+    \renewcommand{\claimweight}{\mdseries}%
     \MUL@setRegularMath
 }
 
 \newcommand{\MUL@setExperimentalFonts}{%
-    \renewcommand{\TextFont}{\MUL@HostFont}%
-    \renewcommand{\TextLightFont}{\MUL@HostLightFont}%
-    \renewcommand{\TextMediumFont}{\MUL@HostMediumFont}%
-    \renewcommand{\TextSemiBoldFont}{\MUL@HostSemiBoldFont}%
-    \renewcommand{\TextExtraBoldFont}{\MUL@HostExtraBoldFont}%
-    \renewcommand{\DisplayFont}{\MUL@FunnelFont}%
-    \renewcommand{\DisplayLightFont}{\MUL@FunnelLightFont}%
-    \renewcommand{\DisplayMediumFont}{\MUL@FunnelMediumFont}%
-    \renewcommand{\DisplaySemiBoldFont}{\MUL@FunnelSemiBoldFont}%
-    \renewcommand{\DisplayExtraBoldFont}{\MUL@FunnelExtraBoldFont}%
-    \renewcommand{\ClaimFont}{\MUL@FunnelBoldFont}%
-    \renewcommand{\TitleWeight}{\bfseries}%
-    \renewcommand{\HeadingWeight}{\mdseries}%
-    \renewcommand{\AuthorWeight}{\bfseries}%
-    \renewcommand{\ClaimWeight}{\mdseries}%
+    \renewcommand{\txtfont}{\MUL@HostFont}%
+    \renewcommand{\txtlightfont}{\MUL@HostLightFont}%
+    \renewcommand{\txtmediumfont}{\MUL@HostMediumFont}%
+    \renewcommand{\txtsemiboldfont}{\MUL@HostSemiBoldFont}%
+    \renewcommand{\txtextraboldfont}{\MUL@HostExtraBoldFont}%
+    \renewcommand{\dispfont}{\MUL@FunnelFont}%
+    \renewcommand{\displightfont}{\MUL@FunnelLightFont}%
+    \renewcommand{\dispmediumfont}{\MUL@FunnelMediumFont}%
+    \renewcommand{\dispsemiboldfont}{\MUL@FunnelSemiBoldFont}%
+    \renewcommand{\dispextraboldfont}{\MUL@FunnelExtraBoldFont}%
+    \renewcommand{\claimfont}{\MUL@FunnelBoldFont}%
+    \renewcommand{\titleweight}{\bfseries}%
+    \renewcommand{\headingweight}{\mdseries}%
+    \renewcommand{\authorweight}{\bfseries}%
+    \renewcommand{\claimweight}{\mdseries}%
     \MUL@setExperimentalMath
 }
 
-\newcommand{\FontMode}[1]{%
+\newcommand{\fontmode}[1]{%
     \ifcsname MUL@set#1Fonts\endcsname
         \csname MUL@set#1Fonts\endcsname
     \else
@@ -348,7 +415,7 @@
     \fi
 }
 
-\FontMode{Regular}% default
+\fontmode{Regular}% default
 
 % ============================================================
 % 5. Typography styles & text helpers
@@ -357,21 +424,21 @@
 % ------------------------------------------------------------
 % 5.1 Named styles
 % ------------------------------------------------------------
-\newcommand{\TitleStyle}{\DisplayFont\TitleWeight\color{White}\fontsize{60pt}{66pt}\selectfont}
-\newcommand{\HeadingStyle}{\DisplayFont\HeadingWeight\color{Turquoise}\fontsize{36pt}{43.2pt}\selectfont}
-\newcommand{\IntroStyle}{\TextFont\color{White}\fontsize{30pt}{36pt}\selectfont}
-\newcommand{\AuthorStyle}{\TextFont\AuthorWeight\color{black}\fontsize{30pt}{36pt}\selectfont}
-\newcommand{\AffiliationStyle}{\TextFont\mdseries\color{black}\fontsize{20pt}{24pt}\selectfont}
-\newcommand{\BodyStyle}{\TextFont\color{black}\fontsize{24pt}{28.8pt}\selectfont}
-\newcommand{\Text}{\TextFont\color{black}\fontsize{24pt}{28.8pt}\selectfont}
-\newcommand{\ReferenceStyle}{\TextFont\color{black}\noindent\fontsize{14pt}{16.8pt}\selectfont}
-\newcommand{\ClaimStyle}{\ClaimFont\ClaimWeight\noindent\fontsize{36pt}{28.8pt}\selectfont}
+\newcommand{\titlestyle}{\dispfont\titleweight\color{White}\fontsize{60pt}{66pt}\selectfont}
+\newcommand{\headingstyle}{\dispfont\headingweight\color{Turquoise}\fontsize{36pt}{43.2pt}\selectfont}
+\newcommand{\introstyle}{\txtfont\color{White}\fontsize{30pt}{36pt}\selectfont}
+\newcommand{\authorstyle}{\txtfont\authorweight\color{black}\fontsize{30pt}{36pt}\selectfont}
+\newcommand{\affiliationstyle}{\txtfont\mdseries\color{black}\fontsize{20pt}{24pt}\selectfont}
+\newcommand{\bodystyle}{\txtfont\color{black}\fontsize{24pt}{28.8pt}\selectfont}
+\newcommand{\bodyfont}{\txtfont\color{black}\fontsize{24pt}{28.8pt}\selectfont}
+\newcommand{\refstyle}{\txtfont\color{black}\noindent\fontsize{14pt}{16.8pt}\selectfont}
+\newcommand{\claimstyle}{\claimfont\claimweight\noindent\fontsize{36pt}{28.8pt}\selectfont}
 
 % ------------------------------------------------------------
 % 5.2 Public text helpers
 % ------------------------------------------------------------
-\newcommand{\Para}[1]{{\BodyStyle\justifying\noindent #1\par}}
-\newcommand{\References}[1]{{\ReferenceStyle\RaggedRight #1\par}}
+\newcommand{\para}[1]{{\bodystyle\justifying\noindent #1\par}}
+\newcommand{\references}[1]{{\refstyle\RaggedRight #1\par}}
 
 % ============================================================
 % 6. Logo & language system
@@ -380,7 +447,7 @@
 % ------------------------------------------------------------
 % 6.1 Language selection
 % ------------------------------------------------------------
-\newcommand{\Language}[1]{\def\MUL@Language{#1}}
+\newcommand{\lang}[1]{\def\MUL@Language{#1}}
 \providecommand{\MUL@Language}{EN}
 
 % ------------------------------------------------------------
@@ -399,6 +466,21 @@
 
 \newcommand{\MUL@FooterLeftText}{}% default empty; override in main file
 
+% ------------------------------------------------------------
+% 6.4 Language-aware QR code
+% ------------------------------------------------------------
+\def\MUL@qr@EN{graphics/qr/qrcode_EN.pdf}% default
+\def\MUL@qr@DE{graphics/qr/qrcode_DE.pdf}% default
+
+\newcommand{\qrset}[2]{%
+    \def\MUL@qr@EN{#1}%
+    \def\MUL@qr@DE{#2}%
+}
+
+\NewDocumentCommand{\qr}{ O{\linewidth} }{%
+    \includegraphics[width=#1]{\csname MUL@qr@\MUL@Language\endcsname}%
+}
+
 % ============================================================
 % 7. Header content commands
 % ============================================================
@@ -407,7 +489,7 @@
 % 7.1 Title
 % ------------------------------------------------------------
 \def\MUL@titleText{}
-\newcommand{\Title}[1]{\gdef\MUL@titleText{#1}}
+\renewcommand{\title}[1]{\gdef\MUL@titleText{#1}}
 
 % ------------------------------------------------------------
 % 7.2 Authors & affiliations
@@ -416,11 +498,11 @@
 \def\MUL@affiliationText{}
 \newif\ifMUL@hasAuthors  \MUL@hasAuthorsfalse
 
-\newcommand{\Authors}[1]{%
+\newcommand{\authors}[1]{%
     \global\MUL@hasAuthorstrue
     \gdef\MUL@authorText{#1}%
 }
-\newcommand{\Affiliations}[1]{%
+\newcommand{\affiliations}[1]{%
     \global\MUL@hasAuthorstrue
     \gdef\MUL@affiliationText{#1}%
 }
@@ -431,7 +513,7 @@
 \def\MUL@introText{}
 \newif\ifMUL@hasIntro  \MUL@hasIntrofalse
 
-\newcommand{\Intro}[1]{%
+\newcommand{\intro}[1]{%
     \global\MUL@hasIntrotrue
     \gdef\MUL@introText{#1}%
 }
@@ -442,11 +524,11 @@
 \def\MUL@topRightImageFile{}
 \newif\ifMUL@hasTopRightImage  \MUL@hasTopRightImagefalse
 
-\newcommand{\HeaderImage}[3]{%
+\newcommand{\headerimage}[3]{%
     \MUL@hasTopRightImagetrue
     \gdef\MUL@topRightImageFile{#1}%
-    \setlength{\TopRightImageWidth}{#2}%
-    \setlength{\TopRightImageHeight}{#3}%
+    \setlength{\headerimgwidth}{#2}%
+    \setlength{\headerimgheight}{#3}%
 }
 
 % ============================================================
@@ -470,11 +552,11 @@
     \setlength{\AuthorHeight}{0pt}%
     \ifMUL@hasAuthors
         \sbox{\MUL@authorBox}{%
-            \begin{minipage}{\GridWidth}
+            \begin{minipage}{\gridwidth}
                 \RaggedRight
-                {\AuthorStyle\MUL@authorText\par}%
+                {\authorstyle\MUL@authorText\par}%
                 \vspace{\AuthorGap}%
-                {\AffiliationStyle
+                {\affiliationstyle
                     \let\MUL@savedBreak\\%
                     \def\\{\MUL@savedBreak\strut\ignorespaces}%
                     \MUL@affiliationText
@@ -488,8 +570,8 @@
     \setlength{\IntroHeight}{0pt}%
     \ifMUL@hasIntro
         \sbox{\MUL@introBox}{%
-            \begin{minipage}{\GridWidth}
-                \RaggedRight{\IntroStyle\MUL@introText\par}%
+            \begin{minipage}{\gridwidth}
+                \RaggedRight{\introstyle\MUL@introText\par}%
             \end{minipage}%
         }%
         \setlength{\IntroHeight}{\ht\MUL@introBox+\dp\MUL@introBox}%
@@ -507,21 +589,21 @@
         % Turquoise header ribbon
         \fill[Turquoise] (0,\paperheight-\HeaderBandHeight) rectangle (\paperwidth,\paperheight);
         % Top-left institutional logo
-        \node at (\MarginLeft+0.5\PrimaryLogoWidth,\paperheight-0.5\HeaderBandHeight)
+        \node at (\marginleft+0.5\PrimaryLogoWidth,\paperheight-0.5\HeaderBandHeight)
             {\logo[width=\PrimaryLogoWidth,height=\PrimaryLogoHeight]{white}{v1}};
         % Title
         \node[anchor=west, inner sep=0pt] at (\TitleLeftX,\paperheight-0.5\HeaderBandHeight)
             {\begin{minipage}[c][\HeaderBandHeight][c]{\TitleWidth}
-                \RaggedRight\TitleStyle\MUL@titleText
+                \RaggedRight\titlestyle\MUL@titleText
             \end{minipage}};
         % Optional top-right image
         \ifMUL@hasTopRightImage
-            \node[anchor=east, inner sep=0pt] at (\paperwidth-\MarginRight,\paperheight-0.5\HeaderBandHeight)
-                {\includegraphics[width=\TopRightImageWidth, height=\TopRightImageHeight]{\MUL@topRightImageFile}};
+            \node[anchor=east, inner sep=0pt] at (\paperwidth-\marginright,\paperheight-0.5\HeaderBandHeight)
+                {\includegraphics[width=\headerimgwidth, height=\headerimgheight]{\MUL@topRightImageFile}};
         \fi
         % Author block
         \ifdim\AuthorHeight>0pt
-            \node[anchor=north west] at (\MarginLeft,\paperheight-\HeaderBandHeight-\AuthorPadding)
+            \node[anchor=north west] at (\marginleft,\paperheight-\HeaderBandHeight-\AuthorPadding)
                 {\usebox{\MUL@authorBox}};
         \fi
         % Intro ribbon
@@ -529,7 +611,7 @@
             \fill[Turquoise] (0,\paperheight-\HeaderBandHeight-\AuthorHeight-\IntroHeight)
                 rectangle
                 (\paperwidth,\paperheight-\HeaderBandHeight-\AuthorHeight);
-            \node[anchor=north west, inner sep=0pt] at (\MarginLeft,\paperheight-\HeaderBandHeight-\AuthorHeight-\IntroPadding)
+            \node[anchor=north west, inner sep=0pt] at (\marginleft,\paperheight-\HeaderBandHeight-\AuthorHeight-\IntroPadding)
                 {\usebox{\MUL@introBox}};
         \fi
     \end{tikzpicture}
@@ -538,7 +620,7 @@
 % ------------------------------------------------------------
 % 8.3 Public build command
 % ------------------------------------------------------------
-\newcommand{\BuildHeader}{%
+\newcommand{\buildheader}{%
     \MUL@measureTopBlocks
     \MUL@drawHeader
 }
@@ -550,8 +632,8 @@
 % ------------------------------------------------------------
 % 9.1 Grid units & debug flag
 % ------------------------------------------------------------
-\newlength{\GridUnitX}  \setlength{\GridUnitX}{20mm}
-\newlength{\GridUnitY}  \setlength{\GridUnitY}{\VGap}% 15mm
+\newlength{\gridunitx}  \setlength{\gridunitx}{20mm}
+\newlength{\gridunity}  \setlength{\gridunity}{\vgaplen}% 15mm
 
 \newif\ifMUL@showGrid  \MUL@showGridfalse
 
@@ -573,10 +655,10 @@
             \MUL@gridBottomY=\FooterBandHeight
             % X-axis label baseline
             \MUL@gridLabelY=\BodyTopY
-            \advance\MUL@gridLabelY by -0.5\GridUnitY
+            \advance\MUL@gridLabelY by -0.5\gridunity
             % --- Vertical grid lines + x labels ---
             \MUL@gridCol=0
-            \MUL@gridX=\MarginLeft
+            \MUL@gridX=\marginleft
             \loop
                 \ifnum\MUL@gridCol<28
                     \ifodd\MUL@gridCol
@@ -587,51 +669,51 @@
                             (\MUL@gridX, \BodyTopY) -- (\MUL@gridX, \MUL@gridBottomY);
                     \fi
                     \node[anchor=center, fill=White] at (\MUL@gridX, \MUL@gridLabelY)
-                        {{\TextFont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridCol}};
+                        {{\txtfont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridCol}};
                     \advance\MUL@gridCol by 1
-                    \advance\MUL@gridX by \GridUnitX
+                    \advance\MUL@gridX by \gridunitx
                 \repeat
             % --- Strong column-structure lines ---
             \foreach \x in {0,6,7,13,14,20,21,27} {%
                 \draw[Turquoise, opacity=1.0, line width=1.0pt]
-                    (\MarginLeft+\x\GridUnitX, \BodyTopY) --
-                    (\MarginLeft+\x\GridUnitX, \MUL@gridBottomY);
+                    (\marginleft+\x\gridunitx, \BodyTopY) --
+                    (\marginleft+\x\gridunitx, \MUL@gridBottomY);
             }
             % --- Horizontal grid lines + y labels ---
             \MUL@gridRow=0
             \MUL@gridY=\BodyTopY
-            \MUL@gridLabelX=\MarginLeft
+            \MUL@gridLabelX=\marginleft
             \loop
                 \ifdim\MUL@gridY>\MUL@gridBottomY
                     \ifodd\MUL@gridRow
                         \draw[color=black, opacity=0.2, line width=0.2pt]
-                            (\MarginLeft, \MUL@gridY) --
-                            (\MarginLeft+\GridWidth, \MUL@gridY);
+                            (\marginleft, \MUL@gridY) --
+                            (\marginleft+\gridwidth, \MUL@gridY);
                     \else
                         \draw[color=red, opacity=0.2, line width=0.2pt]
-                            (\MarginLeft, \MUL@gridY) --
-                            (\MarginLeft+\GridWidth, \MUL@gridY);
+                            (\marginleft, \MUL@gridY) --
+                            (\marginleft+\gridwidth, \MUL@gridY);
                     \fi
                     \node[anchor=east] at (\MUL@gridLabelX-1mm, \MUL@gridY)
-                        {{\TextFont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridRow}};
-                    \node[anchor=west] at (\MUL@gridLabelX+\GridWidth+1mm, \MUL@gridY)
-                        {{\TextFont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridRow}};
+                        {{\txtfont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridRow}};
+                    \node[anchor=west] at (\MUL@gridLabelX+\gridwidth+1mm, \MUL@gridY)
+                        {{\txtfont\fontsize{14pt}{14pt}\selectfont\color{black}\the\MUL@gridRow}};
                     \advance\MUL@gridRow by 1
-                    \advance\MUL@gridY by -\GridUnitY
+                    \advance\MUL@gridY by -\gridunity
                 \repeat
         \end{tikzpicture}
     \fi
 }
 
-\newcommand{\ShowGrid}{%
+\newcommand{\showgrid}{%
     \global\MUL@showGridtrue
     \MUL@drawGrid
 }
 
 % ------------------------------------------------------------
-% 9.3 GridBox placement command
+% 9.3 gridbox placement command
 % ------------------------------------------------------------
-% Usage: \GridBox{x}{y}{width}{height}{<content>}
+% Usage: \gridbox{x}{y}{width}{height}{<content>}
 % Coordinates in grid units from top-left of body area.
 
 \newdimen\MUL@gridBoxX
@@ -641,33 +723,33 @@
 \newdimen\MUL@gridBoxRight
 \newdimen\MUL@gridBoxBottom
 
-\NewDocumentCommand{\GridBox}{ m m m m +m }{%
+\NewDocumentCommand{\gridbox}{ m m m m +m }{%
     \begingroup
     % ----------------------------------------------------------
     % Compute physical position (fractional-safe)
     % ----------------------------------------------------------
-    % Left edge: MarginLeft + x * GridUnitX
+    % Left edge: marginleft + x * gridunitx
     \setlength{\MUL@gridBoxX}{%
         \dimexpr
-        \MarginLeft + (#1\GridUnitX)
+        \marginleft + (#1\gridunitx)
         \relax
     }
-    % Top edge: BodyTopY - y * GridUnitY
+    % Top edge: BodyTopY - y * gridunity
     \setlength{\MUL@gridBoxY}{%
         \dimexpr
-        \BodyTopY - (#2\GridUnitY)
+        \BodyTopY - (#2\gridunity)
         \relax
     }
-    % Width: w * GridUnitX
+    % Width: w * gridunitx
     \setlength{\MUL@gridBoxW}{%
         \dimexpr
-        #3\GridUnitX
+        #3\gridunitx
         \relax
     }
-    % Height: h * GridUnitY
+    % Height: h * gridunity
     \setlength{\MUL@gridBoxH}{%
         \dimexpr
-        #4\GridUnitY
+        #4\gridunity
         \relax
     }
     % Right and bottom edges (for outline)
@@ -691,7 +773,7 @@
         \end{minipage}%
     };
     % --------------------------------------------------------
-    % GridBox outline, enabled by \ShowGrid
+    % gridbox outline, enabled by \showgrid
     % --------------------------------------------------------
     \ifMUL@showGrid
         \draw[color=black, opacity=1, line width=2pt]
@@ -708,18 +790,13 @@
 }
 
 % ------------------------------------------------------------
-% 9.4 Footer grid origin & FooterGridBox
+% 9.4 Footer grid origin & footergridbox
 % ------------------------------------------------------------
 \newlength{\FooterGridTopOffset}  \setlength{\FooterGridTopOffset}{77mm}
 \newlength{\FooterTopY}
 \setlength{\FooterTopY}{\dimexpr\FooterBandHeight+\FooterGridTopOffset\relax}
 
-% \newcommand{\SetFooterGridTopOffset}[1]{%
-%     \setlength{\FooterGridTopOffset}{#1}%
-%     \setlength{\FooterTopY}{\dimexpr\FooterBandHeight+\FooterGridTopOffset\relax}%
-% }
-
-% Usage: \FooterGridBox{x}{y}{width}{height}{<content>}
+% Usage: \footergridbox{x}{y}{width}{height}{<content>}
 
 \newdimen\MUL@footerGridBoxX
 \newdimen\MUL@footerGridBoxY
@@ -728,7 +805,7 @@
 \newdimen\MUL@footerGridBoxRight
 \newdimen\MUL@footerGridBoxBottom
 
-\NewDocumentCommand{\FooterGridBox}{ m m m m +m }{%
+\NewDocumentCommand{\footergridbox}{ m m m m +m }{%
     \begingroup
     % Keep footer-grid origin synchronized with the current offset.
     \setlength{\FooterTopY}{\dimexpr\FooterBandHeight+\FooterGridTopOffset\relax}%
@@ -736,24 +813,24 @@
     % Compute physical position
     % ----------------------------------------------------------
     % Left edge:
-    %   MarginLeft + x * GridUnitX
+    %   marginleft + x * gridunitx
     \setlength{\MUL@footerGridBoxX}{%
-        \dimexpr\MarginLeft + #1\GridUnitX\relax
+        \dimexpr\marginleft + #1\gridunitx\relax
     }%
     % Top edge:
-    %   FooterGridTopY - y * GridUnitY
+    %   FooterGridTopY - y * gridunity
     \setlength{\MUL@footerGridBoxY}{%
-        \dimexpr\FooterTopY - #2\GridUnitY\relax
+        \dimexpr\FooterTopY - #2\gridunity\relax
     }%
     % Width:
-    %   w * GridUnitX
+    %   w * gridunitx
     \setlength{\MUL@footerGridBoxW}{%
-        \dimexpr#3\GridUnitX\relax
+        \dimexpr#3\gridunitx\relax
     }%
     % Height:
-    %   h * GridUnitY
+    %   h * gridunity
     \setlength{\MUL@footerGridBoxH}{%
-        \dimexpr#4\GridUnitY\relax
+        \dimexpr#4\gridunity\relax
     }%
     % Right and bottom edges for optional outline.
     \setlength{\MUL@footerGridBoxRight}{%
@@ -773,7 +850,7 @@
     };
 
     % --------------------------------------------------------
-    % Optional GridBox outline, enabled by \ShowGrid
+    % Optional outline, enabled by \showgrid
     % --------------------------------------------------------
     \ifMUL@showGrid
         \draw[color=black, opacity=1, line width=2pt]
@@ -795,11 +872,6 @@
 
 % ------------------------------------------------------------
 % 10.1 Flow cursor state & initialization
-% ------------------------------------------------------------
-% (Insert \MUL@flowInit, cursor declarations here)
-
-% ------------------------------------------------------------
-% FLOW cursor storage
 % ------------------------------------------------------------
 
 \newcount\MUL@flowBestStart
@@ -873,7 +945,6 @@
 % ------------------------------------------------------------
 % 10.2 Flow placement logic
 % ------------------------------------------------------------
-% (Insert \MUL@selectFlowStart, \MUL@FlowPlace here)
 
 \newcommand{\MUL@selectFlowStart}[1]{%
     \MUL@flowBestStart=1\relax
@@ -920,12 +991,12 @@
 }
 
 % ------------------------------------------------------------
-% 10.3 Public FlowBox command
+% 10.3 Public flowbox command
 % ------------------------------------------------------------
 \newcount\MUL@startIndex
 \newcount\MUL@spanIndex
 
-\NewDocumentCommand{\FlowBox}{ m o m }{%
+\NewDocumentCommand{\flowbox}{ m o m }{%
     \IfNoValueTF{#2}{%
         \MUL@selectFlowStart{#1}%
         \MUL@FlowPlace{\the\MUL@flowBestStart}{#1}{#3}%
@@ -935,42 +1006,42 @@
 }
 
 % ============================================================
-% 11. PosterBody environment
+% 11. posterbody environment
 % ============================================================
 
-\newenvironment{PosterBody}{}{}
+\newenvironment{posterbody}{}{}
 
 % Wrap with flow initialization when flow system is active
-\let\MUL@origPosterBody\PosterBody
-\let\endMUL@origPosterBody\endPosterBody
+\let\MUL@origposterbody\posterbody
+\let\endMUL@origposterbody\endposterbody
 
-\renewenvironment{PosterBody}{%
-    \MUL@origPosterBody
+\renewenvironment{posterbody}{%
+    \MUL@origposterbody
     \MUL@flowInit
 }{%
-    \endMUL@origPosterBody
+    \endMUL@origposterbody
 }
 
 % ============================================================
-% 12. Content helpers: Header, Highlight, Rule, Image
+% 12. Content helpers: sect, highlight, prule, img
 % ============================================================
 
 % ------------------------------------------------------------
 % 12.1 Section header
 % ------------------------------------------------------------
-\newcommand{\Section}[1]{%
+\newcommand{\sect}[1]{%
     \par\noindent
     \begin{minipage}[t]{\linewidth}
-        \HeadingStyle #1
+        \headingstyle #1
     \end{minipage}\par
 }
 
 % ------------------------------------------------------------
-% 12.2 Helper-width computation (shared by Image, Highlight, Rule)
+% 12.2 Helper-width computation (shared by img, highlight, prule)
 % ------------------------------------------------------------
-%   span 1 -> \ColumnWidth
-%   span 2 -> 2\ColumnWidth + 1\ColumnGap
-%   span N -> N\ColumnWidth + (N-1)\ColumnGap
+%   span 1 -> \colwidth
+%   span 2 -> 2\colwidth + 1\colgap
+%   span N -> N\colwidth + (N-1)\colgap
 \newlength{\MUL@blockX}
 \newlength{\MUL@blockY}
 \newlength{\MUL@blockWidth}
@@ -981,22 +1052,22 @@
 \newcommand{\MUL@computeBlock}[3]{%
     \MUL@startIndex=#1\relax
     \advance\MUL@startIndex by -1
-    \setlength{\MUL@blockX}{\MarginLeft}%
-    \addtolength{\MUL@blockX}{\MUL@startIndex\ColumnWidth}%
-    \addtolength{\MUL@blockX}{\MUL@startIndex\ColumnGap}%
+    \setlength{\MUL@blockX}{\marginleft}%
+    \addtolength{\MUL@blockX}{\MUL@startIndex\colwidth}%
+    \addtolength{\MUL@blockX}{\MUL@startIndex\colgap}%
     \MUL@spanIndex=#2\relax
-    \setlength{\MUL@blockWidth}{\MUL@spanIndex\ColumnWidth}%
+    \setlength{\MUL@blockWidth}{\MUL@spanIndex\colwidth}%
     \advance\MUL@spanIndex by -1
-    \addtolength{\MUL@blockWidth}{\MUL@spanIndex\ColumnGap}%
+    \addtolength{\MUL@blockWidth}{\MUL@spanIndex\colgap}%
     \setlength{\MUL@blockY}{\BodyTopY}%
 }
 
 \newcommand{\MUL@computeHelperWidth}[2]{%
     \MUL@spanIndex=#1\relax
-    \setlength{#2}{\MUL@spanIndex\ColumnWidth}%
+    \setlength{#2}{\MUL@spanIndex\colwidth}%
     \advance\MUL@spanIndex by -1\relax
     \ifnum\MUL@spanIndex>0
-        \addtolength{#2}{\MUL@spanIndex\ColumnGap}%
+        \addtolength{#2}{\MUL@spanIndex\colgap}%
     \fi
 }
 
@@ -1006,10 +1077,10 @@
 \newlength{\HighlightWidth}
 
 % Usage:
-%   \Highlight{<content>}
-%   \Highlight[<span>]{<content>}
+%   \highlight{<content>}
+%   \highlight[<span>]{<content>}
 
-\NewDocumentCommand{\Highlight}{ o +m }{%
+\NewDocumentCommand{\highlight}{ o +m }{%
     \begingroup
     % Default: use the width of the surrounding box/minipage.
     \setlength{\HighlightWidth}{\linewidth}%
@@ -1028,7 +1099,7 @@
     \begin{tikzpicture}
         \node[anchor=north west, inner sep=\HighlightInset, outer sep=0pt, fill=Turquoise, fill opacity=0.3, text opacity=1] {%
         \begin{minipage}[t]{\dimexpr\HighlightWidth-2\HighlightInset\relax}
-            \BodyStyle\noindent\justifying #2
+            \bodystyle\noindent\justifying #2
         \end{minipage}%
         };
     \end{tikzpicture}%
@@ -1037,10 +1108,10 @@
 }
 
 % ------------------------------------------------------------
-% 12.4 Rule
+% 12.4 Poster rule
 % ------------------------------------------------------------
 
-\NewDocumentCommand{\Rule}{ o }{%
+\NewDocumentCommand{\prule}{ o }{%
     \begingroup
     % Default: use the width of the surrounding box/minipage.
     \setlength{\RuleWidth}{\linewidth}%
@@ -1065,14 +1136,14 @@
 % 12.5 Image
 % ------------------------------------------------------------
 % Usage:
-%   \Image                          — placeholder at \linewidth
-%   \Image[<span>]                  — placeholder at column span width
-%   \Image[<span>][<path>]          — custom image, auto height
-%   \Image[<span>][<path>][<height>] — custom image, forced height
+%   \img                          — placeholder at \linewidth
+%   \img[<span>]                  — placeholder at column span width
+%   \img[<span>][<path>]          — custom image, auto height
+%   \img[<span>][<path>][<height>] — custom image, forced height
 %
 % File resolution: tries exact path, then graphics/<path>,
 % then falls back to placeholder.
-\NewDocumentCommand{\Image}{ o o o }{%
+\NewDocumentCommand{\img}{ o o o }{%
     \begingroup
         % Width
         \setlength{\ImageWidth}{\linewidth}%
@@ -1082,7 +1153,7 @@
             \fi
         }%
         % File
-        \def\MUL@imageFile{graphics/placeholder_image.png}%
+        \def\MUL@imageFile{graphics/placeholder_image.pdf}%
         \IfNoValueF{#2}{%
             \if\relax\detokenize{#2}\relax\else
                 \IfFileExists{#2}{%
@@ -1092,7 +1163,7 @@
                         \def\MUL@imageFile{graphics/#2}%
                     }{
                         % File not found: keep placeholder.
-                        \def\MUL@imageFile{graphics/placeholder_image.png}%
+                        \def\MUL@imageFile{graphics/placeholder_image.pdf}%
                         }%
                 }%
             \fi
@@ -1120,20 +1191,19 @@
 % ============================================================
 % 13. Footer ribbon
 % ============================================================
-% (Insert \MUL@drawFooterRibbon, \BuildBottomRibbon here)
 
-\newcommand{\BuildBottomRibbon}{%
+\newcommand{\buildfooter}{%
     \begin{tikzpicture}[remember picture, overlay, shift={(current page.south west)}]
         \fill[Turquoise] (0,0) rectangle (\paperwidth,\FooterBandHeight);
         \fill[Turquoise] (0,0) -- (0,2\FooterBandHeight) -- (2\FooterBandHeight,0) -- cycle;
-        \node[anchor=west] at (\MarginLeft,0.5\FooterBandHeight)
-        {\begin{minipage}[c]{0.5\paperwidth-\MarginLeft}
-            \raggedright\ClaimStyle
+        \node[anchor=west] at (\marginleft,0.5\FooterBandHeight)
+        {\begin{minipage}[c]{0.5\paperwidth-\marginleft}
+            \raggedright\claimstyle
             \MUL@FooterLeftText
         \end{minipage}};
-        \node[anchor=east, inner sep=0pt] at (\paperwidth-\MarginRight,0.5\FooterBandHeight)
-        {\begin{minipage}[c]{0.5\paperwidth-\MarginRight}
-            \raggedleft\ClaimStyle\color{TechGreen}\MUL@ClaimText
+        \node[anchor=east, inner sep=0pt] at (\paperwidth-\marginright,0.5\FooterBandHeight)
+        {\begin{minipage}[c]{0.5\paperwidth-\marginright}
+            \raggedleft\claimstyle\color{TechGreen}\MUL@ClaimText
         \end{minipage}};
     \end{tikzpicture}
 }
