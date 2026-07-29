@@ -25,4 +25,4 @@ The provided `makefile` runs the `latex` → `dvips` → `ps2pdf` chain (`.dvi` 
 Header and footer are hand-placed with hardcoded `\put` coordinates — there is no reusable header macro yet (that arrives in v1.0 with `\makeHeader`).
 
 ---
-Superseded by `v1.0-2019`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `poster-v0.1-pre2019`.
+Superseded by `v1.0-2019`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `poster-v0.1-pre2019`.
