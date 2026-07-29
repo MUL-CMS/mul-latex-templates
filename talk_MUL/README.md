@@ -12,4 +12,4 @@ Manual `latex` → `dvips` → `ps2pdf` chain.
 - Main document renamed `template.tex` (from `lecture.tex`)
 
 ---
-Superseded by `v0.22-2013`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.21-2013`.
+Superseded by `v0.22-2013`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.21-2013`.
