@@ -31,4 +31,4 @@ pdflatex thesis.tex
 No support yet for embedding published papers as PDFs (added in v1.1).
 
 ---
-Superseded by `v1.1`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.0`.
+Superseded by `v1.1`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.0`.
