@@ -14,4 +14,4 @@ make pdf
 - `\framegrid` spacing tweak (grid rows divided by 18 instead of 20)
 
 ---
-Superseded by `v2.10-2024`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.01-2024`.
+Superseded by `v2.10-2024`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.01-2024`.
