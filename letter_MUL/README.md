@@ -28,4 +28,4 @@ The `makefile` uses `latexmk -pdf` (pdfLaTeX); the old dvips/ps2pdf path is kept
 Colors: `mul-turquoise` (#006E6E), `mul-smoke` (#3C3C3C).
 
 ---
-Superseded by `v1.1-2020`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `letter-v1.0-2019`.
+Superseded by `v1.1-2020`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `letter-v1.0-2019`.
