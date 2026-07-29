@@ -13,4 +13,4 @@ make pdf
 Functionally identical to v2.01 — `beamerDMS.cls` only gained a set of TODO comments for the next class update (font in headings/footings, indentation symbols, whether `overdraw` should be relative to the page or the text area). These items were subsequently addressed in v3.00-2025.
 
 ---
-Superseded by `v3.00-2025`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.10-2024`.
+Superseded by `v3.00-2025`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.10-2024`.
