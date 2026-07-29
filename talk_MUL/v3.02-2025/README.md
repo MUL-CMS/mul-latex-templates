@@ -44,9 +44,9 @@ This is a custom `beamer` class designed for academic and professional presentat
 
 ### Localization
 - `DElocalization`
-  German labels and slogans (default).
+  German labels and slogans.
 - `ENlocalization`
-  English labels and slogans.
+  English labels and slogans (default as of v3.02-2025).
 
 ### Extra Functional Options
 - `showResults`
@@ -62,7 +62,7 @@ This is a custom `beamer` class designed for academic and professional presentat
   slideSingleNumber,
   showothersubsections,
   showSidebar,
-  DElocalization,
+  ENlocalization,
   defaultFootings
 ]{mul-beamer}
 ```
@@ -143,3 +143,6 @@ Draws a visual grid on the slide for precise placement during development (usual
 
 **David Holec**
 david.holec@unileoben.ac.at
+
+---
+Current version. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.02-2025`.
