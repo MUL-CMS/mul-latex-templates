@@ -145,4 +145,4 @@ Draws a visual grid on the slide for precise placement during development (usual
 david.holec@unileoben.ac.at
 
 ---
-Superseded by `v3.02-2025`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.01-2025`.
+Superseded by `v3.02-2025`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.01-2025`.
