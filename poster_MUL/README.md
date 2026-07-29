@@ -594,4 +594,4 @@ Inner eye color > #FFFFFF (white)
 Outer eye color > #FFFFFF (white)
 
 ---
-Current version. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `poster-v3.0-2026`.
+Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `poster-v3.0-2026`.

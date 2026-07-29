@@ -19,4 +19,4 @@ Same `latexmk -bibtex -pdf` workflow as v1.2 (the `clean` target now removes `th
 > As with v1.2, `mul-thesis.cls`'s `\ProvidesClass` string is unchanged (`2012/04/12 v1.1`) — versioning is tracked by folder name / README only.
 
 ---
-Current version. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.3`.
+Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.3`.

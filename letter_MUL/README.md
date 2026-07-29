@@ -34,4 +34,4 @@ make pdf
 Colors: `mul-turquoise` renamed to `mul-green` (same hex, #006E6E); new `mul-header` (#000000) for headline text. Footer is now built from `logo-footer.pdf` instead of a text tagline.
 
 ---
-Current version. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `letter-v2.0-2025`.
+Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `letter-v2.0-2025`.
