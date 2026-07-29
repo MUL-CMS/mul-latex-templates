@@ -19,4 +19,4 @@ Same `latexmk -pdf` build as v1.0.
 All class commands (`\head`, `\department`, `\address`, `\mail`, `\web`, `\reciever`, `\showdate`, `\subject`) are unchanged from v1.0.
 
 ---
-Superseded by `v2.0-2025`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `letter-v1.1-2020`.
+Superseded by `v2.0-2025`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `letter-v1.1-2020`.
