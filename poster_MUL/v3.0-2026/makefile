@@ -1,20 +1,16 @@
-MAIN = poster_flow
+MAIN = poster_grid
 $bibtex_use = 0
 
 .PHONY: clean figs graphics
 
 all:	$(MAIN).pdf
 
+build:	all
+
 pdf:	$(MAIN).pdf
 
 %.pdf:	%.tex figs graphics
 	latexmk -lualatex $<
-# 
-# %.ps:	%.dvi	
-# 	dvips -Ppdf -G0 $<
-# 
-# %.dvi:	*.tex *.bib figs
-# 	latexmk
 
 figs:	
 	$(MAKE) MAIN=$(MAIN) -C figs
