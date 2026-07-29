@@ -18,4 +18,4 @@ make pdf
 This is a single fixed letterhead for one user (David Holec), not a general-purpose template — reusing it means hand-editing the `.tex` body directly. Header logo is placed via a raw `picture` environment; footer (sender name/address/phone/fax/email) and recipient block are all hardcoded.
 
 ---
-Superseded by `v1.0-2019`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `letter-v0.1-2012-2018`.
+Superseded by `v1.0-2019`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `letter-v0.1-2012-2018`.
