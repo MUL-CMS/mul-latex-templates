@@ -1,8 +1,8 @@
 # poster_MUL Changelog
 
-Each version below is frozen and available as a git tag (`poster-v<version>`); only the current version's folder is kept in the working tree. See each version's own `README.md` (linked below, where available) for usage details.
+Each version below is frozen and available as a git tag (`poster-v<version>`); only the current version's files are kept in the working tree (flat, directly in `poster_MUL/`). Archived versions' own `README.md` can be read by checking out their tag, e.g. `git show poster-v2.0-2022:poster_MUL/README.md`.
 
-## [v3.0-2026](v3.0-2026/README.md) (current)
+## [v3.0-2026](README.md) (current)
 
 XeLaTeX/LuaLaTeX, `graphics/`, `figs/`, `fonts/` structure (2025 MUL rebranding).
 
@@ -12,7 +12,7 @@ XeLaTeX/LuaLaTeX, `graphics/`, `figs/`, `fonts/` structure (2025 MUL rebranding)
 - QR code support (`\qrset`, `\qr`) with EN/DE variants
 - Complete rewrite of header (`\buildheader`), footer (`\buildfooter`), and content commands (`\sect`, `\para`, `\img`, `\highlight`, `\prule`, `\references`)
 
-## [v2.0-2022](v2.0-2022/README.md)
+## v2.0-2022 (tag `poster-v2.0-2022`)
 
 pdfLaTeX using `tikz`, structure with `figs` and `graphics` (Department of Materials Science design). Credits: David Holec and Lukas Löfler.
 
@@ -20,7 +20,7 @@ pdfLaTeX using `tikz`, structure with `figs` and `graphics` (Department of Mater
 - `\authorPhoto` gained a second argument for a caption (name + dates) under the photo
 - New "WHERE RESEARCH MEETS FUTURE" footer banner (`\DMSsloganText`)
 
-## [v1.0-2019](v1.0-2019/README.md)
+## v1.0-2019 (tag `poster-v1.0-2019`)
 
 pdfLaTeX using `tikz`, structure with `figs` and `graphics` (Department of Materials Science design). First rewrite away from PSTricks/dvips.
 
@@ -28,7 +28,7 @@ pdfLaTeX using `tikz`, structure with `figs` and `graphics` (Department of Mater
 - `\posterBox` reimplemented in TikZ; box positions expressed in column/box-separation units instead of absolute coordinates
 - Highlight colors renamed to `MULgreen`
 
-## [v0.1-pre2019](v0.1-pre2019/README.md)
+## v0.1-pre2019 (tag `poster-v0.1-pre2019`)
 
 LaTeX + `dvips` + `ps2pdf` using `pstricks` (Department of Physical Metallurgy and Materials Testing design).
 
