@@ -11,4 +11,4 @@ Manual `latex` → `dvips` → `ps2pdf` chain.
 - Adds `ToC.sty` for table-of-contents handling
 
 ---
-Superseded by `v0.23-2016`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.22-2013`.
+Superseded by `v0.23-2016`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.22-2013`.
