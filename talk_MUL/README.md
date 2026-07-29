@@ -23,4 +23,4 @@ make pdf
 > Note: `beamerDMS.cls`'s internal `\ProvidesClass` string is still unchanged (reads `v1.00`).
 
 ---
-Superseded by `v2.00-2024`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v1.02-2020`.
+Superseded by `v2.00-2024`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v1.02-2020`.
