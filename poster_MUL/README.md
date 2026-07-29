@@ -24,4 +24,4 @@ The `makefile` calls `latexmk -bibtex -pdf` (same build path as v1.0).
 - New footer banner: `\DMSsloganText` ("WHERE RESEARCH MEETS FUTURE") printed in grey below the poster.
 
 ---
-Superseded by `v3.0-2026`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `poster-v2.0-2022`.
+Superseded by `v3.0-2026`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `poster-v2.0-2022`.
