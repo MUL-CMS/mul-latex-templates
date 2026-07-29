@@ -18,4 +18,4 @@ make pdf
 `beamerDMS.cls`'s `\ProvidesClass` string is correctly bumped for this release (`2023/02/22 v2.00`).
 
 ---
-Superseded by `v2.01-2024`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.00-2024`.
+Superseded by `v2.01-2024`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v2.00-2024`.
