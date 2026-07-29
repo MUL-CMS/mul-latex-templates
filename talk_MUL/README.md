@@ -21,4 +21,4 @@ Manual `latex` → `dvips` → `ps2pdf` chain (no makefile in this version).
 No `\aff`, no `overdraw`/`\framegrid` yet (introduced much later, in v1.02-2020).
 
 ---
-Superseded by `v0.21-2013`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.1-2008-2012`.
+Superseded by `v0.21-2013`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v0.1-2008-2012`.
