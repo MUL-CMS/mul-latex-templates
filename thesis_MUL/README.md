@@ -17,4 +17,4 @@ Uses `latexmk -bibtex -pdf` (pdfLaTeX). The old dvips path is present in the mak
 > Note: `mul-thesis.cls`'s internal `\ProvidesClass` string is not bumped for this release — it still reads `2012/04/12 v1.1`. The folder/README version numbers are the source of truth, not the class file's own metadata.
 
 ---
-Superseded by `v1.3`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.2`.
+Superseded by `v1.3`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.2`.
