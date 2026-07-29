@@ -25,4 +25,4 @@ pdflatex thesis.tex
 - `\newChapter` gains a starred form: `\newChapter[*]{title}` for unnumbered chapters
 
 ---
-Superseded by `v1.2`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.1`.
+Superseded by `v1.2`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `thesis-v1.1`.
