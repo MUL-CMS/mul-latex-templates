@@ -545,12 +545,13 @@ project/
 │   ├── logos/
 │   │   ├── logo_rgb_EN_white_v1.pdf
 │   │   ├── logo_rgb_DE_white_v1.pdf
+│   │   ├── logo_readme.txt
 │   │   └── ...
 │   ├── qr/
 │   │   ├── logo_qr.svg
 │   │   ├── qrcode_DE.pdf
 │   │   ├── qrcode_EN.pdf
-│   │   ├── readme_qr.md
+│   │   ├── qrcode_test.pdf
 │   ├── placeholder_image.pdf
 ├── fonts/
 │   ├── Host_Grotesk/
@@ -591,3 +592,6 @@ Square color > #FFFFFF (white)
 Background color > #00727D (MUL turquoise)
 Inner eye color > #FFFFFF (white)
 Outer eye color > #FFFFFF (white)
+
+---
+Current version. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `poster-v3.0-2026`.
