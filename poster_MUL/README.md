@@ -25,4 +25,4 @@ The `makefile` calls `latexmk -bibtex -pdf` directly — no dvi/ps intermediate 
 - `\alert` / `\Alert` — highlight colors, renamed to `MULgreen`.
 
 ---
-Superseded by `v2.0-2022`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `poster-v1.0-2019`.
+Superseded by `v2.0-2022`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `poster-v1.0-2019`.
