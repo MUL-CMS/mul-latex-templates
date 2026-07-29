@@ -19,4 +19,4 @@ make pdf
 No `overdraw`/`\framegrid` yet (introduced in v1.02-2020).
 
 ---
-Superseded by `v1.01-2019`. See [`../CHANGELOG.md`](../CHANGELOG.md) for the full version history. Frozen at tag `talk-v1.00-2019`.
+Superseded by `v1.01-2019`. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v1.00-2019`.
