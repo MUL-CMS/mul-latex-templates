@@ -1,11 +1,11 @@
 # MUL LaTeX templates
 
-A collection of LaTeX templates to be used for our presentations, posters, thesis, official letters etc.
+An unofficial collection of LaTeX templates for presentations, posters, theses, official letters, etc., with MUL branding.
 
 
 ## Usage
 
-LaTeX source codes can be compiled using provided `makefile`. These make use of `latexmk` utility.
+LaTeX source code can be compiled using the provided `makefile`. These make use of the `latexmk` utility.
 
 *   `make pdf`  
     creates `pdf` by preparing all figures (recurses `make` into the subfolder `figs` and `graphics`) and compiles LaTeX code
@@ -31,130 +31,37 @@ A provided utility `select-used-fig` selects from a given subfolder only those f
 *   `select-used-figs <file.log> <subfolder>`  
     selects unused figures subfolder `<subfolder>` based on `<file.log>` and copies them to `<subfolder>-unused`
 
-Why not to delete the files directly? Because each of us has to make the final decision what (and if) to delete. The utility helps you _to select_ the unused figures (but maybe you want to keep certain source data etc.)
+Why not delete the files directly? Because each of us has to make the final decision what (and if) to delete. The utility helps you _to select_ the unused figures (but maybe you want to keep certain source data, etc.)
 
 
 
 
 ## talk_MUL
-*   v3.00-2025 (current)
-    XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
-    (University 2025 rebranding)
 
-    - renaming beamerDMS to mul-beamer (consistency of the whole LaTeX suite)
-    - inclusion of Funnel Display (2025 MUL branding)
-    - change from pdflatex to xelatex to be able to use TTFs (see above)
-    - new option: defaultFootings (to complement emptyFootings and fullFootings)
-    - new option: DElocalization (default) vs ENlocalization (logos, slogan)
-    - change of indentation signs in itemize (from triangles to squares)
-    - overdraw is relative to the text area, not page (i.e. shifts with sidebar)
+Current version: **v3.02-2025**, XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics` (2025 MUL rebranding).
 
-*   v2.10-2024
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-    - list of ToDos for next class update
+Older versions (v0.1-2008-2012 through v3.01-2025) have been archived: their folders were removed from the working tree and frozen as git tags (`talk-v<version>`, e.g. `git checkout talk-v1.02-2020`). See [`talk_MUL/CHANGELOG.md`](talk_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
-*   v2.01-2024
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-    - update of `\framegrid` command
-
-*   v2.00-2024
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-    - new format: 16/9
-    - new options: `emptyFootings` and `fullFootings`
-    - major clean up
-
-*   v1.02-2020
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-    - new environment `overdraw`
-
-*   v1.01-2019
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-
-*   v1.00-2019
-    pdfLaTeX using `tikz`, structure with `figs` and `graphics`
-    (Department of Materials Science design)
-
-*   v0.23-2016
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
-    (Department of Physical Metallurgy and Materials Testing design)
-
-*   v0.22-2013
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
-    (Department of Physical Metallurgy and Materials Testing design)
-
-*   v0.21-2013
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
-    (Department of Physical Metallurgy and Materials Testing design)
-
-*   v0.1-2008-2012
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`  
-    (old Department of Physical Metallurgy and Materials Testing design)
-
-### drawing on slides using the `\framegrid` command
-
-To draw arbitrarily over the whole slide, one can use the `overdraw` environment. This allows you to paint even over the table of contents.
-
-```
-\begin{overdraw}
-    \framegrid
-    \node[red, very thick, fill=red!50!white] (2,2) rectangle (3,3);
-\end{overdraw}
-```
-This will show a grid over the whole slide. Furthermore it will plot a red rectangle on the slide 
 
 ## poster_MUL
 
-*   v2.0-2022 (current)
-    updated design:
-      - horizontal box titles
-      - author photo (and dates for thesis posters)
-      - "WHERE RESEARCH MEETS FUTURE" banner
-      credits to: Lukas Löfler
+Current version: **v3.0-2026**, XeLaTeX/LuaLaTeX, GRID/FLOW dual layout system (2025 MUL rebranding).
 
-*   v1.0-2019
-    pdfLaTeX using `tikz`
-
-*   v0.1-pre2019  
-    LaTeX + `dvips` + `ps2pdf` using `pstricks`
+Older versions (v0.1-pre2019, v1.0-2019, v2.0-2022) have been archived: their folders were removed from the working tree and frozen as git tags (`poster-v<version>`, e.g. `git checkout poster-v2.0-2022`). See [`poster_MUL/CHANGELOG.md`](poster_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
 ## letter_MUL
 
-*   v2.0-2020 (current)
-    pdfLaTeX
-    - major update based on re-branding in 2025
+Current version: **v2.0-2025**, pdfLaTeX, major update based on the 2025 rebranding.
 
-*   v1.0-2019
-    pdfLaTeX
-    (Department of Materials Science design)
-    credits to: Dominik Gehringer
-
-*   v0.1-2012-2018
-    LaTeX + `dvips` + `ps2pdf`
-    (Department of Physical Metallurgy and Materials Testing design)
+Older versions (v0.1-2012-2018, v1.0-2019, v1.1-2020) have been archived: their folders were removed from the working tree and frozen as git tags (`letter-v<version>`, e.g. `git checkout letter-v1.0-2019`). See [`letter_MUL/CHANGELOG.md`](letter_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
 
 ## thesis_MUL
 
-*   v1.3 (2023, current)
-    pdfLaTeX
-    - update of ToC
-    
-*   v1.2 (2022)
-    pdfLaTeX
-    - update of blobs to allow for more papers
+Current version: **v1.3** (2023), pdfLaTeX.
 
-*   v1.1
-    pdfLaTeX
-    - capable of including publications in pdf
+Older versions (v1.0, v1.1, v1.2) have been archived: their folders were removed from the working tree and frozen as git tags (`thesis-v<version>`, e.g. `git checkout thesis-v1.1`). See [`thesis_MUL/CHANGELOG.md`](thesis_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
-*   v1.0  
-    LaTeX + `dvips` + `ps2pdf`  _or_  pdfLaTeX
-    basic template without pdfs
+# design_resources
 
-# Office templates
-The templates are also available for the MS-Office suite. They're in the `office-templates` branch
+A collection of supporting resources and documents for creating the templates; not needed for using the templates.
