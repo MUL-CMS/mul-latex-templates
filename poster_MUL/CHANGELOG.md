@@ -4,7 +4,7 @@ Each version below is frozen and available as a git tag (`poster-v<version>`); o
 
 ## [v3.0-2026](README.md) (current)
 
-XeLaTeX/LuaLaTeX, `graphics/`, `figs/`, `fonts/` structure (2025 MUL rebranding).
+XeLaTeX/LuaLaTeX, `graphics/`, `figs/`, `fonts/` structure (2025 MUL rebranding). Credits: Johann Grillitsch.
 
 - New `GRID`/`FLOW` dual layout system (`\gridbox` for manual placement, `\flowbox` for automatic column balancing)
 - `\colors{Digital|Print}`, `\fontmode{Regular|Experimental}`, `\lang{EN|DE}` global setup commands
