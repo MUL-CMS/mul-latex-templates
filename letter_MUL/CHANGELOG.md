@@ -4,7 +4,7 @@ Each version below is frozen and available as a git tag (`letter-v<version>`); o
 
 ## [v2.0-2025](README.md) (current)
 
-pdfLaTeX. Major update based on the 2025 university re-branding.
+pdfLaTeX. Major update based on the 2025 university rebranding. Credits: David Holec and Dominik Gehringer.
 
 - Vector PDF logos (`logo-mul.pdf`, `logo-dms.pdf`, `logo-footer.pdf`) replace raster `.jpg`/`.png` logos
 - New class-option system: address style, page-numbering style, header-every-page vs. first-page-only, folding guide marks (`tikz`)
