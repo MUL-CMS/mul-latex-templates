@@ -23,30 +23,58 @@ echo "which are not mentioned in the LaTeX log-file: $log."
 
 if [ -d $figs ]; then
   # getting file list
-  allFiles=`grep "<$figs/" $log`
-  allFiles=${allFiles//<$figs\//}
-  allFiles=${allFiles//>/}
+  allFiles=$(grep "^<.*${figs}/" "$log")
 
-  # getting every file name only once (not really necessary in principle...)
-  files="makefile"
-  for f in $allFiles; do
-    if [ "${files//$f/}" = "$files" ]; then
-      files="$files $f"
-    fi
+  processedFiles=()
+  while IFS= read -r line; do
+    # strip everything up to and including the last occurrence of "$figs/"
+    entry="${line#*${figs}/}"
+    entry="${entry//>/}"
+    [ -n "$entry" ] && processedFiles+=("$entry")
+  done <<< "$allFiles"
+
+  # start with makefile, then add each file exactly once
+  files=("makefile")
+  for f in "${processedFiles[@]}"; do
+    found=0
+    for existing in "${files[@]}"; do
+      if [ "$existing" = "$f" ]; then
+        found=1
+        break
+      fi
+    done
+    [ "$found" -eq 0 ] && files+=("$f")
   done
-  # sort list of files alphabetically
-  files=`echo -e "${files// /\n}" | sort`
-  # files=${files//\n/ }
+
+  # sort alphabetically, newline-safe
+  IFS=$'\n' files=($(sort <<< "${files[*]}"))
+  unset IFS
+
   echo -e "\nList of files I will keep:"
-  echo $files
+  printf '%s\n' "${files[@]}"
 
   # processing figs folder and deleting unused files
   mkdir -p ${figs}-unused
   cd $figs
-  for f in *; do
-    if [ "${files//$f/}" = "$files" ]; then
+  
+  shopt -s globstar   # enables ** to match recursively
+  shopt -s dotglob    # optional: include dotfiles too, if relevant
+
+  for f in **/*; do
+    [ -d "$f" ] && continue    # skip directories, only handle files
+
+    echo "$f"
+    keep=0
+    for kept in "${files[@]}"; do
+      if [ "$kept" = "$f" ]; then
+        keep=1
+        break
+      fi
+    done
+    if [ "$keep" -eq 0 ]; then
       echo " moving  - $f"
-      mv $f ../${figs}-unused
+      mkdir -p "../${figs}-unused/$(dirname "$f")"
+      mv -- "$f" "../${figs}-unused/$f"
     else
       echo " keeping + $f"
     fi
