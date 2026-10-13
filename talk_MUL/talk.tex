@@ -1,0 +1,52 @@
+% ====================================================================
+%  TALK (conference presentation) using the 'mul-beamer' class
+%
+%  Compile with XeLaTeX or LuaLaTeX (e.g. `make`, or `latexmk -xelatex talk.tex`).
+%  Overleaf: Menu -> Compiler -> XeLaTeX
+%
+%  All class options and commands are described in README.md;
+%  lecture.tex is the corresponding starting point for lectures.
+% ====================================================================
+%
+\documentclass[
+	fullFootings,% footer: slogan, author: short title, conference, date, slide number
+	slideTotalNumber,% slide numbers as "current/total"
+	ENlocalization,% English logo and slogan (DElocalization for German)
+	showSidebar% sidebar with table of contents (hideSidebar to remove it)
+]{mul-beamer}
+\hypersetup{pdfpagemode=FullScreen}% open the PDF in full-screen mode
+%
+% +-------------------------------+
+% | TITLE PAGE AND FOOTER CONTENT |
+% +-------------------------------+
+%
+% [short title for the footer]{full title for the title page}
+\title[Short title]{Title of the talk which can span over more lines}
+% [short author list for the footer]{full author list with affiliations}
+\author[F. Author {\sl et al.}]{First Author\aff{1}, Second Author\aff{1,2} and Last Author\aff{2}}
+% [short organisational unit for the footer]{full affiliations}
+\institute[Department of Materials Science]{%
+	\aff{1}Department of Materials Science, Montanuniversität Leoben, Austria\\
+	\aff{2}Name of the second institution, City, Country}
+\email{name.surname@unileoben.ac.at}
+\conference{Name of the Conference}
+\date{1 January 2026}
+%
+% optional: partner logo(s) etc. on the title page (TikZ nodes)
+\additionsToTitlePage{%
+	\node[anchor=north west, shift={(0.04\paperheight,-0.04\paperheight)}] at (current page.north west) {%
+		\includegraphics[width=0.084\paperwidth]{graphics/logo-partner.pdf}%
+	};%
+}
+%
+%
+\begin{document}
+%
+\begin{frame}
+	\titlepage
+\end{frame}
+%
+% demonstration of the class functionality: replace by your own slides
+\input{functionality_demo}
+%
+\end{document}

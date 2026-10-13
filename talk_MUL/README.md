@@ -14,6 +14,21 @@ This is a custom `beamer` class designed for academic and professional presentat
 
 ---
 
+## Getting Started
+
+Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload it to Overleaf) and start from one of them:
+
+| File | Mode | Settings |
+| --- | --- | --- |
+| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `\conference{}` shown on the title page and in the footer |
+| `lecture.tex` | lecture | `lectureFootings`, `showResults`, `\lecture{}`: table of contents at each section, lecture name in the footer |
+
+Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
+
+Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in the `makefile` to your own file name), or run `latexmk -xelatex talk.tex`. On Overleaf, select *Menu → Compiler → XeLaTeX*.
+
+---
+
 ## Class Options
 
 ### Sidebar Layout

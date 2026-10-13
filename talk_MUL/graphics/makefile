@@ -34,7 +34,7 @@ all:	$(SVGTARGET) #$(GPITARGET) $(JPGTARGET) $(PNGTARGET)
 # 	(jpeg2ps $< > $@)
 # 	inkscape $< -E $@ --export-ps-level=3
 	inkscape $< --export-pdf=$@
-	touch ../$(MAIN).tex	
+	touch $(patsubst %,../%.tex,$(MAIN))
 	
 clean:	
 	rm -f *.aux *.dvi *-inc.eps *.log

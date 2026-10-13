@@ -1,0 +1,44 @@
+% ====================================================================
+%  LECTURE using the 'mul-beamer' class
+%
+%  Compile with XeLaTeX or LuaLaTeX (e.g. `make`, or `latexmk -xelatex lecture.tex`).
+%  Overleaf: Menu -> Compiler -> XeLaTeX
+%
+%  Lecture mode (\lecture{...}) adds a table of contents at the beginning
+%  of each section. All class options and commands are described in
+%  README.md; talk.tex is the corresponding starting point for talks.
+% ====================================================================
+%
+\documentclass[
+	lectureFootings,% footer: slogan, lecture name, slide number
+	slideSingleNumber,% slide numbers as "current" only
+	ENlocalization,% English logo and slogan (DElocalization for German)
+	showSidebar,% sidebar with table of contents (hideSidebar to remove it)
+	showResults% show content of \showResults{...} (hideResults for handouts)
+]{mul-beamer}
+%
+% +-------------------------------+
+% | TITLE PAGE AND FOOTER CONTENT |
+% +-------------------------------+
+%
+% the title page shows the title (course and topic), lecturer, affiliation, e-mail and date
+\title[Topic of the lecture]{Name of the Course\\[2mm]{\Large Lecture 1: Topic of the lecture}}
+\author{Name of the Lecturer}
+% [short organisational unit]{full affiliation}
+\institute[Department of Materials Science]{Department of Materials Science, Montanuniversität Leoben, Austria}
+\email{name.surname@unileoben.ac.at}
+% lecture name shown in the footer (lectureFootings); switches on the lecture mode
+\lecture{Name of the Course}
+\date{Winter term 2026/27}
+%
+%
+\begin{document}
+%
+\begin{frame}
+	\titlepage
+\end{frame}
+%
+% demonstration of the class functionality: replace by your own slides
+\input{functionality_demo}
+%
+\end{document}

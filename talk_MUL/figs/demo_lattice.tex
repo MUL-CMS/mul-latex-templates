@@ -1,0 +1,17 @@
+% demonstration graphics: a schematic two-component lattice drawn with TikZ
+\begin{tikzpicture}[x=0.55cm, y=0.55cm]
+	\draw[gray!50] (-0.5,-0.5) rectangle (5.5,4.5);
+	\foreach \i in {0,...,5} {
+		\foreach \j in {0,...,4} {
+			\pgfmathtruncatemacro{\site}{mod(\i+\j,2)}
+			\ifnum\site=0
+				\shade[ball color=plotblue] (\i,\j) circle (0.3);
+			\else
+				\shade[ball color=plotred] (\i,\j) circle (0.22);
+			\fi
+		}
+	}
+	\node[below, font=\scriptsize] at (2.5,-0.5) {%
+		\textcolor{plotblue}{$\bullet$} species A\quad
+		\textcolor{plotred}{$\bullet$} species B};
+\end{tikzpicture}%
