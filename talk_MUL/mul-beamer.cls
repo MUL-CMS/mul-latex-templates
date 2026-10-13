@@ -437,7 +437,6 @@
 \setcounter{beamerLeobenlastslide}{0}%
 \newcommand{\lastslide}{\setcounter{beamerLeobenlastslide}{\value{framenumber}}}%
 \AtEndDocument{%
-\message{\arabic{beamerLeobenlastslide}}%
 \ifthenelse{\equal{\value{beamerLeobenlastslide}}{0}}{%
 	\setcounter{beamerLeobenlastslide}{\value{framenumber}}%
 }{%
