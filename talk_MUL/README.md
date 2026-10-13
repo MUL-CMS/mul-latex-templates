@@ -29,6 +29,8 @@ This is a custom `beamer` class designed for academic and professional presentat
   Author and short title centered (default).
 - `fullFootings`
   Shows author/title, conference/date, slogan, and slide number.
+- `lectureFootings`
+  Shows slogan, lecture name (as set by `\lecture{}`), and slide number only. Unlike `fullFootings`, the lecture name is not replaced by section names.
 
 ### Slide Numbering
 - `slideSingleNumber`
@@ -47,6 +49,8 @@ This is a custom `beamer` class designed for academic and professional presentat
   German labels and slogans.
 - `ENlocalization`
   English labels and slogans (default as of v3.02-2025).
+
+The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
 
 ### Extra Functional Options
 - `showResults`
@@ -91,7 +95,7 @@ Example:
 Sets the conference name, printed on the title slide and in footings when using the `fullFootings` option.
 
 ### `\lecture{<lecture name>}`
-Similar to `\conference`, but also prints the table of contents at the beginning of each section (lecture overview).
+Switches to lecture mode: prints the table of contents at the beginning of each section (lecture overview), and with `fullFootings` shows the current section (and subsection) in the footer. The lecture name itself is shown in the footer only with `lectureFootings`.
 
 ### `\additionsToTitlePage{<content>}`
 Appends custom content (e.g., partner logos, funding agencies) to the title slide, typically defined inside a `tikzpicture` environment.
