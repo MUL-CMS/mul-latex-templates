@@ -92,7 +92,7 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
 ## Custom Commands & Environments
 
 ### `\institute[<institute for footings>]{<institute>}`
-Set author affiliations. The optional argument overrides the organizational unit shown in footings.
+Set author affiliations. The optional argument overrides the organizational unit shown in footings (`defaultFootings`). Without it, the full `<institute>` is printed in the footer, so always give the optional argument if the affiliations span more than one line (e.g. several affiliations with `\aff{}`).
 
 ### `\email{<e-mail address>}`
 E-mail address printed (as a link) on the title slide; omitted if not set.
