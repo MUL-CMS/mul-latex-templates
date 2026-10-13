@@ -200,7 +200,7 @@
 				\else\ifx\MUL@footings\MUL@footings@lecture%
 					% lectureFootings
 					% lecture name only (not replaced by section names)
-					\parbox{10cm}{\centering\insertlecture}%
+					\parbox{10cm}{\centering\insertMULlecture}%
 				\else%
 					% fullFootings
 					% author & title ... conference / lecture title ... date
@@ -363,7 +363,7 @@
 % name of the conference/lecture
 \newcommand{\insertconference}{\MULconference}%
 % name of the lecture (used in "lectureFootings")
-\newcommand{\insertlecture}{\MULlecture}%
+\newcommand{\insertMULlecture}{\MULlecture}%
 % superscripts for affiliations
 \newcommand{\aff}[1]{\textsuperscript{#1}}%
 \let\origbeamerinstitute\institute
