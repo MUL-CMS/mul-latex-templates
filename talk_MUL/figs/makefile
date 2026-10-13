@@ -56,4 +56,4 @@ all:	$(GPITARGET) $(EPSTARGET) $(SVGTARGET)
 # 	fi
 
 clean:	
-	rm -f *.aux *.dvi *-inc.eps *.log *.tex *converted-to*
+	rm -f *.aux *.dvi *-inc.eps *.log *converted-to*

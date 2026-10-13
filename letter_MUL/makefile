@@ -1,5 +1,4 @@
 MAIN = letter
-$bibtex_use = 0
 
 .PHONY: clean
 

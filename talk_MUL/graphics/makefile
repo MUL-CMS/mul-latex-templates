@@ -37,4 +37,4 @@ all:	$(SVGTARGET) #$(GPITARGET) $(JPGTARGET) $(PNGTARGET)
 	touch ../$(MAIN).tex	
 	
 clean:	
-	rm -f *.aux *.dvi *-inc.eps *.log *.tex
+	rm -f *.aux *.dvi *-inc.eps *.log

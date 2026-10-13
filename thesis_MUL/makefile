@@ -1,13 +1,12 @@
 MAIN = thesis
-$bibtex_use = 0
 
-.PHONY: clean figs graphics
+.PHONY: all pdf clean figs
 
 all:	$(MAIN).pdf
 
 pdf:	$(MAIN).pdf
 
-%.pdf:	%.tex graphics
+%.pdf:	%.tex figs
 	latexmk -bibtex -pdf $<
 # 
 # %.ps:	%.dvi	
@@ -16,12 +15,11 @@ pdf:	$(MAIN).pdf
 # %.dvi:	*.tex *.bib figs
 # 	latexmk
 
-figs:	
-	$(MAKE) MAIN=$(MAIN) -C figs
-	$(MAKE) MAIN=$(MAIN) -C graphics
+# figs/ has no makefile by default; recurse only if one is added
+figs:
+	@if [ -f figs/makefile ]; then $(MAKE) MAIN=$(MAIN) -C figs; fi
 
 clean:
 	latexmk -c
 	rm -f *.dvi *.ps thesis.bbl *Notes.bib *.backup *.spl
-	$(MAKE) -C figs $@
-	$(MAKE) -C graphics $@
+	@if [ -f figs/makefile ]; then $(MAKE) -C figs $@; fi

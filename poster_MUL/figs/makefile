@@ -19,4 +19,4 @@ all:	$(GPITARGET) $(SVGTARGET)
 	touch ../$(MAIN).tex	
 	
 clean:	
-	rm -f *.aux *.dvi *-inc.eps *.log *.tex *converted-to*
+	rm -f *.aux *.dvi *-inc.eps *.log *converted-to*
