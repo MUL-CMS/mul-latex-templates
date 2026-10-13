@@ -1,7 +1,6 @@
 MAIN = poster_grid
-$bibtex_use = 0
 
-.PHONY: clean figs graphics
+.PHONY: all build pdf clean figs graphics
 
 all:	$(MAIN).pdf
 
@@ -12,8 +11,10 @@ pdf:	$(MAIN).pdf
 %.pdf:	%.tex figs graphics
 	latexmk -lualatex $<
 
-figs:	
+figs:
 	$(MAKE) MAIN=$(MAIN) -C figs
+
+graphics:
 	$(MAKE) MAIN=$(MAIN) -C graphics
 
 clean:
