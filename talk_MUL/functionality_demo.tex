@@ -43,6 +43,42 @@
 	\end{columns}
 \end{frame}
 %
+\subsection{Colours}
+% colour swatch with its name, e.g. \democolour{digital_Turquoise}{white}
+\newcommand{\democolour}[2]{%
+	\tikz[baseline=-0.6ex]\node[fill=#1, text=#2, font=\tiny\ttfamily, minimum width=26mm, minimum height=5mm, inner sep=1pt] {\detokenize{#1}};}
+\begin{frame}{Colours}
+	The brand colours are defined with the names of the MUL style guide (also used by the poster template):
+	\medskip
+	\begin{columns}[T]
+		\begin{column}{0.32\textwidth}
+			\textbf{primary}\par\smallskip
+			\democolour{digital_Turquoise}{white}\par
+			\democolour{digital_GraphiteBlack}{white}\par
+			\democolour{digital_LightGreen}{digital_GraphiteBlack}\par
+			\democolour{digital_TechGreen}{digital_GraphiteBlack}\par
+			\democolour{digital_White}{digital_GraphiteBlack}
+		\end{column}
+		\begin{column}{0.32\textwidth}
+			\textbf{combination} (with a primary colour)\par\smallskip
+			\democolour{digital_BTLight}{white}\par
+			\democolour{digital_BTDark}{white}\par
+			\democolour{digital_TGLight}{white}\par
+			\democolour{digital_TGDark}{white}\par
+			\democolour{digital_GWLight}{digital_GraphiteBlack}\par
+			\democolour{digital_GWDark}{digital_GraphiteBlack}
+		\end{column}
+		\begin{column}{0.32\textwidth}
+			\textbf{secondary} (study areas only)\par\smallskip
+			\democolour{digital_Violet}{white}\par
+			\democolour{digital_Orange}{white}\par
+			\democolour{digital_Blue}{white}
+		\end{column}
+	\end{columns}
+	\medskip
+	Use them as usual, e.g.\ \texttt{\textbackslash textcolor\{digital\_Turquoise\}\{\dots\}}.
+\end{frame}
+%
 %
 \section{Lists and overlays}
 \subsection{Lists}
@@ -115,8 +151,8 @@
 	\end{overdraw}
 	\onslide<3>
 	\begin{overdraw}
-		\node[draw=MULgreen, very thick, rounded corners, fill=white, font=\small] (label) at (9,3) {placed at (9,3)};
-		\draw[->, very thick, MULgreen] (label) -- (5,4.5);
+		\node[draw=digital_Turquoise, very thick, rounded corners, fill=white, font=\small] (label) at (9,3) {placed at (9,3)};
+		\draw[->, very thick, digital_Turquoise] (label) -- (5,4.5);
 	\end{overdraw}
 \end{frame}
 %

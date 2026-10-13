@@ -62,7 +62,7 @@
 \DeclareOption{ENlocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul-en}%
-	\def\MULsloganText{Move Mountains}%
+	\def\MULsloganText{Move mountains}%
 }%
 %
 % class option showResults
@@ -261,11 +261,31 @@
 % | COLORS |
 % +--------+
 %
-\usecolortheme[RGB={0, 115, 126}]{structure}%
-\definecolor{MULgreen}{RGB}{0, 115, 126}%
-\definecolor{MULturquoise}{RGB}{0, 255, 254}%
-\definecolor{MULaddress}{RGB}{58, 57, 56}%
+% MUL brand colours (Brandbook 2026, digital/RGB values; same names as in MUL_poster.cls)
+% primary colours
+\definecolor{digital_Turquoise}{RGB}{0,114,125}% #00727d
+\definecolor{digital_GraphiteBlack}{RGB}{28,38,41}% #1c2629
+\definecolor{digital_White}{RGB}{255,255,255}% #ffffff
+\definecolor{digital_LightGreen}{RGB}{136,205,211}% #88cdd3
+\definecolor{digital_TechGreen}{RGB}{0,255,255}% #00ffff, digital only
+% secondary colours (reserved for the study areas Rohstoffe/Werkstoffe/Prozesse)
+\definecolor{digital_Violet}{RGB}{149,75,151}% #954b97
+\definecolor{digital_Orange}{RGB}{237,106,91}% #ed6a5b
+\definecolor{digital_Blue}{RGB}{88,165,219}% #58a5db
+% combination colours ("Kombifarben"; always use together with a primary colour)
+\definecolor{digital_BTLight}{RGB}{14,76,83}% #0e4c53
+\definecolor{digital_BTDark}{RGB}{21,57,62}% #15393e
+\definecolor{digital_TGLight}{RGB}{68,160,168}% #44a0a8
+\definecolor{digital_TGDark}{RGB}{34,137,147}% #228993
+\definecolor{digital_GWLight}{RGB}{225,242,244}% #e1f2f4
+\definecolor{digital_GWDark}{RGB}{195,230,233}% #c3e6e9
+% names used by earlier versions of this class (kept for compatibility)
+\colorlet{MULgreen}{digital_Turquoise}%
+\colorlet{MULturquoise}{digital_TechGreen}%
+\colorlet{MULaddress}{digital_GraphiteBlack}%
 \definecolor{MULgray}{RGB}{166, 166, 166}%
+\usecolortheme[named=digital_Turquoise]{structure}%
+% plot colours (for figures and data; not part of the brand palette)
 \definecolor{plotblue}{RGB}{31,119,180}%
 \definecolor{plotgreen}{RGB}{44,160,44}%
 \definecolor{plotorange}{RGB}{255,127,14}%
@@ -279,13 +299,19 @@
 %
 % alerted text
 \setbeamercolor{alerted text}{fg=red!80!black}%
-% boxes
-\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!25!bg!90!black}%
-\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!25!bg}%
+% example text (e.g. title of example blocks)
+\setbeamercolor{example text}{fg=digital_TGDark}%
+% boxes: white title on a primary/combination colour, body in GW Light
+\setbeamercolor{block title}{fg=white,bg=digital_Turquoise}%
+\setbeamercolor{block body}{parent=normal text,bg=digital_GWLight}%
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}%
+\setbeamercolor{block body alerted}{parent=normal text,bg=digital_GWLight}%
+\setbeamercolor{block title example}{fg=white,bg=digital_TGDark}%
+\setbeamercolor{block body example}{parent=normal text,bg=digital_GWLight}%
 % titles
 \setbeamercolor{frametitle}{fg=MULgreen}%
 % ToC
-\setbeamercolor{section in toc}{parent=alerted text}%
+\setbeamercolor{section in toc}{fg=digital_GraphiteBlack}%
 \setbeamercolor{section in toc shaded}{fg=normal text.fg!50}%
 % footings
 \setbeamercolor{author in head/foot}{fg=white, bg=MULgreen}%

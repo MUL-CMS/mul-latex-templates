@@ -183,6 +183,20 @@ Draws a visual grid on the slide for precise placement during development (usual
 
 ---
 
+## Colors
+
+The colors of the MUL style guide (Brandbook 2026, digital/RGB values) are defined with the same names as in the poster template:
+
+| Group | Names |
+| --- | --- |
+| primary | `digital_Turquoise`, `digital_GraphiteBlack`, `digital_White`, `digital_LightGreen`, `digital_TechGreen` (digital only) |
+| combination | `digital_BTLight`, `digital_BTDark`, `digital_TGLight`, `digital_TGDark`, `digital_GWLight`, `digital_GWDark` (always together with a primary color) |
+| secondary | `digital_Violet`, `digital_Orange`, `digital_Blue` (reserved for the study areas) |
+
+The names of earlier versions remain available: `MULgreen` (= `digital_Turquoise`), `MULturquoise` (= `digital_TechGreen`), `MULaddress` (= `digital_GraphiteBlack`). For figures, `plotblue`, `plotgreen`, `plotorange`, `plotred`, `plotpurple`, and `plotbrown` are defined in addition.
+
+---
+
 ## Technical Notes
 
 - Requires **XeLaTeX** or **LuaLaTeX** (due to `fontspec` usage).
