@@ -1,4 +1,27 @@
-*   v3.02-2025 (current)
+*   v3.03-2026 (current)
+    XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
+    (University 2025 rebranding)
+    - template split into two starting points, `talk.tex` (conference
+      mode) and `lecture.tex` (lecture mode), sharing the slides in
+      `functionality_demo.tex` that demonstrate the class features;
+      no personal information, demo figures drawn with TikZ
+      (`template.tex` removed)
+    - new option: lectureFootings (slogan, lecture name, slide number;
+      the lecture name is not replaced by section names)
+    - \lecture{} stores the lecture name (\insertMULlecture); beamer's
+      original \lecture remains available as \lectureBeamer
+    - default localization: German again (DElocalization); presentations
+      relying on the English default need the ENlocalization option
+    - fixed: footer did not show the section name at section starts in
+      lecture mode
+    - fixed: empty e-mail/conference/date on the title page still added
+      their spacing; conference slot not shown in lecture mode
+    - empty slogan (\renewcommand{\MULsloganText}{}) supported
+    - removed debug output at the end of the compilation
+    - README: Getting Started section, documented \email, \example,
+      \setFrameLogo, \lastslide, \lectureBeamer
+
+*   v3.02-2025
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
     (University 2025 rebranding)
     - new background title image for CMS, lighther version
