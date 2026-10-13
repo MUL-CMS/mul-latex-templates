@@ -67,6 +67,16 @@ Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in th
 
 The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
 
+### Fonts
+- `classicFont`
+  Latin Modern Sans (beamer default) for text, and for letters, digits, and operator names (`\sin`, `\mathrm{}`) in formulas (default).
+- `brandFont`
+  Host Grotesk (MUL brand font) for text, and for letters, digits, and operator names in formulas. Fallbacks if the bundled font files in `graphics/` are missing: installed Host Grotesk, Calibri, Carlito, Latin Modern Sans.
+
+Note: the MUL style guide prescribes Host Grotesk for body text. This class nevertheless uses Latin Modern Sans by default, as a deliberate choice for the appearance of (scientific) slides; use `brandFont` to follow the style guide.
+
+In formulas, Greek letters and other symbols are always taken from Computer Modern. Frame titles, the title, and the slogan are always set in Funnel Display (see `\funneldisplay`).
+
 ### Extra Functional Options
 - `showResults`
   Enables the `\showResults{}` block (default).
@@ -83,7 +93,8 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
   showSidebar,
   DElocalization,
   defaultFootings,
-  showResults
+  showResults,
+  classicFont
 ]{mul-beamer}
 ```
 
@@ -200,7 +211,7 @@ The names of earlier versions remain available: `MULgreen` (= `digital_Turquoise
 ## Technical Notes
 
 - Requires **XeLaTeX** or **LuaLaTeX** (due to `fontspec` usage).
-- Uses *Funnel Display* font if available; otherwise defaults to sans-serif.
+- Uses *Funnel Display* for headings if available, and *Host Grotesk* for text with the option `brandFont`; both are bundled in `graphics/` (SIL Open Font License 1.1).
 - Includes MUL logos and uses a 16:9 aspect ratio layout.
 
 ---

@@ -19,6 +19,9 @@
 \def\MUL@footings@empty{empty}
 \def\MUL@footings@default{default}
 \def\MUL@footings@lecture{lecture}
+% MULBrandFont: true if Host Grotesk (MUL brand font) is used as text font
+\newif\ifMULBrandFont
+\MULBrandFontfalse
 % MULLecture: true if the presentation is a lecture (adding ToC at the beginning of sections)
 \newif\ifMULLecture
 \MULLecturefalse
@@ -67,13 +70,18 @@
 %
 % class option showResults
 \DeclareOption{showResults}{\MULShowResultstrue}%
+% class option brandFont: Host Grotesk as text font (MUL brand font)
+\DeclareOption{brandFont}{\MULBrandFonttrue}%
+% class option classicFont: Latin Modern Sans as text font (beamer default; class default)
+\DeclareOption{classicFont}{\MULBrandFontfalse}%
+%
 % class option hideResults
 \DeclareOption{hideResults}{\MULShowResultsfalse}%
 %
 % pass all other options to beamer
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}%
 % default behavior
-\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults}%
+\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults, classicFont}%
 \ProcessOptions%
 % other general options for the beamer class
 \PassOptionsToClass{%
@@ -320,6 +328,47 @@
 % +-------+
 % | FONTS |
 % +-------+
+%
+% TEXT FONT
+% beamer sets letters and digits in formulas in the text font; operator names
+% (\sin, \log, ...) and \mathrm are set in the text font as well (\setmathrm),
+% Greek letters and other symbols stay Computer Modern
+% \MUL@settextfont{<font>}{<fontspec options>}: text font and \mathrm/operators
+\newcommand{\MUL@settextfont}[2]{%
+	\setsansfont{#1}[#2]%
+	\setmathrm{#1}[#2]%
+}%
+% Latin Modern Sans (beamer default) for \mathrm/operators
+\newcommand{\MUL@setclassicmath}{%
+	\setmathrm{lmsans10-regular.otf}[%
+		BoldFont = lmsans10-bold.otf,%
+		ItalicFont = lmsans10-oblique.otf,%
+		BoldItalicFont = lmsans10-boldoblique.otf%
+	]%
+}%
+\ifMULBrandFont%
+	% Host Grotesk (MUL brand font); fallbacks: system-installed Host Grotesk,
+	% Calibri, Carlito, and finally Latin Modern Sans
+	\IfFileExists{./graphics/HostGrotesk-Regular.ttf}{%
+		\MUL@settextfont{HostGrotesk}{%
+			Path = ./graphics/,%
+			Extension = .ttf,%
+			UprightFont = *-Regular,%
+			ItalicFont = *-Italic,%
+			BoldFont = *-Bold,%
+			BoldItalicFont = *-BoldItalic%
+		}%
+	}{%
+		\IfFontExistsTF{Host Grotesk}{\MUL@settextfont{Host Grotesk}{}}{%
+			\IfFontExistsTF{Calibri}{\MUL@settextfont{Calibri}{}}{%
+				\IfFontExistsTF{Carlito}{\MUL@settextfont{Carlito}{}}{\MUL@setclassicmath}%
+			}%
+		}%
+	}%
+\else%
+	% Latin Modern Sans (beamer default, option classicFont)
+	\MUL@setclassicmath%
+\fi%
 %
 % Funnel Display font - if possible
 \newif\iffunneldisplayavailable%
