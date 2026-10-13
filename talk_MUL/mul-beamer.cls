@@ -300,12 +300,13 @@
 \definecolor{plotred}{RGB}{214,39,40}%
 \definecolor{plotpurple}{RGB}{148, 103, 189}%
 \definecolor{plotbrown}{RGB}{140, 86, 75}%
+% slogan (claim) on the title page: discreet grey (deliberate deviation from
+% the PowerPoint master, which uses turquoise; see README)
 \colorlet{MULsloganTitleColor}{white!83!black}%
-% \colorlet{MULsloganTitleColor}{MULgreen}%
-% \colorlet{MULsloganSlideColor}{MULturquoise}%
-\colorlet{MULsloganSlideColor}{white!90!black}%
+% slogan in the footer band: white on Turquoise (allowed by the style guide)
+\colorlet{MULsloganSlideColor}{digital_White}%
 %
-% alerted text
+% alerted text: red (deliberate deviation, not in the brand palette; see README)
 \setbeamercolor{alerted text}{fg=red!80!black}%
 % example text (e.g. title of example blocks)
 \setbeamercolor{example text}{fg=digital_TGDark}%

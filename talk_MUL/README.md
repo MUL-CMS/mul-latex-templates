@@ -208,6 +208,18 @@ The names of earlier versions remain available: `MULgreen` (= `digital_Turquoise
 
 ---
 
+## Deviations from the Style Guide
+
+The class follows the MUL style guide (Brandbook 2026) and the official PowerPoint master in colors, logos, claim, and the layout of title, frame titles, and footer, with these deliberate deviations for scientific presentations:
+
+- **Text font:** Latin Modern Sans by default instead of Host Grotesk (option `brandFont` follows the guide).
+- **Claim on the title slide:** discreet grey instead of turquoise (color `MULsloganTitleColor`, e.g. `\colorlet{MULsloganTitleColor}{digital_Turquoise}`).
+- **Alerts:** `\alert{}` and alert blocks are red, which is not part of the brand palette, as the strongest signal for warnings.
+- **Font sizes:** text is smaller relative to the slide than in the PowerPoint master, as beamer slides are typically denser.
+- **Sidebar:** the optional table-of-contents sidebar is not part of the master (Department of Materials Science design).
+
+---
+
 ## Technical Notes
 
 - Requires **XeLaTeX** or **LuaLaTeX** (due to `fontspec` usage).
