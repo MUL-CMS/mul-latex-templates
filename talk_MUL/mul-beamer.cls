@@ -345,6 +345,12 @@
 	\def\MULconference{#1}%
 	\MULLecturefalse%
 }%
+% keep beamer's original \lecture[<short>]{<title>}{<label>} (splitting a file into
+% several lectures, see \includeonlylecture) available as \lectureBeamer, and let
+% beamer's handling of text outside frames recognise it as it does \lecture
+\let\lectureBeamer\lecture%
+\patchcmd{\beamer@treat}{\ifx\beamer@nexttoken\lecture}{\ifx\beamer@nexttoken\lectureBeamer}{}{}%
+% lecture mode: \lecture{<lecture name>}
 \renewcommand{\lecture}[1]{%
 	\def\MULlecture{#1}%
 	\MULLecturetrue%

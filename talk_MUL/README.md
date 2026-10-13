@@ -112,6 +112,26 @@ Sets the conference name, printed on the title slide and in footings when using 
 ### `\lecture{<lecture name>}`
 Switches to lecture mode: prints the table of contents at the beginning of each section (lecture overview), and with `fullFootings` shows the current section (and subsection) in the footer. The lecture name itself is shown in the footer only with `lectureFootings`.
 
+This replaces beamer's own `\lecture` command, which remains available as `\lectureBeamer` (see below).
+
+### `\lectureBeamer[<short title>]{<title>}{<label>}`
+Beamer's original `\lecture` command, for keeping several lectures in one file. Each lecture starts with `\lectureBeamer` in the document; only the lecture(s) selected with `\includeonlylecture{<label>}` in the preamble (or the class option `lecture=<label>`) are compiled. Within a lecture, beamer's `\insertlecture` and `\insertshortlecture` return its title and short title. It is independent of the lecture mode set by `\lecture{}`; both can be used together. See the beamer manual for details.
+
+Example:
+
+```latex
+\lecture{Name of the Course}% lecture mode, name in lectureFootings
+\includeonlylecture{lecture2}% compile only the second lecture
+
+\begin{document}
+\lectureBeamer[Lecture 1]{Topic of the first lecture}{lecture1}
+\begin{frame}{...}...\end{frame}
+
+\lectureBeamer[Lecture 2]{Topic of the second lecture}{lecture2}
+\begin{frame}{...}...\end{frame}
+\end{document}
+```
+
 ### `\additionsToTitlePage{<content>}`
 Appends custom content (e.g., partner logos, funding agencies) to the title slide, typically defined inside a `tikzpicture` environment.
 
