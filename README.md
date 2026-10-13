@@ -20,18 +20,20 @@ Don't forget to modify the name of your main document in the `makefile`!
 
 ### Clean unused figures
 
-A provided utility `select-used-fig` selects from a given subfolder only those files which are really used in the present document. This is useful if you prepare your _new_ document using an _old_ document as a template, hence ending up with many unnecessary (and often irrelevant) figures. The used figures are taken from the LaTeX `log` file.
+A provided utility `select_used_figs.sh` selects from a given subfolder only those files which are really used in the present document. This is useful if you prepare your _new_ document using an _old_ document as a template, hence ending up with many unnecessary (and often irrelevant) figures. The used figures are taken from the LaTeX `log` file and, if present, from the matching `fls` file (written by `latexmk`). Run it from the folder containing the main document, after a successful compilation.
 
-*   `select-used-figs`  
+*   `select_used_figs.sh`  
     lists available `log` files in the present directory
 
-*   `select-used-figs <file.log>`  
-    selects unused figures subfolder `figs` based on `<file.log>` and copies them to `figs-unused`
+*   `select_used_figs.sh <file.log>`  
+    selects unused figures in subfolder `figs` based on `<file.log>` and moves them to `figs-unused`
 
-*   `select-used-figs <file.log> <subfolder>`  
-    selects unused figures subfolder `<subfolder>` based on `<file.log>` and copies them to `<subfolder>-unused`
+*   `select_used_figs.sh <file.log> <subfolder>`  
+    selects unused figures in subfolder `<subfolder>` based on `<file.log>` and moves them to `<subfolder>-unused`
 
-Why not delete the files directly? Because each of us has to make the final decision what (and if) to delete. The utility helps you _to select_ the unused figures (but maybe you want to keep certain source data, etc.)
+The utility stops without moving anything if the `log` file does not exist or mentions no file from the subfolder at all. Figure sources that are not read by LaTeX (e.g. `.svg` or `.gpi` files converted by the `figs` makefile) are moved too, so check `figs-unused` before deleting it.
+
+Why not delete the unused files directly? Because each of us has to make the final decision what (and if) to delete. The utility helps you _to select_ the unused figures (but maybe you want to keep certain source data, etc.)
 
 
 
