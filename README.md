@@ -40,9 +40,9 @@ Why not delete the unused files directly? Because each of us has to make the fin
 
 ## talk_MUL
 
-Current version: **v3.02-2025**, XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics` (2025 MUL rebranding).
+Current version: **v3.03-2026**, XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics` (2025 MUL rebranding), separate starting points for talks and lectures.
 
-Older versions (v0.1-2008-2012 through v3.01-2025) have been archived: their folders were removed from the working tree and frozen as git tags (`talk-v<version>`, e.g. `git checkout talk-v1.02-2020`). See [`talk_MUL/CHANGELOG.md`](talk_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
+Older versions (v0.1-2008-2012 through v3.02-2025) have been archived: their folders were removed from the working tree and frozen as git tags (`talk-v<version>`, e.g. `git checkout talk-v1.02-2020`). See [`talk_MUL/CHANGELOG.md`](talk_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
 
 ## poster_MUL

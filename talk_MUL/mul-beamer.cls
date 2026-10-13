@@ -1,7 +1,7 @@
 % Author: David Holec, david.holec@unileoben.ac.at
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{mul-beamer}[2025/07/04 v3.01  Beamer with a MUL/DMS layout]%
+\ProvidesClass{mul-beamer}[2026/10/13 v3.03 Beamer with a MUL/DMS layout]%
 %
 %
 % +---------------------------+
@@ -14,12 +14,11 @@
 % MULShowResults: true if content of \showResults{} to be shown
 \newif\ifMULShowResults
 \MULShowResultstrue
-% MULOnlySlideNumbers: true if only slide numbers are to be added to footings (for printing slides)
-\newif\ifMULOnlySlideNumbers
-\MULOnlySlideNumbersfalse
-% type of footings
-\newif\ifMULDefaultFootings
-\MULDefaultFootingstrue
+% MUL@footings: type of footings (empty, default, full, lecture)
+\def\MUL@footings{default}
+\def\MUL@footings@empty{empty}
+\def\MUL@footings@default{default}
+\def\MUL@footings@lecture{lecture}
 % MULLecture: true if the presentation is a lecture (adding ToC at the beginning of sections)
 \newif\ifMULLecture
 \MULLecturefalse
@@ -35,11 +34,13 @@
 \DeclareOption{hideSidebar}{\MULIsSidebarfalse}%
 %
 % class option emptyFootings
-\DeclareOption{emptyFootings}{\MULOnlySlideNumberstrue}%
+\DeclareOption{emptyFootings}{\def\MUL@footings{empty}}%
 % class option defaultFootings
-\DeclareOption{defaultFootings}{\MULOnlySlideNumbersfalse\MULDefaultFootingstrue}%
+\DeclareOption{defaultFootings}{\def\MUL@footings{default}}%
 % class option fullFootings
-\DeclareOption{fullFootings}{\MULOnlySlideNumbersfalse\MULDefaultFootingsfalse}%
+\DeclareOption{fullFootings}{\def\MUL@footings{full}}%
+% class option lectureFootings
+\DeclareOption{lectureFootings}{\def\MUL@footings{lecture}}%
 %
 % class option slideSingleNumber: slides numbered as #(slide)
 \DeclareOption{slideSingleNumber}{\def\frameNumber{\insertframenumber}}%
@@ -72,7 +73,7 @@
 % pass all other options to beamer
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}%
 % default behavior
-\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, ENlocalization, defaultFootings}%
+\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults}%
 \ProcessOptions%
 % other general options for the beamer class
 \PassOptionsToClass{%
@@ -188,14 +189,18 @@
 			\end{tikzpicture}%
 			\usebeamerfont{foot}%
 			\hspace*{0.068\paperwidth}%
-			\ifMULOnlySlideNumbers\else%
+			\ifx\MUL@footings\MUL@footings@empty\else%
 				% uni slogan
 				{\usebeamerfont{MULslogan in foot}{\color{MULsloganSlideColor}\MULsloganText}}%
 				\hfill%
-				\ifMULDefaultFootings%
+				\ifx\MUL@footings\MUL@footings@default%
 					% defaultFootings
 					% author | organisation unit
 					\parbox{6cm}{\centering\beamer@shortauthor{} | \shortinstitute}%
+				\else\ifx\MUL@footings\MUL@footings@lecture%
+					% lectureFootings
+					% lecture name only (not replaced by section names)
+					\parbox{10cm}{\centering\insertMULlecture}%
 				\else%
 					% fullFootings
 					% author & title ... conference / lecture title ... date
@@ -204,7 +209,7 @@
 					\parbox{4cm}{\centering\MULconference}%
 					\hfill%
 					\parbox{2cm}{\centering\mbox{}\hfill\parbox{1.7cm}\insertdate}%
-				\fi%
+				\fi\fi%
 			\fi%
 			\hfill%
 			% frame numbers
@@ -226,7 +231,9 @@
 		% background, logo and slogan
 		\node at (current page.center) {\includegraphics[width=\paperwidth]{graphics/background_title_cms.jpg}};%
 		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogo}};%
-		\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MULsloganTitleColor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
+		\ifdefempty{\MULsloganText}{}{%
+			\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MULsloganTitleColor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
+		}%
 		% title
 		\node[anchor=south, shift={(0,0.02\paperwidth)}] at (current page.center) {\parbox{0.9\paperwidth}{%
 			\centering%
@@ -238,9 +245,10 @@
 			\usebeamerfont{author}{\color{MULaddress}\insertauthor}\par\medskip%
 			\usebeamerfont{institute}{\color{MULaddress}
 				\insertinstitute\par\smallskip
-				\ifblank{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
-				\ifblank{\insertconference}{}{\insertconference\par\smallskip}%
-				\ifblank{\insertdate}{}{\insertdate}
+				\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
+				% conference name only (in lecture mode it holds section names)
+				\ifMULLecture\else\ifdefempty{\MULconference}{}{\insertconference\par\smallskip}\fi%
+				\ifdefempty{\insertdate}{}{\insertdate}
 			}%
 		}};%
 		% custom additions
@@ -332,26 +340,41 @@
 \newcommand{\email}[1]{\def\insertemail{#1}}%
 % conference name or lecture name (+setting the lecture mode)
 \def\MULconference{}%
+\def\MULlecture{}%
 \newcommand{\conference}[1]{%
 	\def\MULconference{#1}%
 	\MULLecturefalse%
 }%
-\renewcommand{\lecture}[1]{
+% keep beamer's original \lecture[<short>]{<title>}{<label>} (splitting a file into
+% several lectures, see \includeonlylecture) available as \lectureBeamer, and let
+% beamer's handling of text outside frames recognise it as it does \lecture
+\let\lectureBeamer\lecture%
+\patchcmd{\beamer@treat}{\ifx\beamer@nexttoken\lecture}{\ifx\beamer@nexttoken\lectureBeamer}{}{}%
+% lecture mode: \lecture{<lecture name>}
+\renewcommand{\lecture}[1]{%
+	\def\MULlecture{#1}%
 	\MULLecturetrue%
+	% the hooks act only in lecture mode (a later \conference switches it off)
 	\AtBeginSection{%
-		\def\MUL@conference{\thesection{}~\insertsectionhead}%
-		\begin{frame}{\insertsectionhead}%
-			\vspace*{-2mm}\mbox{}\vfill%
-			\tableofcontents[currentsection, subsectionstyle=hide]%
-			\vfill\mbox{}%
-		\end{frame}%
+		\ifMULLecture\expandafter\@firstofone\else\expandafter\@gobble\fi{%
+			\def\MULconference{\thesection{}~\insertsectionhead}%
+			\begin{frame}{\insertsectionhead}%
+				\vspace*{-2mm}\mbox{}\vfill%
+				\tableofcontents[currentsection, subsectionstyle=hide]%
+				\vfill\mbox{}%
+			\end{frame}%
+		}%
 	}%
 	\AtBeginSubsection{%
-		\def\MULconference{\thesection.\thesubsection{}~\insertsubsection}%
+		\ifMULLecture%
+			\def\MULconference{\thesection.\thesubsection{}~\insertsubsection}%
+		\fi%
 	}%
 }%
 % name of the conference/lecture
 \newcommand{\insertconference}{\MULconference}%
+% name of the lecture (used in "lectureFootings")
+\newcommand{\insertMULlecture}{\MULlecture}%
 % superscripts for affiliations
 \newcommand{\aff}[1]{\textsuperscript{#1}}%
 \let\origbeamerinstitute\institute
@@ -421,21 +444,18 @@
 % +--------------------+
 
 % \lastslide command for not counting the back up slides
-\newcounter{beamerLeobenlastslide}%
-\setcounter{beamerLeobenlastslide}{0}%
-\newcommand{\lastslide}{\setcounter{beamerLeobenlastslide}{\value{framenumber}}}%
+\newcounter{MULlastslide}%
+\setcounter{MULlastslide}{0}%
+\newcommand{\lastslide}{\setcounter{MULlastslide}{\value{framenumber}}}%
 \AtEndDocument{%
-\message{\arabic{beamerLeobenlastslide}}%
-\ifthenelse{\equal{\value{beamerLeobenlastslide}}{0}}{%
-	\setcounter{beamerLeobenlastslide}{\value{framenumber}}%
+\ifthenelse{\equal{\value{MULlastslide}}{0}}{%
+	\setcounter{MULlastslide}{\value{framenumber}}%
 }{%
 	\relax%
 }%
 \if@filesw%
 \immediate\write\@auxout{\string\@writefile{nav}%
-	{\noexpand\headcommand{\noexpand\def\noexpand\inserttotalframenumber{\arabic{beamerLeobenlastslide}}}}}%
-\newwrite\tf@nav%
-\immediate\openout\tf@nav\jobname.nav\relax%
+	{\noexpand\headcommand{\noexpand\gdef\noexpand\inserttotalframenumber{\arabic{MULlastslide}}}}}%
 \fi%
 }%
 %

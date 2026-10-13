@@ -14,6 +14,21 @@ This is a custom `beamer` class designed for academic and professional presentat
 
 ---
 
+## Getting Started
+
+Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload it to Overleaf) and start from one of them:
+
+| File | Mode | Settings |
+| --- | --- | --- |
+| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `\conference{}` shown on the title page and in the footer |
+| `lecture.tex` | lecture | `lectureFootings`, `showResults`, `\lecture{}`: table of contents at each section, lecture name in the footer |
+
+Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
+
+Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in the `makefile` to your own file name), or run `latexmk -xelatex talk.tex`. On Overleaf, select *Menu → Compiler → XeLaTeX*.
+
+---
+
 ## Class Options
 
 ### Sidebar Layout
@@ -26,9 +41,11 @@ This is a custom `beamer` class designed for academic and professional presentat
 - `emptyFootings`
   Minimal footline showing slide number only.
 - `defaultFootings`
-  Author and short title centered (default).
+  Shows slogan, author | organisational unit (optional argument of `\institute`), and slide number (default).
 - `fullFootings`
   Shows author/title, conference/date, slogan, and slide number.
+- `lectureFootings`
+  Shows slogan, lecture name (as set by `\lecture{}`), and slide number only. Unlike `fullFootings`, the lecture name is not replaced by section names.
 
 ### Slide Numbering
 - `slideSingleNumber`
@@ -44,13 +61,15 @@ This is a custom `beamer` class designed for academic and professional presentat
 
 ### Localization
 - `DElocalization`
-  German labels and slogans.
+  German labels and slogans (default).
 - `ENlocalization`
-  English labels and slogans (default as of v3.02-2025).
+  English labels and slogans.
+
+The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
 
 ### Extra Functional Options
 - `showResults`
-  Enables the `\showResults{}` block.
+  Enables the `\showResults{}` block (default).
 - `hideResults`
   Hides the `\showResults{}` block.
 
@@ -62,8 +81,9 @@ This is a custom `beamer` class designed for academic and professional presentat
   slideSingleNumber,
   showothersubsections,
   showSidebar,
-  ENlocalization,
-  defaultFootings
+  DElocalization,
+  defaultFootings,
+  showResults
 ]{mul-beamer}
 ```
 
@@ -72,7 +92,10 @@ This is a custom `beamer` class designed for academic and professional presentat
 ## Custom Commands & Environments
 
 ### `\institute[<institute for footings>]{<institute>}`
-Set author affiliations. The optional argument overrides the organizational unit shown in footings.
+Set author affiliations. The optional argument overrides the organizational unit shown in footings (`defaultFootings`). Without it, the full `<institute>` is printed in the footer, so always give the optional argument if the affiliations span more than one line (e.g. several affiliations with `\aff{}`).
+
+### `\email{<e-mail address>}`
+E-mail address printed (as a link) on the title slide; omitted if not set.
 
 ### `\aff{<affiliation>}`
 Used after author names to indicate institutional affiliation with a superscript number.
@@ -91,7 +114,27 @@ Example:
 Sets the conference name, printed on the title slide and in footings when using the `fullFootings` option.
 
 ### `\lecture{<lecture name>}`
-Similar to `\conference`, but also prints the table of contents at the beginning of each section (lecture overview).
+Switches to lecture mode: prints the table of contents at the beginning of each section (lecture overview), and with `fullFootings` shows the current section (and subsection) in the footer. The lecture name itself is shown in the footer only with `lectureFootings`.
+
+This replaces beamer's own `\lecture` command, which remains available as `\lectureBeamer` (see below).
+
+### `\lectureBeamer[<short title>]{<title>}{<label>}`
+Beamer's original `\lecture` command, for keeping several lectures in one file. Each lecture starts with `\lectureBeamer` in the document; only the lecture(s) selected with `\includeonlylecture{<label>}` in the preamble (or the class option `lecture=<label>`) are compiled. Within a lecture, beamer's `\insertlecture` and `\insertshortlecture` return its title and short title. It is independent of the lecture mode set by `\lecture{}`; both can be used together. See the beamer manual for details.
+
+Example:
+
+```latex
+\lecture{Name of the Course}% lecture mode, name in lectureFootings
+\includeonlylecture{lecture2}% compile only the second lecture
+
+\begin{document}
+\lectureBeamer[Lecture 1]{Topic of the first lecture}{lecture1}
+\begin{frame}{...}...\end{frame}
+
+\lectureBeamer[Lecture 2]{Topic of the second lecture}{lecture2}
+\begin{frame}{...}...\end{frame}
+\end{document}
+```
 
 ### `\additionsToTitlePage{<content>}`
 Appends custom content (e.g., partner logos, funding agencies) to the title slide, typically defined inside a `tikzpicture` environment.
@@ -113,6 +156,15 @@ Changes the font to *Funnel Display* if available.
 
 ### `\showResults{<content>}`
 Conditionally shows or hides content depending on the `showResults` or `hideResults` class options.
+
+### `\example`
+Used instead of `\item` in `itemize` lists: an item marked with a stop sign and starting with *Example:*.
+
+### `\setFrameLogo{<file>}`
+Replaces the logo in the top-right corner of the frames, e.g. `\setFrameLogo{graphics/logo-dms.pdf}`. In the preamble or between frames, it applies to all following frames; enclosed in a group `{\setFrameLogo{...} \begin{frame}...\end{frame}}`, it applies to the enclosed frames only.
+
+### `\lastslide`
+Placed between frames, it sets the total number of slides (`slideTotalNumber`) to the number of the preceding frame, so that following (e.g. backup) slides are not counted.
 
 ### Environment: `overdraw`
 Allows layered drawing over slide content, implemented using TikZ.
@@ -145,4 +197,4 @@ Draws a visual grid on the slide for precise placement during development (usual
 david.holec@unileoben.ac.at
 
 ---
-Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.02-2025`.
+Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.03-2026`.
