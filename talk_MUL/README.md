@@ -41,7 +41,7 @@ Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in th
 - `emptyFootings`
   Minimal footline showing slide number only.
 - `defaultFootings`
-  Author and short title centered (default).
+  Shows slogan, author | organisational unit (optional argument of `\institute`), and slide number (default).
 - `fullFootings`
   Shows author/title, conference/date, slogan, and slide number.
 - `lectureFootings`
@@ -69,7 +69,7 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
 
 ### Extra Functional Options
 - `showResults`
-  Enables the `\showResults{}` block.
+  Enables the `\showResults{}` block (default).
 - `hideResults`
   Hides the `\showResults{}` block.
 
@@ -82,7 +82,8 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
   showothersubsections,
   showSidebar,
   DElocalization,
-  defaultFootings
+  defaultFootings,
+  showResults
 ]{mul-beamer}
 ```
 
@@ -92,6 +93,9 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
 
 ### `\institute[<institute for footings>]{<institute>}`
 Set author affiliations. The optional argument overrides the organizational unit shown in footings.
+
+### `\email{<e-mail address>}`
+E-mail address printed (as a link) on the title slide; omitted if not set.
 
 ### `\aff{<affiliation>}`
 Used after author names to indicate institutional affiliation with a superscript number.
@@ -152,6 +156,15 @@ Changes the font to *Funnel Display* if available.
 
 ### `\showResults{<content>}`
 Conditionally shows or hides content depending on the `showResults` or `hideResults` class options.
+
+### `\example`
+Used instead of `\item` in `itemize` lists: an item marked with a stop sign and starting with *Example:*.
+
+### `\setFrameLogo{<file>}`
+Replaces the logo in the top-right corner of the frames, e.g. `\setFrameLogo{graphics/logo-dms.pdf}`. In the preamble or between frames, it applies to all following frames; enclosed in a group `{\setFrameLogo{...} \begin{frame}...\end{frame}}`, it applies to the enclosed frames only.
+
+### `\lastslide`
+Placed between frames, it sets the total number of slides (`slideTotalNumber`) to the number of the preceding frame, so that following (e.g. backup) slides are not counted.
 
 ### Environment: `overdraw`
 Allows layered drawing over slide content, implemented using TikZ.
