@@ -245,10 +245,10 @@
 			\usebeamerfont{author}{\color{MULaddress}\insertauthor}\par\medskip%
 			\usebeamerfont{institute}{\color{MULaddress}
 				\insertinstitute\par\smallskip
-				\ifblank{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
+				\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
 				% conference name only (in lecture mode it holds section names)
-				\ifMULLecture\else\ifblank{\insertconference}{}{\insertconference\par\smallskip}\fi%
-				\ifblank{\insertdate}{}{\insertdate}
+				\ifMULLecture\else\ifdefempty{\MULconference}{}{\insertconference\par\smallskip}\fi%
+				\ifdefempty{\insertdate}{}{\insertdate}
 			}%
 		}};%
 		% custom additions
