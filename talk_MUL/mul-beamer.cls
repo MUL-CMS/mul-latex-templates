@@ -354,16 +354,21 @@
 \renewcommand{\lecture}[1]{%
 	\def\MULlecture{#1}%
 	\MULLecturetrue%
+	% the hooks act only in lecture mode (a later \conference switches it off)
 	\AtBeginSection{%
-		\def\MULconference{\thesection{}~\insertsectionhead}%
-		\begin{frame}{\insertsectionhead}%
-			\vspace*{-2mm}\mbox{}\vfill%
-			\tableofcontents[currentsection, subsectionstyle=hide]%
-			\vfill\mbox{}%
-		\end{frame}%
+		\ifMULLecture\expandafter\@firstofone\else\expandafter\@gobble\fi{%
+			\def\MULconference{\thesection{}~\insertsectionhead}%
+			\begin{frame}{\insertsectionhead}%
+				\vspace*{-2mm}\mbox{}\vfill%
+				\tableofcontents[currentsection, subsectionstyle=hide]%
+				\vfill\mbox{}%
+			\end{frame}%
+		}%
 	}%
 	\AtBeginSubsection{%
-		\def\MULconference{\thesection.\thesubsection{}~\insertsubsection}%
+		\ifMULLecture%
+			\def\MULconference{\thesection.\thesubsection{}~\insertsubsection}%
+		\fi%
 	}%
 }%
 % name of the conference/lecture
@@ -439,20 +444,18 @@
 % +--------------------+
 
 % \lastslide command for not counting the back up slides
-\newcounter{beamerLeobenlastslide}%
-\setcounter{beamerLeobenlastslide}{0}%
-\newcommand{\lastslide}{\setcounter{beamerLeobenlastslide}{\value{framenumber}}}%
+\newcounter{MULlastslide}%
+\setcounter{MULlastslide}{0}%
+\newcommand{\lastslide}{\setcounter{MULlastslide}{\value{framenumber}}}%
 \AtEndDocument{%
-\ifthenelse{\equal{\value{beamerLeobenlastslide}}{0}}{%
-	\setcounter{beamerLeobenlastslide}{\value{framenumber}}%
+\ifthenelse{\equal{\value{MULlastslide}}{0}}{%
+	\setcounter{MULlastslide}{\value{framenumber}}%
 }{%
 	\relax%
 }%
 \if@filesw%
 \immediate\write\@auxout{\string\@writefile{nav}%
-	{\noexpand\headcommand{\noexpand\def\noexpand\inserttotalframenumber{\arabic{beamerLeobenlastslide}}}}}%
-\newwrite\tf@nav%
-\immediate\openout\tf@nav\jobname.nav\relax%
+	{\noexpand\headcommand{\noexpand\gdef\noexpand\inserttotalframenumber{\arabic{MULlastslide}}}}}%
 \fi%
 }%
 %

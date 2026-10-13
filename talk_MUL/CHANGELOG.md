@@ -17,7 +17,11 @@
     - fixed: empty e-mail/conference/date on the title page still added
       their spacing; conference slot not shown in lecture mode
     - empty slogan (\renewcommand{\MULsloganText}{}) supported
-    - removed debug output at the end of the compilation
+    - fixed: \conference after \lecture did not switch off the ToC slides
+      at section starts
+    - removed debug output and a redundant re-opening of the .nav file at
+      the end of the compilation; \lastslide counter renamed MULlastslide
+    - lecture.tex: plain-text PDF title (\texorpdfstring)
     - README: Getting Started section, documented \email, \example,
       \setFrameLogo, \lastslide, \lectureBeamer
 
