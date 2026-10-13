@@ -61,9 +61,9 @@ Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in th
 
 ### Localization
 - `DElocalization`
-  German labels and slogans.
+  German labels and slogans (default).
 - `ENlocalization`
-  English labels and slogans (default as of v3.02-2025).
+  English labels and slogans.
 
 The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
 
@@ -81,7 +81,7 @@ The slogan can be removed from the title page and footer with `\renewcommand{\MU
   slideSingleNumber,
   showothersubsections,
   showSidebar,
-  ENlocalization,
+  DElocalization,
   defaultFootings
 ]{mul-beamer}
 ```

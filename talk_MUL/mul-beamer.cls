@@ -73,7 +73,7 @@
 % pass all other options to beamer
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}%
 % default behavior
-\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, ENlocalization, defaultFootings}%
+\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings}%
 \ProcessOptions%
 % other general options for the beamer class
 \PassOptionsToClass{%
