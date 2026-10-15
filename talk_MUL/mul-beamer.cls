@@ -489,7 +489,8 @@
 % name of the lecture (used in "lectureFootings")
 \newcommand{\insertMULlecture}{\MULlecture}%
 % superscripts for affiliations
-\newcommand{\aff}[1]{\textsuperscript{#1}}%
+% (\texorpdfstring: omitted in the PDF metadata, e.g. the author list)
+\newcommand{\aff}[1]{\texorpdfstring{\textsuperscript{#1}}{}}%
 \let\origbeamerinstitute\institute
 % institution name used in "defaultFootings"
 \newcommand{\shortinstitute}{} % initially empty
