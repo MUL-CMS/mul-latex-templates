@@ -59,13 +59,17 @@
 \DeclareOption{DElocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
 	\def\MULsloganText{Versetz’ Berge}%
+	\def\MULthanksText{Danke für Ihre Aufmerksamkeit!}%
 }%
 % class option ENlocalization
 \DeclareOption{ENlocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul-en}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
 	\def\MULsloganText{Move mountains}%
+	\def\MULthanksText{Thank you for your attention!}%
 }%
 %
 % class option showResults
@@ -227,6 +231,37 @@
 	\fi%
 }%
 %
+%
+% DARK SLIDES (final frame, dark title page)
+% background image: turquoise with a multiplied black-and-white photo (style guide)
+\def\MULdarkBackground{graphics/background_dark_cms.jpg}%
+\newcommand{\setDarkBackground}[1]{\def\MULdarkBackground{#1}}%
+% background and white logo of the dark slides (inside a tikzpicture with remember picture)
+\newcommand{\MUL@darkbackground}{%
+	\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+	\node at (current page.center) {\includegraphics[width=\paperwidth]{\MULdarkBackground}};%
+	\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogoWhite}};%
+}%
+%
+% FINAL FRAME
+% \finalframe[<text>]: closing slide, by default "Thank you for your attention!"
+% (localised), with the e-mail address (\email) and a white footer band with the claim
+\newcommand{\finalframe}[1][\MULthanksText]{%
+	\begin{frame}[plain]%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\MUL@darkbackground%
+			% e-mail address and text
+			\node[anchor=south west, inner sep=0pt, text width=0.8\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.28\paperheight)}]current page.south west) {%
+				\ifdefempty{\insertemail}{}{{\usebeamerfont{MULfinal email}\color{white}\insertemail}\par\medskip}%
+				{\usebeamerfont{MULfinal}\color{white}#1\par}%
+			};%
+			% white footer band (as the footer of the frames) with the claim in turquoise
+			\fill[white] (current page.south west) rectangle ([shift={(\paperwidth,0.053\paperheight)}]current page.south west);%
+			\fill[white] ([shift={(0,0.018\paperheight)}]current page.south west) -- ++(0.09\paperheight,0) -- ++(-0.09\paperheight,0.09\paperheight) -- cycle;%
+			\node[anchor=base west, inner sep=0pt] at ([shift={(0.068\paperwidth,0.018\paperheight)}]current page.south west) {\usebeamerfont{MULslogan in foot}\color{digital_Turquoise}\MULsloganText};%
+		\end{tikzpicture}%
+	\end{frame}%
+}%
 %
 % TITLE PAGE
 % additional graphics and other elements to be included on the title page
@@ -404,6 +439,8 @@
 \setbeamerfont{frametitle}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in title}{size=\large, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in foot}{size=\scriptsize, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal}{size=\Huge, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal email}{size=\small, series=\mdseries}%
 \setbeamerfont{foot}{size=\tiny, family=\sffamily}%
 %
 %
