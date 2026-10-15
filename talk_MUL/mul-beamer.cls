@@ -1,7 +1,7 @@
 % Author: David Holec, david.holec@unileoben.ac.at
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{mul-beamer}[2026/10/13 v3.03 Beamer with a MUL/DMS layout]%
+\ProvidesClass{mul-beamer}[2026/10/15 v3.10 Beamer with a MUL/DMS layout]%
 %
 %
 % +---------------------------+

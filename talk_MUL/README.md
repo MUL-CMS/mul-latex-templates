@@ -295,4 +295,4 @@ The class follows the MUL style guide (Brandbook 2026) and the official PowerPoi
 david.holec@unileoben.ac.at
 
 ---
-Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.03-2026`.
+Current version. See [`CHANGELOG.md`](CHANGELOG.md) for the full version history. Frozen at tag `talk-v3.10-2026`.
