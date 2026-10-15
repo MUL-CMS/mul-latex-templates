@@ -13,7 +13,7 @@
 	slideTotalNumber,% slide numbers as "current/total"
 	DElocalization,% German logo and slogan (ENlocalization for English)
 	lightTitle,% light title slide (darkTitle for the dark version)
-	showSidebar,% sidebar with table of contents (hideSidebar to remove it)
+	hideSidebar,% no sidebar (showSidebar for a sidebar with the table of contents)
 	classicFont% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
 ]{mul-beamer}
 \hypersetup{pdfpagemode=FullScreen}% open the PDF in full-screen mode
@@ -33,6 +33,8 @@
 \email{name.surname@unileoben.ac.at}
 \conference{Name of the Conference}
 \date{1 January 2026}
+% optional: title of the agenda slide (\agendaframe), default Inhalt/Outline by localization
+% \setAgendaTitle{Agenda}
 %
 % optional: partner logo(s) etc. on the title page (TikZ nodes)
 \additionsToTitlePage{%
@@ -50,5 +52,21 @@
 %
 % demonstration of the class functionality: replace by your own slides
 \input{functionality_demo}
+%
+% closing slide; here with English text, while logo and claim follow DElocalization
+% (\finalframe without [...] gives the text of the localization)
+\finalframe[Thank you for your attention!]
+%
+% \lastslide: the total number of slides (option slideTotalNumber) counts only
+% up to here, i.e., the following backup slides are not included
+\lastslide
+%
+\section*{Backup}
+\begin{frame}{Backup slide}
+	\begin{itemize}
+		\item slides after \texttt{\textbackslash lastslide} are not counted in the total number of slides
+		\item useful for backup slides
+	\end{itemize}
+\end{frame}
 %
 \end{document}

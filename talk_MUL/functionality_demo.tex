@@ -10,7 +10,82 @@
 \newcommand{\democmd}[1]{\texttt{\textbackslash #1}}
 %
 % agenda: table of contents in the layout of the MUL PowerPoint master
-\agendaframe
+\agendaframe[Outline]
+%
+%
+\section{Overview}
+\subsection{Class options}
+% sketch of a footer style (scaled to half the text width): \demofooter{<option>}{<middle text>}{<slide number>};
+% an empty <middle text> gives the footer without slogan (emptyFootings)
+\newcommand{\demofooter}[3]{%
+	\resizebox{0.48\textwidth}{!}{%
+	\begin{tikzpicture}[x=1mm, y=1mm, every node/.style={inner sep=0pt, text=white, font=\fontsize{3.5}{4}\selectfont}]%
+		\fill[digital_Turquoise] (0,0) rectangle (62,3.2);%
+		\fill[digital_Turquoise] (0,1) -- (5,1) -- (0,6) -- cycle;%
+		\ifblank{#2}{}{%
+			\node[anchor=west] at (7,1.6) {\funneldisplay\bfseries\MULsloganText};%
+			\node at (36,1.6) {#2};%
+		}%
+		\node[anchor=east] at (60,1.6) {#3};%
+		\node[anchor=south west, text=digital_GraphiteBlack, font=\tiny\ttfamily] at (7,4) {#1};%
+	\end{tikzpicture}}%
+}%
+\begin{frame}{Class options}
+	\beamerdefaultoverlayspecification{}% all items at once
+	\scriptsize
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Footer] \texttt{defaultFootings}*, \texttt{fullFootings}, \texttt{lectureFootings}, \texttt{emptyFootings} (see below)
+				\item[Slide numbers] \texttt{slideSingleNumber}*, \texttt{slideTotalNumber} (current/total)
+				\item[Sidebar] \texttt{showSidebar}*, \texttt{hideSidebar}; \texttt{showothersubsections}*, \texttt{hideothersubsections}
+				\item[Language] \texttt{DElocalization}*, \texttt{ENlocalization} (logo, claim, texts)
+			\end{description}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Title slide] \texttt{lightTitle}*, \texttt{darkTitle}
+				\item[Text font] \texttt{classicFont}* (Latin Modern Sans), \texttt{brandFont} (Host Grotesk)
+				\item[Results] \texttt{showResults}*, \texttt{hideResults} (\democmd{showResults})
+				\item[beamer] all other options are passed to beamer, e.g.\ \texttt{trans}, \texttt{handout}; the aspect ratio is always 16:9
+			\end{description}
+		\end{column}
+	\end{columns}
+	\medskip
+	* default
+	\vfill
+	\demofooter{defaultFootings}{F.~Author \textit{et al.} $|$ Department of Materials Science}{5}\hfill
+	\demofooter{fullFootings}{F.~Author: Short title \quad Name of the Conference \quad 1 January 2026}{5/9}\par\medskip
+	\demofooter{lectureFootings}{Name of the Course}{5}\hfill
+	\demofooter{emptyFootings}{}{5}\par
+	\smallskip
+	{\tiny with \texttt{fullFootings} in lecture mode, the conference is replaced by the current section/subsection, e.g.\ \emph{1.2 Subsection}}
+\end{frame}
+%
+\subsection{Commands}
+\begin{frame}{Commands}
+	\beamerdefaultoverlayspecification{}% all items at once
+	\scriptsize
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Title slide] \democmd{title[<short>]}, \democmd{author[<short>]} with \democmd{aff\{<n>\}}, \democmd{institute[<unit for footer>]}, \democmd{email}, \democmd{date}, \democmd{conference} (talk) or \democmd{lecture} (lecture mode), \democmd{additionsToTitlePage}
+				\item[Settings] \democmd{setFrameLogo}, \democmd{setDarkBackground}, \democmd{setAgendaTitle}
+				\item[Special slides] \democmd{agendaframe}, \democmd{personframe}, \democmd{finalframe} (between frames)
+				\item[Lectures] \democmd{lectureBeamer} with \democmd{includeonlylecture} (beamer's original \democmd{lecture})
+			\end{description}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Content] \democmd{alert}, \democmd{Alert}, \democmd{example}, \democmd{funneldisplay}, \democmd{showResults}, colours \texttt{digital\_\dots}
+				\item[Between frames] \democmd{literature}, \democmd{lastslide}
+				\item[Placing] \texttt{overdraw} environment, \democmd{framegrid}
+			\end{description}
+		\end{column}
+	\end{columns}
+	\medskip
+	All of them are described in \texttt{README.md}; the following slides demonstrate them.
+\end{frame}
 %
 %
 \section{Basics}
@@ -146,14 +221,14 @@
 \begin{frame}{Placing objects with \texttt{overdraw}}
 	\begin{itemize}[<1->]
 		\item the \texttt{overdraw} environment is a TikZ picture with absolute coordinates: one unit is 1/16 of the slide width, the origin is the bottom-left corner of the slide (right of the sidebar, if shown)
-		\item \democmd{framegrid} inside \texttt{overdraw} draws the coordinate grid for finding positions (slide 2) -- remove it in the final version
-		\item slide 3: label and arrow placed with \texttt{overdraw}
+		\item \democmd{framegrid} inside \texttt{overdraw} draws the coordinate grid for finding positions -- remove it in the final version
+		\item steps: grid (slide 2), grid with label and arrow placed with \texttt{overdraw} (slide 3), final result (slide 4)
 	\end{itemize}
-	\onslide<2>
+	\onslide<2-3>
 	\begin{overdraw}
 		\framegrid
 	\end{overdraw}
-	\onslide<3>
+	\onslide<3-4>
 	\begin{overdraw}
 		\node[draw=digital_Turquoise, very thick, rounded corners, fill=white, font=\small] (label) at (9,3) {placed at (9,3)};
 		\draw[->, very thick, digital_Turquoise] (label) -- (5,4.5);
@@ -166,7 +241,8 @@
 \begin{frame}{Hidden results}
 	\begin{itemize}[<1->]
 		\item \democmd{showResults\{\dots\}} shows its content with the class option \texttt{showResults} (default), and leaves an empty space of the same size with \texttt{hideResults}
-		\item useful for exercises in lecture handouts
+		\item independent of the beamer mode: in the presentation (default) as well as with the beamer class options \texttt{trans} or \texttt{handout} (one page per frame, without overlays, e.g.\ for printing), only \texttt{showResults}/\texttt{hideResults} decide
+		\item handouts of exercises without results: \texttt{\textbackslash documentclass[trans, hideResults]\{mul-beamer\}}
 	\end{itemize}
 	\bigskip
 	\begin{block}{Exercise}
@@ -192,7 +268,7 @@
 \begin{frame}{Agenda slide}
 	\begin{itemize}[<1->]
 		\item \democmd{agendaframe} (between frames) shows the table of contents (sections only) in the \emph{Agenda} layout of the MUL PowerPoint master, see the second slide
-		\item \democmd{agendaframe[<title>]} replaces the title \texttt{\MULagendaText}
+		\item \democmd{agendaframe[<title>]} replaces the title (default: \emph{\MULagendaText}); \democmd{setAgendaTitle\{<title>\}} (in the preamble) changes the default
 	\end{itemize}
 \end{frame}
 %
@@ -215,23 +291,9 @@
 \subsection{Closing slide}
 \begin{frame}{Closing slide}
 	\begin{itemize}[<1->]
-		\item \democmd{finalframe} (between frames) adds a closing slide in the dark style of the MUL slides: ``Thank you for your attention!'' (localised), the e-mail address set by \democmd{email}, and the claim
+		\item \democmd{finalframe} (between frames) adds a closing slide in the dark style of the MUL slides: ``Thank you for your attention!'' (localised), the e-mail address set by \democmd{email}, and the claim -- see the end of \texttt{talk.tex}
 		\item \democmd{finalframe[\dots]} replaces the text, e.g.\ \texttt{\textbackslash finalframe[Questions?]}
 		\item \democmd{setDarkBackground\{graphics/background\_dark.jpg\}} (in the preamble) uses the background of the official PowerPoint master instead of the CMS variant
 		\item the class option \texttt{darkTitle} gives a title slide in the same dark style
-	\end{itemize}
-\end{frame}
-%
-\finalframe
-%
-% \lastslide: the total number of slides (option slideTotalNumber) counts only
-% up to here, i.e., the following backup slides are not included
-\lastslide
-%
-\section*{Backup}
-\begin{frame}{Backup slide}
-	\begin{itemize}[<1->]
-		\item slides after \democmd{lastslide} are not counted in the total number of slides
-		\item useful for backup slides
 	\end{itemize}
 \end{frame}

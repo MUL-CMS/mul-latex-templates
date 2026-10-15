@@ -65,7 +65,7 @@
 	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
 	\def\MULsloganText{Versetz’ Berge}%
 	\def\MULthanksText{Danke für Ihre Aufmerksamkeit!}%
-	\def\MULagendaText{Agenda}%
+	\def\MULagendaText{Inhalt}%
 }%
 % class option ENlocalization
 \DeclareOption{ENlocalization}{%
@@ -74,7 +74,7 @@
 	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
 	\def\MULsloganText{Move mountains}%
 	\def\MULthanksText{Thank you for your attention!}%
-	\def\MULagendaText{Agenda}%
+	\def\MULagendaText{Outline}%
 }%
 %
 % class option showResults
@@ -255,7 +255,9 @@
 %
 % AGENDA FRAME
 % \agendaframe[<title>]: table of contents (sections only) as in the "Agenda" layout of
-% the PowerPoint master: large title, turquoise rule, list in the left half of the slide
+% the PowerPoint master: large title, turquoise rule, list in the left half of the slide;
+% default title "Inhalt"/"Outline" (localised), changed by \setAgendaTitle{<title>}
+\newcommand{\setAgendaTitle}[1]{\def\MULagendaText{#1}}%
 \newcommand{\agendaframe}[1][\MULagendaText]{%
 	{%
 	\setbeamertemplate{sidebar left}{}% no sidebar on this frame
@@ -288,7 +290,7 @@
 			% e-mail address and text
 			\node[anchor=south west, inner sep=0pt, text width=0.8\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.28\paperheight)}]current page.south west) {%
 				\ifdefempty{\insertemail}{}{{\usebeamerfont{MULfinal email}\color{white}\insertemail}\par\medskip}%
-				{\usebeamerfont{MULfinal}\color{white}#1\par}%
+				{\usebeamerfont{MULfinal}\color{white}\hyphenpenalty=10000\exhyphenpenalty=10000 #1\par}% no hyphenation
 			};%
 			% white footer band (as the footer of the frames) with the claim in turquoise
 			\fill[white] (current page.south west) rectangle ([shift={(\paperwidth,0.053\paperheight)}]current page.south west);%

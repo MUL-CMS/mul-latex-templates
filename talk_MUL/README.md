@@ -20,7 +20,7 @@ Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload 
 
 | File | Mode | Settings |
 | --- | --- | --- |
-| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `\conference{}` shown on the title page and in the footer |
+| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `hideSidebar`, `\conference{}` shown on the title page and in the footer; closing slide (`\finalframe`) and a backup slide (`\lastslide`) |
 | `lecture.tex` | lecture | `lectureFootings`, `showResults`, `\lecture{}`: table of contents at each section, lecture name in the footer |
 
 Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
@@ -88,6 +88,8 @@ In formulas, Greek letters and other symbols are always taken from Computer Mode
   Enables the `\showResults{}` block (default).
 - `hideResults`
   Hides the `\showResults{}` block.
+
+`showResults`/`hideResults` are independent of the beamer mode: in the presentation as well as with beamer's options `trans` or `handout` (one page per frame, without overlays), only these two options decide. For exercise handouts without results, use e.g. `\documentclass[trans, hideResults]{mul-beamer}`.
 
 ### Default Class Setup
 
@@ -182,7 +184,7 @@ Used instead of `\item` in `itemize` lists: an item marked with a stop sign and 
 Replaces the logo in the top-right corner of the frames, e.g. `\setFrameLogo{graphics/logo-dms.pdf}`. In the preamble or between frames, it applies to all following frames; enclosed in a group `{\setFrameLogo{...} \begin{frame}...\end{frame}}`, it applies to the enclosed frames only.
 
 ### `\agendaframe[<title>]`
-Adds a slide (between frames) with the table of contents (sections only) in the *Agenda* layout of the MUL PowerPoint master: large title (default: *Agenda*), turquoise rule, and the list in the left half of the slide. The footer is kept, the sidebar is hidden on this slide.
+Adds a slide (between frames) with the table of contents (sections only) in the *Agenda* layout of the MUL PowerPoint master: large title (default: *Inhalt* / *Outline*, depending on the localization), turquoise rule, and the list in the left half of the slide. The footer is kept, the sidebar is hidden on this slide. `\setAgendaTitle{<title>}` (in the preamble) changes the default title, e.g. `\setAgendaTitle{Agenda}`.
 
 ### `\personframe[<photo>]{<name>}{<role>}{<text>}`
 Adds a slide (between frames) introducing a person, as in the *Zur Person* layout of the MUL PowerPoint master: the photo fills the left part of the slide (cropped to fit; a neutral placeholder if `<photo>` is omitted), name and role at the top right, and `<text>` below (may contain lists). The footer is kept, the sidebar is hidden on this slide.
@@ -198,7 +200,7 @@ Example:
 ```
 
 ### `\finalframe[<text>]`
-Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`.
+Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`, or `\finalframe[Thank you for your attention!]` for English text with the German logo and claim (`DElocalization`), as in `talk.tex`.
 
 ### `\setDarkBackground{<file>}`
 Background image of the dark slides (`\finalframe`, title slide with `darkTitle`). Two are provided: `graphics/background_dark_cms.jpg` (default, matching the CMS title page) and `graphics/background_dark.jpg` (from the official PowerPoint master).
