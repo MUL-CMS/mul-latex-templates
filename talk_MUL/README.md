@@ -174,6 +174,19 @@ Used instead of `\item` in `itemize` lists: an item marked with a stop sign and 
 ### `\setFrameLogo{<file>}`
 Replaces the logo in the top-right corner of the frames, e.g. `\setFrameLogo{graphics/logo-dms.pdf}`. In the preamble or between frames, it applies to all following frames; enclosed in a group `{\setFrameLogo{...} \begin{frame}...\end{frame}}`, it applies to the enclosed frames only.
 
+### `\personframe[<photo>]{<name>}{<role>}{<text>}`
+Adds a slide (between frames) introducing a person, as in the *Zur Person* layout of the MUL PowerPoint master: the photo fills the left part of the slide (cropped to fit; a neutral placeholder if `<photo>` is omitted), name and role at the top right, and `<text>` below (may contain lists). The footer is kept, the sidebar is hidden on this slide.
+
+Example:
+
+```latex
+\personframe[figs/photo.jpg]{Name Surname}{Function, Department}{%
+  \begin{itemize}
+    \item since 2020: current position
+    \item research interests: \dots
+  \end{itemize}}
+```
+
 ### `\finalframe[<text>]`
 Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`.
 

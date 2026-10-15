@@ -185,6 +185,22 @@
 \end{frame}
 }%
 %
+\subsection{Person slide}
+\begin{frame}{Person slide}
+	\begin{itemize}[<1->]
+		\item \democmd{personframe[<photo>]\{<name>\}\{<role>\}\{<text>\}} (between frames) introduces a person, as in the \emph{Zur Person} layout of the MUL PowerPoint master
+		\item the photo fills the left part of the slide (cropped as needed); without \texttt{<photo>}, a placeholder is shown (next slide)
+		\item \texttt{<text>} can contain lists, e.g.\ a short CV
+	\end{itemize}
+\end{frame}
+%
+\personframe{Name Surname}{Function, Department of Materials Science}{%
+	\begin{itemize}[<1->]
+		\item since 2020: current position
+		\item 2015--2020: previous position
+		\item research interests: topic A, topic B
+	\end{itemize}}
+%
 \subsection{Closing slide}
 \begin{frame}{Closing slide}
 	\begin{itemize}[<1->]

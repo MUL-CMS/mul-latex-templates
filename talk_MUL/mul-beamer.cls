@@ -263,6 +263,52 @@
 	\end{frame}%
 }%
 %
+% PERSON FRAME
+% \personframe[<photo>]{<name>}{<role>}{<text>}: introduction of a person as in the
+% "Zur Person" layout of the PowerPoint master; photo on the left (cropped to fill
+% the area; a placeholder without <photo>), name, role, and text on the right
+\newsavebox{\MUL@photobox}%
+\newcommand{\personframe}[4][]{%
+	{%
+	\setbeamertemplate{sidebar left}{}% no sidebar on this frame
+	\begin{frame}%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+			% photo area: left 37% of the slide, from the top down to the footer
+			\begin{scope}%
+				\clip (current page.north west) rectangle ([shift={(0.37\paperwidth,0.053\paperheight)}]current page.south west);%
+				\ifblank{#1}{%
+					% placeholder: silhouette on GW Light
+					\fill[digital_GWLight] (current page.north west) rectangle ([shift={(0.37\paperwidth,0.053\paperheight)}]current page.south west);%
+					\fill[digital_GWDark] ([shift={(0.185\paperwidth,0.62\paperheight)}]current page.south west) circle (0.12\paperheight);%
+					\fill[digital_GWDark] ([shift={(0.185\paperwidth,0.053\paperheight)}]current page.south west) ellipse [x radius=0.14\paperwidth, y radius=0.42\paperheight];%
+				}{%
+					% photo scaled to cover the area (by height for wide, by width for tall photos)
+					\sbox{\MUL@photobox}{\includegraphics[width=10cm]{#1}}%
+					\pgfmathtruncatemacro{\MUL@photowide}{(\wd\MUL@photobox/\ht\MUL@photobox) > (0.37*\paperwidth/(0.947*\paperheight)) ? 1 : 0}%
+					\node at ([shift={(0.185\paperwidth,0.5265\paperheight)}]current page.south west) {%
+						\ifnum\MUL@photowide=1 \includegraphics[height=0.947\paperheight]{#1}%
+						\else\includegraphics[width=0.37\paperwidth]{#1}\fi%
+					};%
+				}%
+			\end{scope}%
+			% frame logo (as in the frame titles)
+			\node[anchor=north east, shift={(-0.02\paperwidth,-0.025\paperheight)}] at (current page.north east) {\includegraphics[height=5mm]{\MULframeLogo}};%
+			% name and role
+			\node[anchor=north west, inner sep=0pt, text width=0.52\paperwidth, align=left] at ([shift={(0.41\paperwidth,-0.12\paperheight)}]current page.north west) {%
+				{\usebeamerfont{MULperson name}\color{digital_Turquoise}#2\par}%
+				\smallskip%
+				{\usebeamerfont{MULperson role}\color{digital_GraphiteBlack}#3\par}%
+			};%
+			% text
+			\node[anchor=north west, inner sep=0pt, text width=0.52\paperwidth, align=left] at ([shift={(0.41\paperwidth,-0.38\paperheight)}]current page.north west) {%
+				\usebeamercolor[fg]{normal text}#4%
+			};%
+		\end{tikzpicture}%
+	\end{frame}%
+	}%
+}%
+%
 % TITLE PAGE
 % additional graphics and other elements to be included on the title page
 \def\MULtitleAdditions{}%
@@ -439,6 +485,8 @@
 \setbeamerfont{frametitle}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in title}{size=\large, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in foot}{size=\scriptsize, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULperson name}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULperson role}{size=\large, series=\mdseries, family=\funneldisplay}%
 \setbeamerfont{MULfinal}{size=\Huge, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULfinal email}{size=\small, series=\mdseries}%
 \setbeamerfont{foot}{size=\tiny, family=\sffamily}%
