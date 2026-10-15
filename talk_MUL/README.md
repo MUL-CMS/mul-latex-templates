@@ -181,6 +181,9 @@ Used instead of `\item` in `itemize` lists: an item marked with a stop sign and 
 ### `\setFrameLogo{<file>}`
 Replaces the logo in the top-right corner of the frames, e.g. `\setFrameLogo{graphics/logo-dms.pdf}`. In the preamble or between frames, it applies to all following frames; enclosed in a group `{\setFrameLogo{...} \begin{frame}...\end{frame}}`, it applies to the enclosed frames only.
 
+### `\agendaframe[<title>]`
+Adds a slide (between frames) with the table of contents (sections only) in the *Agenda* layout of the MUL PowerPoint master: large title (default: *Agenda*), turquoise rule, and the list in the left half of the slide. The footer is kept, the sidebar is hidden on this slide.
+
 ### `\personframe[<photo>]{<name>}{<role>}{<text>}`
 Adds a slide (between frames) introducing a person, as in the *Zur Person* layout of the MUL PowerPoint master: the photo fills the left part of the slide (cropped to fit; a neutral placeholder if `<photo>` is omitted), name and role at the top right, and `<text>` below (may contain lists). The footer is kept, the sidebar is hidden on this slide.
 

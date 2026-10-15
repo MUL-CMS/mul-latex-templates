@@ -65,6 +65,7 @@
 	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
 	\def\MULsloganText{Versetz’ Berge}%
 	\def\MULthanksText{Danke für Ihre Aufmerksamkeit!}%
+	\def\MULagendaText{Agenda}%
 }%
 % class option ENlocalization
 \DeclareOption{ENlocalization}{%
@@ -73,6 +74,7 @@
 	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
 	\def\MULsloganText{Move mountains}%
 	\def\MULthanksText{Thank you for your attention!}%
+	\def\MULagendaText{Agenda}%
 }%
 %
 % class option showResults
@@ -249,6 +251,31 @@
 	\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
 	\node at (current page.center) {\includegraphics[width=\paperwidth]{\MULdarkBackground}};%
 	\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogoWhite}};%
+}%
+%
+% AGENDA FRAME
+% \agendaframe[<title>]: table of contents (sections only) as in the "Agenda" layout of
+% the PowerPoint master: large title, turquoise rule, list in the left half of the slide
+\newcommand{\agendaframe}[1][\MULagendaText]{%
+	{%
+	\setbeamertemplate{sidebar left}{}% no sidebar on this frame
+	\begin{frame}%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+			% frame logo (as in the frame titles)
+			\node[anchor=north east, shift={(-0.02\paperwidth,-0.025\paperheight)}] at (current page.north east) {\includegraphics[height=5mm]{\MULframeLogo}};%
+			% title and rule
+			\node[anchor=south west, inner sep=0pt, text width=0.44\paperwidth, align=left] at ([shift={(0.07\paperwidth,0.64\paperheight)}]current page.south west) {%
+				\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}#1\par%
+			};%
+			\draw[digital_Turquoise, line width=1.5pt] ([shift={(0.07\paperwidth,0.61\paperheight)}]current page.south west) -- ++(0.39\paperwidth,0);%
+			% table of contents
+			\node[anchor=north west, inner sep=0pt, text width=0.45\paperwidth, align=left] at ([shift={(0.07\paperwidth,0.57\paperheight)}]current page.south west) {%
+				\tableofcontents[hideallsubsections]%
+			};%
+		\end{tikzpicture}%
+	\end{frame}%
+	}%
 }%
 %
 % FINAL FRAME

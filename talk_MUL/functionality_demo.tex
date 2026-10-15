@@ -9,6 +9,9 @@
 % typesetting command names in the demo, e.g. \democmd{alert} -> \alert
 \newcommand{\democmd}[1]{\texttt{\textbackslash #1}}
 %
+% agenda: table of contents in the layout of the MUL PowerPoint master
+\agendaframe
+%
 %
 \section{Basics}
 \subsection{Text and highlighting}
@@ -184,6 +187,14 @@
 	\end{itemize}
 \end{frame}
 }%
+%
+\subsection{Agenda slide}
+\begin{frame}{Agenda slide}
+	\begin{itemize}[<1->]
+		\item \democmd{agendaframe} (between frames) shows the table of contents (sections only) in the \emph{Agenda} layout of the MUL PowerPoint master, see the second slide
+		\item \democmd{agendaframe[<title>]} replaces the title \texttt{\MULagendaText}
+	\end{itemize}
+\end{frame}
 %
 \subsection{Person slide}
 \begin{frame}{Person slide}
