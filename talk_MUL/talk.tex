@@ -11,7 +11,9 @@
 \documentclass[
 	fullFootings,% footer: slogan, author: short title, conference, date, slide number
 	slideTotalNumber,% slide numbers as "current/total"
-	DElocalization,% German logo and slogan (ENlocalization for English)
+	ENlocalization,% English texts (DElocalization for German)
+	DElogo,% German MUL logo (overrides the logo of ENlocalization)
+	DEslogan,% German slogan (overrides the slogan of ENlocalization)
 	lightTitle,% light title slide (darkTitle for the dark version)
 	hideSidebar,% no sidebar (showSidebar for a sidebar with the table of contents)
 	classicFont% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
@@ -53,9 +55,8 @@
 % demonstration of the class functionality: replace by your own slides
 \input{functionality_demo}
 %
-% closing slide; here with English text, while logo and claim follow DElocalization
-% (\finalframe without [...] gives the text of the localization)
-\finalframe[Thank you for your attention!]
+% closing slide (text of the localization; \finalframe[<text>] for another text)
+\finalframe
 %
 % \lastslide: the total number of slides (option slideTotalNumber) counts only
 % up to here, i.e., the following backup slides are not included

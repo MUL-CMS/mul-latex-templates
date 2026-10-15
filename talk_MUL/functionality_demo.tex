@@ -10,7 +10,7 @@
 \newcommand{\democmd}[1]{\texttt{\textbackslash #1}}
 %
 % agenda: table of contents in the layout of the MUL PowerPoint master
-\agendaframe[Outline]
+\agendaframe
 %
 %
 \section{Overview}
@@ -39,7 +39,7 @@
 				\item[Footer] \texttt{defaultFootings}*, \texttt{fullFootings}, \texttt{lectureFootings}, \texttt{emptyFootings} (see below)
 				\item[Slide numbers] \texttt{slideSingleNumber}*, \texttt{slideTotalNumber} (current/total)
 				\item[Sidebar] \texttt{showSidebar}*, \texttt{hideSidebar}; \texttt{showothersubsections}*, \texttt{hideothersubsections}
-				\item[Language] \texttt{DElocalization}*, \texttt{ENlocalization} (logo, claim, texts)
+				\item[Language] \texttt{DElocalization}*, \texttt{ENlocalization} (logo, claim, texts); \texttt{DElogo}, \texttt{ENlogo}, \texttt{DEslogan}, \texttt{ENslogan} (logo or claim only)
 			\end{description}
 		\end{column}
 		\begin{column}{0.48\textwidth}
@@ -70,7 +70,7 @@
 		\begin{column}{0.48\textwidth}
 			\begin{description}
 				\item[Title slide] \democmd{title[<short>]}, \democmd{author[<short>]} with \democmd{aff\{<n>\}}, \democmd{institute[<unit for footer>]}, \democmd{email}, \democmd{date}, \democmd{conference} (talk) or \democmd{lecture} (lecture mode), \democmd{additionsToTitlePage}
-				\item[Settings] \democmd{setFrameLogo}, \democmd{setDarkBackground}, \democmd{setAgendaTitle}
+				\item[Settings] \democmd{setFrameLogo}, \democmd{setTitleLogo}, \democmd{setSlogan}, \democmd{setThanksText}, \democmd{setAgendaTitle}, \democmd{setDarkBackground}
 				\item[Special slides] \democmd{agendaframe}, \democmd{personframe}, \democmd{finalframe} (between frames)
 				\item[Lectures] \democmd{lectureBeamer} with \democmd{includeonlylecture} (beamer's original \democmd{lecture})
 			\end{description}

@@ -76,6 +76,19 @@
 	\def\MULthanksText{Thank you for your attention!}%
 	\def\MULagendaText{Outline}%
 }%
+% class options DElogo/ENlogo and DEslogan/ENslogan: language of the title logo or the
+% claim only, overriding the localization (declared after DE/ENlocalization, hence
+% always processed after them, independent of the order in \documentclass)
+\DeclareOption{DElogo}{%
+	\def\MULtitleLogo{graphics/logo-mul}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
+}%
+\DeclareOption{ENlogo}{%
+	\def\MULtitleLogo{graphics/logo-mul-en}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
+}%
+\DeclareOption{DEslogan}{\def\MULsloganText{Versetz’ Berge}}%
+\DeclareOption{ENslogan}{\def\MULsloganText{Move mountains}}%
 %
 % class option showResults
 \DeclareOption{showResults}{\MULShowResultstrue}%
@@ -627,6 +640,11 @@
 \def\example{\item[\alert{\Stopsign}]\textit{Example: }}%
 % user defined logo in the headings of slides
 \newcommand{\setFrameLogo}[1]{\renewcommand{\MULframeLogo}{#1}}%
+% user defined logo on the title page (and the dark slides): \setTitleLogo{<logo>}{<white logo>}
+\newcommand{\setTitleLogo}[2]{\def\MULtitleLogo{#1}\def\MULtitleLogoWhite{#2}}%
+% user defined claim (empty: no claim) and text of the closing slide
+\newcommand{\setSlogan}[1]{\def\MULsloganText{#1}}%
+\newcommand{\setThanksText}[1]{\def\MULthanksText{#1}}%
 %
 % environment for adding drawings with absolute coordinates w.r.t. to slide/text area
 \newenvironment{overdraw}{%

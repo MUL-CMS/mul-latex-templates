@@ -20,8 +20,8 @@ Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload 
 
 | File | Mode | Settings |
 | --- | --- | --- |
-| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `hideSidebar`, `\conference{}` shown on the title page and in the footer; closing slide (`\finalframe`) and a backup slide (`\lastslide`) |
-| `lecture.tex` | lecture | `lectureFootings`, `showResults`, `\lecture{}`: table of contents at each section, lecture name in the footer |
+| `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `hideSidebar`, `ENlocalization` with `DElogo` and `DEslogan`, `\conference{}` shown on the title page and in the footer; closing slide (`\finalframe`) and a backup slide (`\lastslide`) |
+| `lecture.tex` | lecture | `lectureFootings`, `showResults`, `darkTitle`, `\lecture{}`: table of contents at each section, lecture name in the footer |
 
 Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
 
@@ -65,7 +65,13 @@ Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in th
 - `ENlocalization`
   English labels and slogans.
 
-The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
+Languages can be mixed with the following options, which override the localization for the title logo or the claim only (independent of their order in `\documentclass`):
+- `DElogo`, `ENlogo`
+  German or English MUL logo on the title page and the dark slides.
+- `DEslogan`, `ENslogan`
+  German (*Versetz’ Berge*) or English (*Move mountains*) claim.
+
+E.g. `\documentclass[ENlocalization, DElogo, DEslogan]{mul-beamer}` gives English texts with the German logo and claim (as in `talk.tex`). Individual elements can also be set by `\setTitleLogo`, `\setSlogan`, `\setThanksText`, and `\setAgendaTitle`; `\setSlogan{}` removes the claim from the title page and footer.
 
 ### Title Slide
 - `lightTitle`
@@ -200,7 +206,16 @@ Example:
 ```
 
 ### `\finalframe[<text>]`
-Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`, or `\finalframe[Thank you for your attention!]` for English text with the German logo and claim (`DElocalization`), as in `talk.tex`.
+Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`; `\setThanksText{<text>}` (in the preamble) changes the default text.
+
+### `\setTitleLogo{<logo>}{<white logo>}`
+Replaces the logo on the title page (`<logo>`) and on the dark slides (`<white logo>`), e.g. `\setTitleLogo{graphics/logo-mul}{graphics/logo-mul-white}` for the German logo; see also the options `DElogo`/`ENlogo`.
+
+### `\setSlogan{<text>}`
+Replaces the claim on the title page, in the footer, and on the closing slide; `\setSlogan{}` removes it. See also the options `DEslogan`/`ENslogan`.
+
+### `\setThanksText{<text>}`
+Replaces the default text of `\finalframe`.
 
 ### `\setDarkBackground{<file>}`
 Background image of the dark slides (`\finalframe`, title slide with `darkTitle`). Two are provided: `graphics/background_dark_cms.jpg` (default, matching the CMS title page) and `graphics/background_dark.jpg` (from the official PowerPoint master).
