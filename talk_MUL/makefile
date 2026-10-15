@@ -20,7 +20,7 @@ graphics:
 	$(MAKE) MAIN="$(MAIN)" -C graphics
 
 clean:
-	rm -f *.nav *.snm
+	rm -f *.nav *.snm *.vrb
 	latexmk -c $(MAIN:=.tex)
 	$(MAKE) -C figs $@
 	$(MAKE) -C graphics $@
