@@ -13,8 +13,10 @@
 	lectureFootings,% footer: slogan, lecture name, slide number
 	slideSingleNumber,% slide numbers as "current" only
 	DElocalization,% German logo and slogan (ENlocalization for English)
+	darkTitle,% dark title slide (lightTitle for the light version)
 	showSidebar,% sidebar with table of contents (hideSidebar to remove it)
-	showResults% show content of \showResults{...} (hideResults for handouts)
+	showResults,% show content of \showResults{...} (hideResults for handouts, e.g. with trans)
+	classicFont,% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
 ]{mul-beamer}
 %
 % +-------------------------------+
@@ -28,9 +30,14 @@
 % [short organisational unit]{full affiliation}
 \institute[Department of Materials Science]{Department of Materials Science, Montanuniversität Leoben, Austria}
 \email{name.surname@unileoben.ac.at}
+% optional: website and QR code on the closing slide (\finalframe), see talk.tex
+% \website[https://www.unileoben.ac.at/...]{www.unileoben.ac.at/...}
+% \setQRcode[<caption>]{graphics/qr/<file>}
 % lecture name shown in the footer (lectureFootings); switches on the lecture mode
 \lecture{Name of the Course}
 \date{Winter term 2026/27}
+% optional: title of the agenda slide (\agendaframe), default Inhalt/Outline by localization
+% \setAgendaTitle{Agenda}
 %
 % optional: several lectures in one file (beamer's original \lecture, see README.md);
 % start each lecture in the document with \lectureBeamer[<short>]{<title>}{<label>}
@@ -47,6 +54,9 @@
 \end{frame}
 %
 % demonstration of the class functionality: replace by your own slides
-\input{functionality_demo}
+\input{demo_functionality}
+%
+% detailed documentation of the class: remove when writing your own slides
+\input{demo_documentation}
 %
 \end{document}

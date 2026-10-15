@@ -19,6 +19,19 @@ TODO:
 
  \titleframe
      - Manually creates a title frame (e.g., for a second intro slide).
+     - Partly covered: the class options lightTitle/darkTitle select the
+       light or dark title slide (v3.10-2026).
 
- \finalframe
-     - Displays a "Thank you" or "Questions?" slide depending on language setting.
+ website on the title slide
+     - The PowerPoint master shows "UNILEOBEN.AC.AT" at the bottom left of the
+       title slide; \website{} is currently used on the closing slide only.
+
+DONE:
+
+ \finalframe (v3.10-2026)
+     - Closing slide in the dark style of the PowerPoint master
+       ("Danke für Ihre Aufmerksamkeit!"/"Thank you for your attention!"),
+       see README.md.
+
+ \agendaframe, \personframe (v3.10-2026)
+     - Layouts "Agenda" and "Zur Person" of the PowerPoint master.

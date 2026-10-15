@@ -11,8 +11,12 @@
 \documentclass[
 	fullFootings,% footer: slogan, author: short title, conference, date, slide number
 	slideTotalNumber,% slide numbers as "current/total"
-	DElocalization,% German logo and slogan (ENlocalization for English)
-	showSidebar% sidebar with table of contents (hideSidebar to remove it)
+	ENlocalization,% English texts (DElocalization for German)
+	DElogo,% German MUL logo (overrides the logo of ENlocalization)
+	DEslogan,% German slogan (overrides the slogan of ENlocalization)
+	lightTitle,% light title slide (darkTitle for the dark version)
+	hideSidebar,% no sidebar (showSidebar for a sidebar with the table of contents)
+	classicFont% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
 ]{mul-beamer}
 \hypersetup{pdfpagemode=FullScreen}% open the PDF in full-screen mode
 %
@@ -29,8 +33,15 @@
 	\aff{1}Department of Materials Science, Montanuniversität Leoben, Austria\\
 	\aff{2}Name of the second institution, City, Country}
 \email{name.surname@unileoben.ac.at}
+% website on the closing slide (default unileoben.ac.at), e.g. of the group:
+% \website[https://www.unileoben.ac.at/...]{www.unileoben.ac.at/...}
+% QR code on the closing slide, e.g. linking to the group website or a paper
+% (static QR codes can be created at https://www.tu-chemnitz.de/urz/apps/qrcode/index.html.en; see README.md)
+\setQRcode[unileoben.ac.at]{graphics/qr/qrcode_unileoben.png}
 \conference{Name of the Conference}
 \date{1 January 2026}
+% optional: title of the agenda slide (\agendaframe), default Inhalt/Outline by localization
+% \setAgendaTitle{Agenda}
 %
 % optional: partner logo(s) etc. on the title page (TikZ nodes)
 \additionsToTitlePage{%
@@ -47,6 +58,24 @@
 \end{frame}
 %
 % demonstration of the class functionality: replace by your own slides
-\input{functionality_demo}
+\input{demo_functionality}
+%
+% closing slide (text of the localization; \finalframe[<text>] for another text)
+\finalframe
+%
+% \lastslide: the total number of slides (option slideTotalNumber) counts only
+% up to here, i.e., the following backup slides are not included
+\lastslide
+%
+\section*{Backup}
+\begin{frame}{Backup slide}
+	\begin{itemize}
+		\item slides after \texttt{\textbackslash lastslide} are not counted in the total number of slides
+		\item useful for backup slides
+	\end{itemize}
+\end{frame}
+%
+% detailed documentation of the class as backup slides: remove when writing your own slides
+\input{demo_documentation}
 %
 \end{document}

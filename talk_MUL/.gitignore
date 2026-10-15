@@ -1,0 +1,12 @@
+# LaTeX auxiliary files (latexmk / XeLaTeX / beamer)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.xdv
+*.synctex.gz

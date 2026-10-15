@@ -1,0 +1,300 @@
+% ====================================================================
+%  Demonstration of the functionality of the 'mul-beamer' class
+%
+%  This file is included by talk.tex and lecture.tex via
+%    \input{demo_functionality}
+%  (the detailed documentation is in demo_documentation.tex)
+%  Remove that line (and this file) when starting your own presentation.
+% ====================================================================
+%
+% typesetting command names in the demo, e.g. \democmd{alert} -> \alert
+\newcommand{\democmd}[1]{\texttt{\textbackslash #1}}
+%
+% agenda: table of contents in the layout of the MUL PowerPoint master
+\agendaframe
+%
+%
+\section{Overview}
+\subsection{Class options}
+% sketch of a footer style (scaled to half the text width): \demofooter{<option>}{<middle text>}{<slide number>};
+% an empty <middle text> gives the footer without slogan (emptyFootings)
+\newcommand{\demofooter}[3]{%
+	\resizebox{0.48\textwidth}{!}{%
+	\begin{tikzpicture}[x=1mm, y=1mm, every node/.style={inner sep=0pt, text=white, font=\fontsize{3.5}{4}\selectfont}]%
+		\fill[digital_Turquoise] (0,0) rectangle (62,3.2);%
+		\fill[digital_Turquoise] (0,1) -- (5,1) -- (0,6) -- cycle;%
+		\ifblank{#2}{}{%
+			\node[anchor=west] at (7,1.6) {\funneldisplay\bfseries\MULsloganText};%
+			\node at (36,1.6) {#2};%
+		}%
+		\node[anchor=east] at (60,1.6) {#3};%
+		\node[anchor=south west, text=digital_GraphiteBlack, font=\tiny\ttfamily] at (7,4) {#1};%
+	\end{tikzpicture}}%
+}%
+\begin{frame}{Class options}
+	\beamerdefaultoverlayspecification{}% all items at once
+	\scriptsize
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Footer] \texttt{defaultFootings}*, \texttt{fullFootings}, \texttt{lectureFootings}, \texttt{emptyFootings} (see below)
+				\item[Slide numbers] \texttt{slideSingleNumber}*, \texttt{slideTotalNumber} (current/total)
+				\item[Sidebar] \texttt{showSidebar}*, \texttt{hideSidebar}; \texttt{showothersubsections}*, \texttt{hideothersubsections}
+				\item[Language] \texttt{DElocalization}*, \texttt{ENlocalization} (logo, claim, texts); \texttt{DElogo}, \texttt{ENlogo}, \texttt{DEslogan}, \texttt{ENslogan} (logo or claim only)
+			\end{description}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Title slide] \texttt{lightTitle}*, \texttt{darkTitle}
+				\item[Text font] \texttt{classicFont}* (Latin Modern Sans), \texttt{brandFont} (Host Grotesk)
+				\item[Results] \texttt{showResults}*, \texttt{hideResults} (\democmd{showResults})
+				\item[beamer] all other options are passed to beamer, e.g.\ \texttt{trans}, \texttt{handout}; the aspect ratio is always 16:9
+			\end{description}
+		\end{column}
+	\end{columns}
+	\medskip
+	* default
+	\vfill
+	\demofooter{defaultFootings}{F.~Author \textit{et al.} \textbar{} Department of Materials Science}{5}\hfill
+	\demofooter{fullFootings}{F.~Author: Short title \quad Name of the Conference \quad 1 January 2026}{5/9}\par\medskip
+	\demofooter{lectureFootings}{Name of the Course}{5}\hfill
+	\demofooter{emptyFootings}{}{5}\par
+	\smallskip
+	{\tiny with \texttt{fullFootings} in lecture mode, the conference is replaced by the current section/subsection, e.g.\ \emph{1.2 Subsection}}
+\end{frame}
+%
+\subsection{Commands}
+\begin{frame}{Commands}
+	\beamerdefaultoverlayspecification{}% all items at once
+	\scriptsize
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Title slide] \democmd{title[<short>]}, \democmd{author[<short>]} with \democmd{aff\{<n>\}}, \democmd{institute[<unit for footer>]}, \democmd{email}, \democmd{date}, \democmd{conference} (talk) or \democmd{lecture} (lecture mode), \democmd{additionsToTitlePage}
+				\item[Settings] \democmd{setFrameLogo}, \democmd{setTitleLogo}, \democmd{setSlogan}, \democmd{setThanksText}, \democmd{setAgendaTitle}, \democmd{setDarkBackground}, \democmd{website}, \democmd{setQRcode}
+				\item[Special slides] \democmd{agendaframe}, \democmd{personframe}, \democmd{finalframe} (between frames)
+				\item[Lectures] \democmd{lectureBeamer} with \democmd{includeonlylecture} (beamer's original \democmd{lecture})
+			\end{description}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{description}
+				\item[Content] \democmd{alert}, \democmd{Alert}, \democmd{example}, \democmd{funneldisplay}, \democmd{showResults}, colours \texttt{digital\_\dots}
+				\item[Between frames] \democmd{literature}, \democmd{lastslide}
+				\item[Placing] \texttt{overdraw} environment, \democmd{framegrid}
+			\end{description}
+		\end{column}
+	\end{columns}
+	\medskip
+	All of them are described in \texttt{README.md} and in the backup slides at the end (\texttt{demo\_documentation.tex}); the following slides demonstrate them.
+\end{frame}
+%
+%
+\section{Basics}
+\subsection{Text and highlighting}
+\begin{frame}{Text and highlighting}
+	\begin{itemize}[<1->]% all items at once (see "Lists and overlays")
+		\item \alert{important content} is highlighted with \democmd{alert\{\dots\}}
+		\item \Alert{less important content} is highlighted with \democmd{Alert\{\dots\}}
+		\item {\funneldisplay The MUL display font} (Funnel Display) is switched on with \democmd{funneldisplay}; it is used for the frame titles
+		\item the text is set in Latin Modern Sans; class option \texttt{brandFont} switches to Host Grotesk, the MUL text font
+		\item mathematics works as usual: $a^2 + b^2 = \Alert{c^2}$, \quad $\sin\alpha = \frac{b}{c}$
+	\end{itemize}
+\end{frame}
+%
+\subsection{Blocks and columns}
+\begin{frame}{Blocks and columns}
+	\begin{columns}[T]
+		\begin{column}{0.48\textwidth}
+			\begin{block}{A block}
+				Standard beamer \texttt{block} in the MUL colours.
+			\end{block}
+			\begin{alertblock}{An alert block}
+				For warnings and important statements.
+			\end{alertblock}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{exampleblock}{An example block}
+				For examples.
+			\end{exampleblock}
+			\begin{block}{}
+				A block without title.
+			\end{block}
+		\end{column}
+	\end{columns}
+\end{frame}
+%
+\subsection{Colours}
+% colour swatch with its name, e.g. \democolour{digital_Turquoise}{white}
+\newcommand{\democolour}[2]{%
+	\tikz[baseline=-0.6ex]\node[fill=#1, text=#2, font=\tiny\ttfamily, minimum width=26mm, minimum height=5mm, inner sep=1pt] {\detokenize{#1}};}
+\begin{frame}{Colours}
+	The brand colours are defined with the names of the MUL style guide (also used by the poster template):
+	\medskip
+	\begin{columns}[T]
+		\begin{column}{0.32\textwidth}
+			\textbf{primary}\par\smallskip
+			\democolour{digital_Turquoise}{white}\par
+			\democolour{digital_GraphiteBlack}{white}\par
+			\democolour{digital_LightGreen}{digital_GraphiteBlack}\par
+			\democolour{digital_TechGreen}{digital_GraphiteBlack}\par
+			\democolour{digital_White}{digital_GraphiteBlack}
+		\end{column}
+		\begin{column}{0.32\textwidth}
+			\textbf{combination} (with a primary colour)\par\smallskip
+			\democolour{digital_BTLight}{white}\par
+			\democolour{digital_BTDark}{white}\par
+			\democolour{digital_TGLight}{white}\par
+			\democolour{digital_TGDark}{white}\par
+			\democolour{digital_GWLight}{digital_GraphiteBlack}\par
+			\democolour{digital_GWDark}{digital_GraphiteBlack}
+		\end{column}
+		\begin{column}{0.32\textwidth}
+			\textbf{secondary} (study areas only)\par\smallskip
+			\democolour{digital_Violet}{white}\par
+			\democolour{digital_Orange}{white}\par
+			\democolour{digital_Blue}{white}
+		\end{column}
+	\end{columns}
+	\medskip
+	Use them as usual, e.g.\ \texttt{\textbackslash textcolor\{digital\_Turquoise\}\{\dots\}}.
+\end{frame}
+%
+%
+\section{Lists and overlays}
+\subsection{Lists}
+\begin{frame}{Lists}
+	By default, list items are uncovered one by one (\texttt{<+->} is the class default):
+	\begin{itemize}
+		\item first level items have squares
+		\begin{itemize}
+			\item lower levels have dashes
+		\end{itemize}
+		\example examples are marked with \democmd{example} instead of \democmd{item}
+		\item last item
+	\end{itemize}
+	\bigskip
+	Use \texttt{\textbackslash begin\{itemize\}[<1->]} to show all items at once:
+	\begin{itemize}[<1->]
+		\item all
+		\item at
+		\item once
+	\end{itemize}
+\end{frame}
+%
+\subsection{Overlays}
+\begin{frame}{Overlays}
+	\begin{itemize}[<1->]
+		\item \democmd{only<2>\{\dots\}}: content exists on slide 2 only (takes no space otherwise)
+		\item \democmd{uncover<3->\{\dots\}}: space for the content is always reserved, the content is shown from slide 3 on
+	\end{itemize}
+	\bigskip
+	\only<2>{\Alert{This text is shown with \democmd{only<2>}.}}
+	\uncover<3->{\alert{This text is shown with \democmd{uncover<3->}.}}
+\end{frame}
+%
+%
+\section{Figures}
+\subsection{Figures and literature}
+\literature{%
+	A. Author, B. Author, and C. Author, {\em J. Example Sci.} {\bf 1}, 1 (2026)\\
+	D. Author and E. Author, {\em Example Lett.} {\bf 2}, 100 (2025)}
+\begin{frame}{Figures and literature}
+	\begin{columns}[T]
+		\begin{column}{0.55\textwidth}
+			\centering
+			\input{figs/demo_plot}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\centering
+			\input{figs/demo_lattice}
+		\end{column}
+	\end{columns}
+	\bigskip
+	\begin{itemize}[<1->]
+		\item figures are kept in the folder \texttt{figs}, graphics (logos, background) in \texttt{graphics}
+		\item images are included with \texttt{\textbackslash includegraphics\{figs/\dots\}}; these demo figures are TikZ drawings included with \texttt{\textbackslash input}
+		\item \democmd{literature\{\dots\}} (outside a frame) prints references above the footer of this and all following slides; clear it with \democmd{literature\{\}}
+	\end{itemize}
+\end{frame}
+\literature{}
+%
+\subsection{Placing objects}
+\begin{frame}{Placing objects with \texttt{overdraw}}
+	\begin{itemize}[<1->]
+		\item the \texttt{overdraw} environment is a TikZ picture with absolute coordinates: one unit is 1/16 of the slide width, the origin is the bottom-left corner of the slide (right of the sidebar, if shown)
+		\item \democmd{framegrid} inside \texttt{overdraw} draws the coordinate grid for finding positions -- remove it in the final version
+		\item steps: grid (slide 2), grid with label and arrow placed with \texttt{overdraw} (slide 3), final result (slide 4)
+	\end{itemize}
+	\onslide<2-3>
+	\begin{overdraw}
+		\framegrid
+	\end{overdraw}
+	\onslide<3-4>
+	\begin{overdraw}
+		\node[draw=digital_Turquoise, very thick, rounded corners, fill=white, font=\small] (label) at (9,3) {placed at (9,3)};
+		\draw[->, very thick, digital_Turquoise] (label) -- (5,4.5);
+	\end{overdraw}
+\end{frame}
+%
+%
+\section{More tools}
+\subsection{Hidden results}
+\begin{frame}{Hidden results}
+	\begin{itemize}[<1->]
+		\item \democmd{showResults\{\dots\}} shows its content with the class option \texttt{showResults} (default), and leaves an empty space of the same size with \texttt{hideResults}
+		\item independent of the beamer mode: in the presentation (default) as well as with the beamer class options \texttt{trans} or \texttt{handout} (one page per frame, without overlays, e.g.\ for printing), only \texttt{showResults}/\texttt{hideResults} decide
+		\item handouts of exercises without results: \texttt{\textbackslash documentclass[trans, hideResults]\{mul-beamer\}}
+	\end{itemize}
+	\bigskip
+	\begin{block}{Exercise}
+		Solve $x^2 - 5x + 6 = 0$.\par\medskip
+		Result: \showResults{$x_1 = 2$, \quad $x_2 = 3$}
+	\end{block}
+\end{frame}
+%
+\subsection{Frame logo}
+% \setFrameLogo inside a group {...} changes the logo for the enclosed frames only;
+% outside a group (or in the preamble) it changes it for all following frames
+{%
+\setFrameLogo{graphics/logo-dms.pdf}
+\begin{frame}{Frame logo}
+	\begin{itemize}[<1->]
+		\item the logo in the top-right corner can be changed with \democmd{setFrameLogo\{graphics/\dots\}}
+		\item here: the logo of the Department of Materials Science
+	\end{itemize}
+\end{frame}
+}%
+%
+\subsection{Agenda slide}
+\begin{frame}{Agenda slide}
+	\begin{itemize}[<1->]
+		\item \democmd{agendaframe} (between frames) shows the table of contents (sections only) in the \emph{Agenda} layout of the MUL PowerPoint master, see the second slide
+		\item \democmd{agendaframe[<title>]} replaces the title (default: \emph{\MULagendaText}); \democmd{setAgendaTitle\{<title>\}} (in the preamble) changes the default
+	\end{itemize}
+\end{frame}
+%
+\subsection{Person slide}
+\begin{frame}{Person slide}
+	\begin{itemize}[<1->]
+		\item \democmd{personframe[<photo>]\{<name>\}\{<role>\}\{<text>\}} (between frames) introduces a person, as in the \emph{Zur Person} layout of the MUL PowerPoint master
+		\item the photo fills the left part of the slide (cropped as needed); without \texttt{<photo>}, a placeholder is shown (next slide)
+		\item \texttt{<text>} can contain lists, e.g.\ a short CV
+	\end{itemize}
+\end{frame}
+%
+\personframe{Name Surname}{Function, Department of Materials Science}{%
+	\begin{itemize}[<1->]
+		\item since 2020: current position
+		\item 2015--2020: previous position
+		\item research interests: topic A, topic B
+	\end{itemize}}
+%
+\subsection{Closing slide}
+\begin{frame}{Closing slide}
+	\begin{itemize}[<1->]
+		\item \democmd{finalframe} (between frames) adds a closing slide in the dark style of the MUL slides -- see the end of \texttt{talk.tex}: ``Thank you for your attention!'' (localised), for talks the title and the authors, the e-mail address (\democmd{email}), the website (\democmd{website}, default unileoben.ac.at), an optional QR code (\democmd{setQRcode}), and the claim and author line in the footer
+		\item \democmd{finalframe[\dots]} replaces the text, e.g.\ \texttt{\textbackslash finalframe[Questions?]}
+		\item \democmd{setDarkBackground\{graphics/background\_dark.jpg\}} (in the preamble) uses the background of the official PowerPoint master instead of the CMS variant
+		\item the class option \texttt{darkTitle} gives a title slide in the same dark style
+	\end{itemize}
+\end{frame}

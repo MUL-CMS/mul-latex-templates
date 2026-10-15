@@ -1,7 +1,7 @@
 % Author: David Holec, david.holec@unileoben.ac.at
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{mul-beamer}[2026/10/13 v3.03 Beamer with a MUL/DMS layout]%
+\ProvidesClass{mul-beamer}[2026/10/15 v3.10 Beamer with a MUL/DMS layout]%
 %
 %
 % +---------------------------+
@@ -19,6 +19,12 @@
 \def\MUL@footings@empty{empty}
 \def\MUL@footings@default{default}
 \def\MUL@footings@lecture{lecture}
+% MULDarkTitle: true for the dark version of the title page
+\newif\ifMULDarkTitle
+\MULDarkTitlefalse
+% MULBrandFont: true if Host Grotesk (MUL brand font) is used as text font
+\newif\ifMULBrandFont
+\MULBrandFontfalse
 % MULLecture: true if the presentation is a lecture (adding ToC at the beginning of sections)
 \newif\ifMULLecture
 \MULLecturefalse
@@ -56,24 +62,53 @@
 \DeclareOption{DElocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
 	\def\MULsloganText{Versetz’ Berge}%
+	\def\MULthanksText{Danke für Ihre Aufmerksamkeit!}%
+	\def\MULagendaText{Inhalt}%
 }%
 % class option ENlocalization
 \DeclareOption{ENlocalization}{%
 	\def\MULframeLogo{graphics/logo-mul_M}%
 	\def\MULtitleLogo{graphics/logo-mul-en}%
-	\def\MULsloganText{Move Mountains}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
+	\def\MULsloganText{Move mountains}%
+	\def\MULthanksText{Thank you for your attention!}%
+	\def\MULagendaText{Outline}%
 }%
+% class options DElogo/ENlogo and DEslogan/ENslogan: language of the title logo or the
+% claim only, overriding the localization (declared after DE/ENlocalization, hence
+% always processed after them, independent of the order in \documentclass)
+\DeclareOption{DElogo}{%
+	\def\MULtitleLogo{graphics/logo-mul}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-white}%
+}%
+\DeclareOption{ENlogo}{%
+	\def\MULtitleLogo{graphics/logo-mul-en}%
+	\def\MULtitleLogoWhite{graphics/logo-mul-en-white}%
+}%
+\DeclareOption{DEslogan}{\def\MULsloganText{Versetz’ Berge}}%
+\DeclareOption{ENslogan}{\def\MULsloganText{Move mountains}}%
 %
 % class option showResults
 \DeclareOption{showResults}{\MULShowResultstrue}%
+% class option lightTitle: light title page (light background, turquoise title)
+\DeclareOption{lightTitle}{\MULDarkTitlefalse}%
+% class option darkTitle: dark title page (dark background, white logo and text)
+\DeclareOption{darkTitle}{\MULDarkTitletrue}%
+%
+% class option brandFont: Host Grotesk as text font (MUL brand font)
+\DeclareOption{brandFont}{\MULBrandFonttrue}%
+% class option classicFont: Latin Modern Sans as text font (beamer default; class default)
+\DeclareOption{classicFont}{\MULBrandFontfalse}%
+%
 % class option hideResults
 \DeclareOption{hideResults}{\MULShowResultsfalse}%
 %
 % pass all other options to beamer
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}%
 % default behavior
-\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults}%
+\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults, classicFont, lightTitle}%
 \ProcessOptions%
 % other general options for the beamer class
 \PassOptionsToClass{%
@@ -220,6 +255,144 @@
 }%
 %
 %
+% DARK SLIDES (final frame, dark title page)
+% background image: turquoise with a multiplied black-and-white photo (style guide)
+\def\MULdarkBackground{graphics/background_dark_cms.jpg}%
+\newcommand{\setDarkBackground}[1]{\def\MULdarkBackground{#1}}%
+% background and white logo of the dark slides (inside a tikzpicture with remember picture)
+\newcommand{\MUL@darkbackground}{%
+	\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+	\node at (current page.center) {\includegraphics[width=\paperwidth]{\MULdarkBackground}};%
+	\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogoWhite}};%
+}%
+%
+% AGENDA FRAME
+% \agendaframe[<title>]: table of contents (sections only) as in the "Agenda" layout of
+% the PowerPoint master: large title, turquoise rule, list in the left half of the slide;
+% default title "Inhalt"/"Outline" (localised), changed by \setAgendaTitle{<title>}
+\newcommand{\setAgendaTitle}[1]{\def\MULagendaText{#1}}%
+\newcommand{\agendaframe}[1][\MULagendaText]{%
+	{%
+	\setbeamertemplate{sidebar left}{}% no sidebar on this frame
+	\begin{frame}%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+			% frame logo (as in the frame titles)
+			\node[anchor=north east, shift={(-0.02\paperwidth,-0.025\paperheight)}] at (current page.north east) {\includegraphics[height=5mm]{\MULframeLogo}};%
+			% title and rule
+			\node[anchor=south west, inner sep=0pt, text width=0.44\paperwidth, align=left] at ([shift={(0.07\paperwidth,0.64\paperheight)}]current page.south west) {%
+				\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}#1\par%
+			};%
+			\draw[digital_Turquoise, line width=1.5pt] ([shift={(0.07\paperwidth,0.61\paperheight)}]current page.south west) -- ++(0.39\paperwidth,0);%
+			% table of contents
+			\node[anchor=north west, inner sep=0pt, text width=0.45\paperwidth, align=left] at ([shift={(0.07\paperwidth,0.57\paperheight)}]current page.south west) {%
+				\tableofcontents[hideallsubsections]%
+			};%
+		\end{tikzpicture}%
+	\end{frame}%
+	}%
+}%
+%
+% FINAL FRAME
+% website shown on the closing slide: \website[<url>]{<text>}, default unileoben.ac.at
+% (<url> defaults to https://<text>; \website{} removes it)
+\def\MULwebsite{unileoben.ac.at}%
+\def\MULwebsiteURL{https://www.unileoben.ac.at}%
+\newcommand{\website}[2][]{%
+	\def\MULwebsite{#2}%
+	\ifblank{#1}{\def\MULwebsiteURL{https://#2}}{\def\MULwebsiteURL{#1}}%
+}%
+% optional QR code on the closing slide: \setQRcode[<caption>]{<image file>}
+\def\MULqrfile{}%
+\def\MULqrcaption{}%
+\newcommand{\setQRcode}[2][]{\def\MULqrcaption{#1}\def\MULqrfile{#2}}%
+% \finalframe[<text>]: closing slide in the dark style of the PowerPoint master:
+% <text> (default "Thank you for your attention!", localised); for talks (not in
+% lecture mode) the title and the authors (without affiliations); the e-mail address
+% and the website; the QR code (\setQRcode); a white footer band with the claim and
+% the author line (short author | organisational unit, as in defaultFootings)
+\newcommand{\finalframe}[1][\MULthanksText]{%
+	\begin{frame}[plain]%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\MUL@darkbackground%
+			% text
+			\node[anchor=north west, inner sep=0pt, text width=0.75\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.78\paperheight)}]current page.south west) {%
+				\usebeamerfont{MULfinal}\color{white}\hyphenpenalty=10000\exhyphenpenalty=10000 #1\par% no hyphenation
+			};%
+			% title and authors (talks only), e-mail address and website
+			\node[anchor=south west, inner sep=0pt, text width=0.58\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.10\paperheight)}]current page.south west) {%
+				\color{white}%
+				\ifMULLecture\else%
+					{\usebeamerfont{MULfinal title}\inserttitle\par}\smallskip%
+					{\usebeamerfont{MULfinal info}\let\aff\@gobble\insertauthor\par}\medskip%
+				\fi%
+				{\usebeamerfont{MULfinal info}%
+					\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par}%
+					\ifdefempty{\MULwebsite}{}{\href{\MULwebsiteURL}{\MULwebsite}\par}%
+				}%
+			};%
+			% QR code on a white background (quiet zone), with caption
+			\ifdefempty{\MULqrfile}{}{%
+				\node[anchor=south east, fill=white, rounded corners=1mm, inner sep=1.5mm] (MUL@qr) at ([shift={(0.932\paperwidth,0.10\paperheight)}]current page.south west) {\includegraphics[height=0.24\paperheight]{\MULqrfile}};%
+				\ifdefempty{\MULqrcaption}{}{%
+					\node[anchor=south, inner sep=0pt, yshift=1.5mm, text width=0.3\paperwidth, align=center] at (MUL@qr.north) {\usebeamerfont{MULfinal info}\color{white}\MULqrcaption};%
+				}%
+			}%
+			% white footer band (as the footer of the frames) with the claim and the author line
+			\fill[white] (current page.south west) rectangle ([shift={(\paperwidth,0.053\paperheight)}]current page.south west);%
+			\fill[white] ([shift={(0,0.018\paperheight)}]current page.south west) -- ++(0.09\paperheight,0) -- ++(-0.09\paperheight,0.09\paperheight) -- cycle;%
+			\node[anchor=base west, inner sep=0pt] at ([shift={(0.068\paperwidth,0.018\paperheight)}]current page.south west) {\usebeamerfont{MULslogan in foot}\color{digital_Turquoise}\MULsloganText};%
+			\node[anchor=base east, inner sep=0pt] at ([shift={(0.95\paperwidth,0.018\paperheight)}]current page.south west) {\usebeamerfont{foot}\color{digital_Turquoise}\beamer@shortauthor\ifdefempty{\shortinstitute}{}{{} | \shortinstitute}};%
+		\end{tikzpicture}%
+	\end{frame}%
+}%
+%
+% PERSON FRAME
+% \personframe[<photo>]{<name>}{<role>}{<text>}: introduction of a person as in the
+% "Zur Person" layout of the PowerPoint master; photo on the left (cropped to fill
+% the area; a placeholder without <photo>), name, role, and text on the right
+\newsavebox{\MUL@photobox}%
+\newcommand{\personframe}[4][]{%
+	{%
+	\setbeamertemplate{sidebar left}{}% no sidebar on this frame
+	\begin{frame}%
+		\begin{tikzpicture}[overlay, remember picture]%
+			\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+			% photo area: left 37% of the slide, from the top down to the footer
+			\begin{scope}%
+				\clip (current page.north west) rectangle ([shift={(0.37\paperwidth,0.053\paperheight)}]current page.south west);%
+				\ifblank{#1}{%
+					% placeholder: silhouette on GW Light
+					\fill[digital_GWLight] (current page.north west) rectangle ([shift={(0.37\paperwidth,0.053\paperheight)}]current page.south west);%
+					\fill[digital_GWDark] ([shift={(0.185\paperwidth,0.62\paperheight)}]current page.south west) circle (0.12\paperheight);%
+					\fill[digital_GWDark] ([shift={(0.185\paperwidth,0.053\paperheight)}]current page.south west) ellipse [x radius=0.14\paperwidth, y radius=0.42\paperheight];%
+				}{%
+					% photo scaled to cover the area (by height for wide, by width for tall photos)
+					\sbox{\MUL@photobox}{\includegraphics[width=10cm]{#1}}%
+					\pgfmathtruncatemacro{\MUL@photowide}{(\wd\MUL@photobox/\ht\MUL@photobox) > (0.37*\paperwidth/(0.947*\paperheight)) ? 1 : 0}%
+					\node at ([shift={(0.185\paperwidth,0.5265\paperheight)}]current page.south west) {%
+						\ifnum\MUL@photowide=1 \includegraphics[height=0.947\paperheight]{#1}%
+						\else\includegraphics[width=0.37\paperwidth]{#1}\fi%
+					};%
+				}%
+			\end{scope}%
+			% frame logo (as in the frame titles)
+			\node[anchor=north east, shift={(-0.02\paperwidth,-0.025\paperheight)}] at (current page.north east) {\includegraphics[height=5mm]{\MULframeLogo}};%
+			% name and role
+			\node[anchor=north west, inner sep=0pt, text width=0.52\paperwidth, align=left] at ([shift={(0.41\paperwidth,-0.12\paperheight)}]current page.north west) {%
+				{\usebeamerfont{MULperson name}\color{digital_Turquoise}#2\par}%
+				\smallskip%
+				{\usebeamerfont{MULperson role}\color{digital_GraphiteBlack}#3\par}%
+			};%
+			% text
+			\node[anchor=north west, inner sep=0pt, text width=0.52\paperwidth, align=left] at ([shift={(0.41\paperwidth,-0.38\paperheight)}]current page.north west) {%
+				\usebeamercolor[fg]{normal text}#4%
+			};%
+		\end{tikzpicture}%
+	\end{frame}%
+	}%
+}%
+%
 % TITLE PAGE
 % additional graphics and other elements to be included on the title page
 \def\MULtitleAdditions{}%
@@ -228,22 +401,36 @@
 \setbeamertemplate{title page}{%
 	\begin{tikzpicture}[overlay, remember picture]%
 		\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+		% light or dark version (class options lightTitle/darkTitle)
+		\ifMULDarkTitle%
+			\def\MUL@titlebackground{\MULdarkBackground}%
+			\def\MUL@titlelogo{\MULtitleLogoWhite}%
+			\def\MUL@titlecolor{\color{white}}%
+			\colorlet{MUL@addresscolor}{white}%
+			\colorlet{MUL@slogancolor}{MULsloganDarkColor}%
+		\else%
+			\def\MUL@titlebackground{graphics/background_title_cms.jpg}%
+			\def\MUL@titlelogo{\MULtitleLogo}%
+			\def\MUL@titlecolor{\usebeamercolor{title}\color{fg}}%
+			\colorlet{MUL@addresscolor}{MULaddress}%
+			\colorlet{MUL@slogancolor}{MULsloganTitleColor}%
+		\fi%
 		% background, logo and slogan
-		\node at (current page.center) {\includegraphics[width=\paperwidth]{graphics/background_title_cms.jpg}};%
-		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogo}};%
+		\node at (current page.center) {\includegraphics[width=\paperwidth]{\MUL@titlebackground}};%
+		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MUL@titlelogo}};%
 		\ifdefempty{\MULsloganText}{}{%
-			\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MULsloganTitleColor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
+			\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MUL@slogancolor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
 		}%
 		% title
 		\node[anchor=south, shift={(0,0.02\paperwidth)}] at (current page.center) {\parbox{0.9\paperwidth}{%
 			\centering%
-			\usebeamerfont{title}{\usebeamercolor{title}\color{fg}\bfseries\funneldisplay\inserttitle}%
+			\usebeamerfont{title}{\MUL@titlecolor\bfseries\funneldisplay\inserttitle}%
 		}};%
 		% affiliations, email, conference name, date
 		\node[anchor=north, shift={(0,0\paperwidth)}] at (current page.center) {\parbox{0.9\paperwidth}{%
 			\centering%
-			\usebeamerfont{author}{\color{MULaddress}\insertauthor}\par\medskip%
-			\usebeamerfont{institute}{\color{MULaddress}
+			\usebeamerfont{author}{\color{MUL@addresscolor}\insertauthor}\par\medskip%
+			\usebeamerfont{institute}{\color{MUL@addresscolor}
 				\insertinstitute\par\smallskip
 				\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
 				% conference name only (in lecture mode it holds section names)
@@ -261,31 +448,60 @@
 % | COLORS |
 % +--------+
 %
-\usecolortheme[RGB={0, 115, 126}]{structure}%
-\definecolor{MULgreen}{RGB}{0, 115, 126}%
-\definecolor{MULturquoise}{RGB}{0, 255, 254}%
-\definecolor{MULaddress}{RGB}{58, 57, 56}%
+% MUL brand colours (Brandbook 2026, digital/RGB values; same names as in MUL_poster.cls)
+% primary colours
+\definecolor{digital_Turquoise}{RGB}{0,114,125}% #00727d
+\definecolor{digital_GraphiteBlack}{RGB}{28,38,41}% #1c2629
+\definecolor{digital_White}{RGB}{255,255,255}% #ffffff
+\definecolor{digital_LightGreen}{RGB}{136,205,211}% #88cdd3
+\definecolor{digital_TechGreen}{RGB}{0,255,255}% #00ffff, digital only
+% secondary colours (reserved for the study areas Rohstoffe/Werkstoffe/Prozesse)
+\definecolor{digital_Violet}{RGB}{149,75,151}% #954b97
+\definecolor{digital_Orange}{RGB}{237,106,91}% #ed6a5b
+\definecolor{digital_Blue}{RGB}{88,165,219}% #58a5db
+% combination colours ("Kombifarben"; always use together with a primary colour)
+\definecolor{digital_BTLight}{RGB}{14,76,83}% #0e4c53
+\definecolor{digital_BTDark}{RGB}{21,57,62}% #15393e
+\definecolor{digital_TGLight}{RGB}{68,160,168}% #44a0a8
+\definecolor{digital_TGDark}{RGB}{34,137,147}% #228993
+\definecolor{digital_GWLight}{RGB}{225,242,244}% #e1f2f4
+\definecolor{digital_GWDark}{RGB}{195,230,233}% #c3e6e9
+% names used by earlier versions of this class (kept for compatibility)
+\colorlet{MULgreen}{digital_Turquoise}%
+\colorlet{MULturquoise}{digital_TechGreen}%
+\colorlet{MULaddress}{digital_GraphiteBlack}%
 \definecolor{MULgray}{RGB}{166, 166, 166}%
+\usecolortheme[named=digital_Turquoise]{structure}%
+% plot colours (for figures and data; not part of the brand palette)
 \definecolor{plotblue}{RGB}{31,119,180}%
 \definecolor{plotgreen}{RGB}{44,160,44}%
 \definecolor{plotorange}{RGB}{255,127,14}%
 \definecolor{plotred}{RGB}{214,39,40}%
 \definecolor{plotpurple}{RGB}{148, 103, 189}%
 \definecolor{plotbrown}{RGB}{140, 86, 75}%
+% slogan (claim) on the title page: discreet grey (deliberate deviation from
+% the PowerPoint master, which uses turquoise; see README)
 \colorlet{MULsloganTitleColor}{white!83!black}%
-% \colorlet{MULsloganTitleColor}{MULgreen}%
-% \colorlet{MULsloganSlideColor}{MULturquoise}%
-\colorlet{MULsloganSlideColor}{white!90!black}%
+% slogan (claim) on the dark title page: Light-Green on Turquoise (allowed by the style guide)
+\colorlet{MULsloganDarkColor}{digital_LightGreen}%
+% slogan in the footer band: white on Turquoise (allowed by the style guide)
+\colorlet{MULsloganSlideColor}{digital_White}%
 %
-% alerted text
+% alerted text: red (deliberate deviation, not in the brand palette; see README)
 \setbeamercolor{alerted text}{fg=red!80!black}%
-% boxes
-\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!25!bg!90!black}%
-\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!25!bg}%
+% example text (e.g. title of example blocks)
+\setbeamercolor{example text}{fg=digital_TGDark}%
+% boxes: white title on a primary/combination colour, body in GW Light
+\setbeamercolor{block title}{fg=white,bg=digital_Turquoise}%
+\setbeamercolor{block body}{parent=normal text,bg=digital_GWLight}%
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}%
+\setbeamercolor{block body alerted}{parent=normal text,bg=digital_GWLight}%
+\setbeamercolor{block title example}{fg=white,bg=digital_TGDark}%
+\setbeamercolor{block body example}{parent=normal text,bg=digital_GWLight}%
 % titles
 \setbeamercolor{frametitle}{fg=MULgreen}%
 % ToC
-\setbeamercolor{section in toc}{parent=alerted text}%
+\setbeamercolor{section in toc}{fg=digital_GraphiteBlack}%
 \setbeamercolor{section in toc shaded}{fg=normal text.fg!50}%
 % footings
 \setbeamercolor{author in head/foot}{fg=white, bg=MULgreen}%
@@ -295,6 +511,47 @@
 % | FONTS |
 % +-------+
 %
+% TEXT FONT
+% beamer sets letters and digits in formulas in the text font; operator names
+% (\sin, \log, ...) and \mathrm are set in the text font as well (\setmathrm),
+% Greek letters and other symbols stay Computer Modern
+% \MUL@settextfont{<font>}{<fontspec options>}: text font and \mathrm/operators
+\newcommand{\MUL@settextfont}[2]{%
+	\setsansfont{#1}[#2]%
+	\setmathrm{#1}[#2]%
+}%
+% Latin Modern Sans (beamer default) for \mathrm/operators
+\newcommand{\MUL@setclassicmath}{%
+	\setmathrm{lmsans10-regular.otf}[%
+		BoldFont = lmsans10-bold.otf,%
+		ItalicFont = lmsans10-oblique.otf,%
+		BoldItalicFont = lmsans10-boldoblique.otf%
+	]%
+}%
+\ifMULBrandFont%
+	% Host Grotesk (MUL brand font); fallbacks: system-installed Host Grotesk,
+	% Calibri, Carlito, and finally Latin Modern Sans
+	\IfFileExists{./fonts/Host_Grotesk/HostGrotesk-Regular.ttf}{%
+		\MUL@settextfont{HostGrotesk}{%
+			Path = ./fonts/Host_Grotesk/,%
+			Extension = .ttf,%
+			UprightFont = *-Regular,%
+			ItalicFont = *-Italic,%
+			BoldFont = *-Bold,%
+			BoldItalicFont = *-BoldItalic%
+		}%
+	}{%
+		\IfFontExistsTF{Host Grotesk}{\MUL@settextfont{Host Grotesk}{}}{%
+			\IfFontExistsTF{Calibri}{\MUL@settextfont{Calibri}{}}{%
+				\IfFontExistsTF{Carlito}{\MUL@settextfont{Carlito}{}}{\MUL@setclassicmath}%
+			}%
+		}%
+	}%
+\else%
+	% Latin Modern Sans (beamer default, option classicFont)
+	\MUL@setclassicmath%
+\fi%
+%
 % Funnel Display font - if possible
 \newif\iffunneldisplayavailable%
 \funneldisplayavailablefalse%
@@ -302,10 +559,10 @@
   \newfontfamily\funnelfont{Funnel Display}%
   \funneldisplayavailabletrue%
 }{%
-	\IfFileExists{./graphics/FunnelDisplay-Regular.ttf}{%
-		\IfFileExists{./graphics/FunnelDisplay-Bold.ttf}{%
+	\IfFileExists{./fonts/Funnel_Display/FunnelDisplay-Regular.ttf}{%
+		\IfFileExists{./fonts/Funnel_Display/FunnelDisplay-Bold.ttf}{%
 			\newfontfamily\funnelfont[%
-				Path = ./graphics/,%
+				Path = ./fonts/Funnel_Display/,%
 				UprightFont = FunnelDisplay-Regular.ttf,%
 				BoldFont = FunnelDisplay-Bold.ttf%
 			]{FunnelDisplay}%
@@ -328,6 +585,11 @@
 \setbeamerfont{frametitle}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in title}{size=\large, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULslogan in foot}{size=\scriptsize, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULperson name}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULperson role}{size=\large, series=\mdseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal}{size=\Huge, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal title}{size=\large, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal info}{size=\small, series=\mdseries}%
 \setbeamerfont{foot}{size=\tiny, family=\sffamily}%
 %
 %
@@ -376,7 +638,8 @@
 % name of the lecture (used in "lectureFootings")
 \newcommand{\insertMULlecture}{\MULlecture}%
 % superscripts for affiliations
-\newcommand{\aff}[1]{\textsuperscript{#1}}%
+% (\texorpdfstring: omitted in the PDF metadata, e.g. the author list)
+\newcommand{\aff}[1]{\texorpdfstring{\textsuperscript{#1}}{}}%
 \let\origbeamerinstitute\institute
 % institution name used in "defaultFootings"
 \newcommand{\shortinstitute}{} % initially empty
@@ -412,6 +675,11 @@
 \def\example{\item[\alert{\Stopsign}]\textit{Example: }}%
 % user defined logo in the headings of slides
 \newcommand{\setFrameLogo}[1]{\renewcommand{\MULframeLogo}{#1}}%
+% user defined logo on the title page (and the dark slides): \setTitleLogo{<logo>}{<white logo>}
+\newcommand{\setTitleLogo}[2]{\def\MULtitleLogo{#1}\def\MULtitleLogoWhite{#2}}%
+% user defined claim (empty: no claim) and text of the closing slide
+\newcommand{\setSlogan}[1]{\def\MULsloganText{#1}}%
+\newcommand{\setThanksText}[1]{\def\MULthanksText{#1}}%
 %
 % environment for adding drawings with absolute coordinates w.r.t. to slide/text area
 \newenvironment{overdraw}{%

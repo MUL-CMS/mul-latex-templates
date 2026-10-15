@@ -1,4 +1,36 @@
-*   v3.03-2026 (current)
+*   v3.10-2026 (current)
+    XeLaTeX/LuaTeX using `tikz`, structure with `figs`, `graphics`, and
+    `fonts` (University 2025 rebranding, aligned with the Brandbook 2026
+    and the official PowerPoint master)
+    - brand colours of the style guide (`digital_*`, same names as in
+      MUL_poster.cls; MULgreen, MULturquoise, MULaddress kept as aliases);
+      blocks in the combination colours, ToC without red, claim in the
+      footer in white, English claim "Move mountains"
+    - new options: brandFont (Host Grotesk, bundled in fonts/) and
+      classicFont (Latin Modern Sans, default); operator names (\sin, ...)
+      in the text font
+    - new options: lightTitle (default) / darkTitle (dark title slide);
+      DElogo/ENlogo and DEslogan/ENslogan (mix languages, e.g.
+      ENlocalization with DElogo, DEslogan)
+    - new slides from the PowerPoint master: \agendaframe (Inhalt/Outline),
+      \personframe (Zur Person), \finalframe (closing slide with title,
+      authors, e-mail, website, QR code)
+    - new settings: \setTitleLogo, \setSlogan, \setThanksText,
+      \setAgendaTitle, \setDarkBackground, \website, \setQRcode
+    - dark backgrounds (CMS variant and PowerPoint master), white logos,
+      demo QR code
+    - \aff omitted in PDF strings (no hyperref warnings)
+    - templates: talk.tex without sidebar, ENlocalization with German logo
+      and claim, closing and backup slides; lecture.tex with darkTitle
+    - demo: overview of all options and commands (with footer sketches),
+      demo_functionality.tex (renamed) and demo_documentation.tex
+      (detailed documentation as backup slides)
+    - README: colours, fonts, deviations from the style guide, QR codes
+    - visible changes for existing presentations: colours of blocks and
+      ToC, author/affiliations on the title slide in Graphite Black, white
+      footer claim, English claim spelled "Move mountains"
+
+*   v3.03-2026
     XeLaTeX/LuaTeX using `tikz`, structure with `figs` and `graphics`
     (University 2025 rebranding)
     - template split into two starting points, `talk.tex` (conference
