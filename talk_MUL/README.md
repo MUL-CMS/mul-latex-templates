@@ -23,7 +23,7 @@ Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload 
 | `talk.tex` | talk (conference) | `fullFootings`, `slideTotalNumber`, `hideSidebar`, `ENlocalization` with `DElogo` and `DEslogan`, `\conference{}` shown on the title page and in the footer; closing slide (`\finalframe`) and a backup slide (`\lastslide`) |
 | `lecture.tex` | lecture | `lectureFootings`, `showResults`, `darkTitle`, `\lecture{}`: table of contents at each section, lecture name in the footer |
 
-Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
+Both include `demo_functionality.tex` (via `\input{demo_functionality}`), a set of slides demonstrating the functionality of the class, and, as backup slides at the end, `demo_documentation.tex` (via `\input{demo_documentation}`), a detailed documentation of all class options and commands. Remove these lines (and the files, together with `figs/demo_*.tex`) when writing your own slides.
 
 Folders: `figs/` for your figures, `graphics/` for logos, backgrounds, and QR codes, `fonts/` for the bundled fonts (Funnel Display, Host Grotesk).
 

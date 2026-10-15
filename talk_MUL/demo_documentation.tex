@@ -1,0 +1,157 @@
+% ====================================================================
+%  Documentation of the 'mul-beamer' class as backup slides
+%
+%  This file is included at the end of talk.tex and lecture.tex via
+%    \input{demo_documentation}
+%  (after \lastslide, i.e., not counted in the total number of slides).
+%  Remove that line (and this file) when starting your own presentation.
+%  The same information is given in README.md.
+% ====================================================================
+%
+% all list items at once on the following slides
+\beamerdefaultoverlayspecification{}%
+% commands (\verb, verbatim) and options/files (\doctt) in turquoise
+\makeatletter
+\def\verbatim@font{\normalfont\ttfamily\color{digital_Turquoise}}%
+\makeatother
+\newcommand{\doctt}[1]{{\color{digital_Turquoise}\ttfamily #1}}%
+% list with more space between the items
+\newenvironment{doclist}{\begin{itemize}\setlength{\itemsep}{1.2ex}}{\end{itemize}}%
+%
+% lecture mode: normal section (in the agenda, sidebar, and with a table of contents
+% slide); talks: unnumbered section, as the documentation follows the backup slides
+\ifbool{MULLecture}{\section{Documentation}}{\section*{Documentation}}%
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: class options (1/2)}
+	\scriptsize
+	\begin{tabular}{@{}p{0.27\textwidth}p{0.68\textwidth}@{}}
+		\multicolumn{2}{@{}l}{\textbf{Footer} (* default)}\\
+		\doctt{defaultFootings}* & slogan, author $|$ organisational unit (\verb|\institute[...]|), slide number\\
+		\doctt{fullFootings} & slogan, author: short title, conference (lecture mode: current section/subsection), date, slide number\\
+		\doctt{lectureFootings} & slogan, lecture name (\verb|\lecture{...}|), slide number\\
+		\doctt{emptyFootings} & slide number only\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Slide numbers}}\\
+		\doctt{slideSingleNumber}* & current slide number\\
+		\doctt{slideTotalNumber} & current/total; the total counts up to \verb|\lastslide|\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Sidebar}}\\
+		\doctt{showSidebar}*, \doctt{hideSidebar} & sidebar with the table of contents, or none\\
+		\doctt{showothersubsections}*, \doctt{hideothersubsections} & subsections of all sections, or of the current section only, in the sidebar\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Title slide}}\\
+		\doctt{lightTitle}* & light background, turquoise title, grey claim\\
+		\doctt{darkTitle} & dark background (\verb|\setDarkBackground|), white logo and text, claim in Light-Green\\
+	\end{tabular}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: class options (2/2)}
+	\scriptsize
+	\begin{tabular}{@{}p{0.27\textwidth}p{0.68\textwidth}@{}}
+		\multicolumn{2}{@{}l}{\textbf{Language} (* default)}\\
+		\doctt{DElocalization}*, \doctt{ENlocalization} & German or English logo, claim, and texts (closing slide, agenda title)\\
+		\doctt{DElogo}, \doctt{ENlogo} & title logo only (overrides the localization)\\
+		\doctt{DEslogan}, \doctt{ENslogan} & claim only (overrides the localization)\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Text font}}\\
+		\doctt{classicFont}* & Latin Modern Sans for text, and letters, digits, operator names in formulas\\
+		\doctt{brandFont} & Host Grotesk (MUL brand font, \doctt{fonts/Host\_Grotesk/}); fallbacks: installed Host Grotesk, Calibri, Carlito, Latin Modern Sans\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Results}}\\
+		\doctt{showResults}*, \doctt{hideResults} & content of \verb|\showResults{...}| shown, or replaced by empty space; independent of the beamer mode\\[2ex]
+		\multicolumn{2}{@{}l}{\textbf{Other options}}\\
+		e.g.\ \doctt{trans}, \doctt{handout} & passed to beamer (one page per frame, without overlays); the font size (10\,pt), top-aligned frames, and the aspect ratio 16:9 are fixed\\
+	\end{tabular}
+	\medskip
+	\begin{exampleblock}{Example}
+\begin{verbatim}
+\documentclass[ENlocalization, DElogo, DEslogan, hideSidebar]{mul-beamer}
+\end{verbatim}
+	\end{exampleblock}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: title slide}
+	\scriptsize
+	\begin{doclist}
+		\item \verb|\title[<short title>]{<title>}|, \verb|\author[<short authors>]{<authors>}|, \verb|\date{<date>}| -- short versions for the footer (\doctt{fullFootings}, closing slide)
+		\item \verb|\aff{<n>}| -- affiliation number (superscript) in \verb|\author| and \verb|\institute|; omitted in the PDF metadata and on the closing slide
+		\item \verb|\institute[<unit for the footer>]{<affiliations>}| -- give \verb|[...]| for multi-line affiliations (otherwise the full text appears in \doctt{defaultFootings})
+		\item \verb|\email{<address>}| -- on the title slide and the closing slide (as a link)
+		\item \verb|\conference{<name>}| -- talk: on the title slide and in \doctt{fullFootings}
+		\item \verb|\lecture{<name>}| -- lecture mode: table of contents at each section, name in \doctt{lectureFootings}, current section in \doctt{fullFootings}; the name is not shown on the title slide (put it into \verb|\title|)
+		\item \verb|\additionsToTitlePage{<TikZ nodes>}| -- e.g.\ partner logos:
+	\end{doclist}
+	\medskip
+	\begin{exampleblock}{Example}
+\begin{verbatim}
+\additionsToTitlePage{\node[anchor=north west, shift={(0.04\paperheight,
+  -0.04\paperheight)}] at (current page.north west)
+  {\includegraphics[width=0.084\paperwidth]{graphics/logo-partner.pdf}};}
+\end{verbatim}
+	\end{exampleblock}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: settings (preamble)}
+	\scriptsize
+	\begin{doclist}
+		\item \verb|\setFrameLogo{<file>}| -- logo in the frame titles (in a group \verb|{...}| around frames: these frames only)
+		\item \verb|\setTitleLogo{<logo>}{<white logo>}| -- logo of the title slide and of the dark slides
+		\item \verb|\setSlogan{<text>}| -- claim on the title slide, in the footer, and on the closing slide; \verb|\setSlogan{}| removes it
+		\item \verb|\setThanksText{<text>}| -- default text of \verb|\finalframe|
+		\item \verb|\setAgendaTitle{<title>}| -- default title of \verb|\agendaframe| (Inhalt/Outline)
+		\item \verb|\setDarkBackground{<file>}| -- background of the dark slides: \doctt{graphics/background\_dark\_cms.jpg} (default) or \doctt{graphics/background\_dark.jpg} (PowerPoint master)
+		\item \verb|\website[<url>]{<text>}| -- website on the closing slide (default unileoben.ac.at; \verb|<url>| defaults to \verb|https://<text>|; \verb|\website{}| removes it)
+		\item \verb|\setQRcode[<caption>]{<image file>}| -- QR code on the closing slide, e.g.\ linking to the group website or a paper; create static QR codes e.g.\ at \url{https://www.tu-chemnitz.de/urz/apps/qrcode/index.html.en} (PNG, or SVG converted by \doctt{make})
+	\end{doclist}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: special slides}
+	\scriptsize
+	\begin{doclist}
+		\item \verb|\agendaframe[<title>]| -- table of contents (sections only), \emph{Agenda} layout of the PowerPoint master
+		\item \verb|\personframe[<photo>]{<name>}{<role>}{<text>}| -- \emph{Zur Person} layout: photo on the left (placeholder without \verb|<photo>|), name, role, and text (may contain lists)
+		\item \verb|\finalframe[<text>]| -- closing slide: text, title and authors (talks), e-mail, website, QR code, claim and author line
+	\end{doclist}
+	\medskip
+	\begin{exampleblock}{Example}
+\begin{verbatim}
+\agendaframe
+\personframe[figs/photo.jpg]{Name Surname}{Function}{Short CV}
+\finalframe[Questions?]
+\end{verbatim}
+	\end{exampleblock}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: content of frames}
+	\scriptsize
+	\begin{doclist}
+		\item \verb|\alert{...}| -- important content (red); \verb|\Alert{...}| -- less important content (turquoise)
+		\item \verb|\example| -- instead of \verb|\item|: item marked with a stop sign and \emph{Example:}
+		\item \verb|\funneldisplay| -- switches to the display font Funnel Display (used for titles and the claim)
+		\item \verb|\showResults{...}| -- content shown with \doctt{showResults}, empty space with \doctt{hideResults}
+		\item lists are uncovered item by item by default (\verb|<+->|); \verb|\begin{itemize}[<1->]| shows all items at once
+		\item colours of the style guide: \doctt{digital\_Turquoise}, \doctt{digital\_GraphiteBlack}, \doctt{digital\_LightGreen}, \doctt{digital\_TechGreen}, \doctt{digital\_White}; combination colours \doctt{digital\_BTLight}, \dots, \doctt{digital\_GWDark}; secondary colours \doctt{digital\_Violet}, \doctt{digital\_Orange}, \doctt{digital\_Blue} (study areas only); for figures \doctt{plotblue}, \doctt{plotgreen}, \doctt{plotorange}, \doctt{plotred}, \doctt{plotpurple}, \doctt{plotbrown}
+	\end{doclist}
+\end{frame}
+%
+% --------------------------------------------------------------------
+\begin{frame}[fragile]{Documentation: further commands}
+	\scriptsize
+	\begin{doclist}
+		\item \verb|\literature{<references>}| -- references above the footer of all following slides; \verb|\literature{}| clears them
+		\item \verb|\lastslide| -- the total number of slides (\doctt{slideTotalNumber}) counts only up to here (backup slides)
+		\item \verb|\lectureBeamer[<short>]{<title>}{<label>}| with \verb|\includeonlylecture{<label>}| -- beamer's original \verb|\lecture|: several lectures in one file, only the selected one is compiled
+		\item \verb|overdraw| environment -- TikZ picture with absolute coordinates (unit 1/16 of the slide width, origin bottom left, right of the sidebar); \verb|\framegrid| inside it shows the grid:
+	\end{doclist}
+	\medskip
+	\begin{exampleblock}{Example}
+\begin{verbatim}
+\begin{overdraw}
+  \framegrid   % remove in the final version
+  \node[draw=digital_Turquoise] (a) at (9,3) {label};
+  \draw[->, digital_Turquoise] (a) -- (5,4.5);
+\end{overdraw}
+\end{verbatim}
+	\end{exampleblock}
+\end{frame}
