@@ -70,7 +70,7 @@
 		\begin{column}{0.48\textwidth}
 			\begin{description}
 				\item[Title slide] \democmd{title[<short>]}, \democmd{author[<short>]} with \democmd{aff\{<n>\}}, \democmd{institute[<unit for footer>]}, \democmd{email}, \democmd{date}, \democmd{conference} (talk) or \democmd{lecture} (lecture mode), \democmd{additionsToTitlePage}
-				\item[Settings] \democmd{setFrameLogo}, \democmd{setTitleLogo}, \democmd{setSlogan}, \democmd{setThanksText}, \democmd{setAgendaTitle}, \democmd{setDarkBackground}
+				\item[Settings] \democmd{setFrameLogo}, \democmd{setTitleLogo}, \democmd{setSlogan}, \democmd{setThanksText}, \democmd{setAgendaTitle}, \democmd{setDarkBackground}, \democmd{website}, \democmd{setQRcode}
 				\item[Special slides] \democmd{agendaframe}, \democmd{personframe}, \democmd{finalframe} (between frames)
 				\item[Lectures] \democmd{lectureBeamer} with \democmd{includeonlylecture} (beamer's original \democmd{lecture})
 			\end{description}
@@ -291,7 +291,7 @@
 \subsection{Closing slide}
 \begin{frame}{Closing slide}
 	\begin{itemize}[<1->]
-		\item \democmd{finalframe} (between frames) adds a closing slide in the dark style of the MUL slides: ``Thank you for your attention!'' (localised), the e-mail address set by \democmd{email}, and the claim -- see the end of \texttt{talk.tex}
+		\item \democmd{finalframe} (between frames) adds a closing slide in the dark style of the MUL slides -- see the end of \texttt{talk.tex}: ``Thank you for your attention!'' (localised), for talks the title and the authors, the e-mail address (\democmd{email}), the website (\democmd{website}, default unileoben.ac.at), an optional QR code (\democmd{setQRcode}), and the claim and author line in the footer
 		\item \democmd{finalframe[\dots]} replaces the text, e.g.\ \texttt{\textbackslash finalframe[Questions?]}
 		\item \democmd{setDarkBackground\{graphics/background\_dark.jpg\}} (in the preamble) uses the background of the official PowerPoint master instead of the CMS variant
 		\item the class option \texttt{darkTitle} gives a title slide in the same dark style

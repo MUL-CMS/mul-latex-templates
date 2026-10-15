@@ -294,21 +294,55 @@
 }%
 %
 % FINAL FRAME
-% \finalframe[<text>]: closing slide, by default "Thank you for your attention!"
-% (localised), with the e-mail address (\email) and a white footer band with the claim
+% website shown on the closing slide: \website[<url>]{<text>}, default unileoben.ac.at
+% (<url> defaults to https://<text>; \website{} removes it)
+\def\MULwebsite{unileoben.ac.at}%
+\def\MULwebsiteURL{https://www.unileoben.ac.at}%
+\newcommand{\website}[2][]{%
+	\def\MULwebsite{#2}%
+	\ifblank{#1}{\def\MULwebsiteURL{https://#2}}{\def\MULwebsiteURL{#1}}%
+}%
+% optional QR code on the closing slide: \setQRcode[<caption>]{<image file>}
+\def\MULqrfile{}%
+\def\MULqrcaption{}%
+\newcommand{\setQRcode}[2][]{\def\MULqrcaption{#1}\def\MULqrfile{#2}}%
+% \finalframe[<text>]: closing slide in the dark style of the PowerPoint master:
+% <text> (default "Thank you for your attention!", localised); for talks (not in
+% lecture mode) the title and the authors (without affiliations); the e-mail address
+% and the website; the QR code (\setQRcode); a white footer band with the claim and
+% the author line (short author | organisational unit, as in defaultFootings)
 \newcommand{\finalframe}[1][\MULthanksText]{%
 	\begin{frame}[plain]%
 		\begin{tikzpicture}[overlay, remember picture]%
 			\MUL@darkbackground%
-			% e-mail address and text
-			\node[anchor=south west, inner sep=0pt, text width=0.8\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.28\paperheight)}]current page.south west) {%
-				\ifdefempty{\insertemail}{}{{\usebeamerfont{MULfinal email}\color{white}\insertemail}\par\medskip}%
-				{\usebeamerfont{MULfinal}\color{white}\hyphenpenalty=10000\exhyphenpenalty=10000 #1\par}% no hyphenation
+			% text
+			\node[anchor=north west, inner sep=0pt, text width=0.75\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.78\paperheight)}]current page.south west) {%
+				\usebeamerfont{MULfinal}\color{white}\hyphenpenalty=10000\exhyphenpenalty=10000 #1\par% no hyphenation
 			};%
-			% white footer band (as the footer of the frames) with the claim in turquoise
+			% title and authors (talks only), e-mail address and website
+			\node[anchor=south west, inner sep=0pt, text width=0.58\paperwidth, align=left] at ([shift={(0.068\paperwidth,0.10\paperheight)}]current page.south west) {%
+				\color{white}%
+				\ifMULLecture\else%
+					{\usebeamerfont{MULfinal title}\inserttitle\par}\smallskip%
+					{\usebeamerfont{MULfinal info}\let\aff\@gobble\insertauthor\par}\medskip%
+				\fi%
+				{\usebeamerfont{MULfinal info}%
+					\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par}%
+					\ifdefempty{\MULwebsite}{}{\href{\MULwebsiteURL}{\MULwebsite}\par}%
+				}%
+			};%
+			% QR code on a white background (quiet zone), with caption
+			\ifdefempty{\MULqrfile}{}{%
+				\node[anchor=south east, fill=white, rounded corners=1mm, inner sep=1.5mm] (MUL@qr) at ([shift={(0.932\paperwidth,0.10\paperheight)}]current page.south west) {\includegraphics[height=0.24\paperheight]{\MULqrfile}};%
+				\ifdefempty{\MULqrcaption}{}{%
+					\node[anchor=south, inner sep=0pt, yshift=1.5mm, text width=0.3\paperwidth, align=center] at (MUL@qr.north) {\usebeamerfont{MULfinal info}\color{white}\MULqrcaption};%
+				}%
+			}%
+			% white footer band (as the footer of the frames) with the claim and the author line
 			\fill[white] (current page.south west) rectangle ([shift={(\paperwidth,0.053\paperheight)}]current page.south west);%
 			\fill[white] ([shift={(0,0.018\paperheight)}]current page.south west) -- ++(0.09\paperheight,0) -- ++(-0.09\paperheight,0.09\paperheight) -- cycle;%
 			\node[anchor=base west, inner sep=0pt] at ([shift={(0.068\paperwidth,0.018\paperheight)}]current page.south west) {\usebeamerfont{MULslogan in foot}\color{digital_Turquoise}\MULsloganText};%
+			\node[anchor=base east, inner sep=0pt] at ([shift={(0.95\paperwidth,0.018\paperheight)}]current page.south west) {\usebeamerfont{foot}\color{digital_Turquoise}\beamer@shortauthor\ifdefempty{\shortinstitute}{}{{} | \shortinstitute}};%
 		\end{tikzpicture}%
 	\end{frame}%
 }%
@@ -497,9 +531,9 @@
 \ifMULBrandFont%
 	% Host Grotesk (MUL brand font); fallbacks: system-installed Host Grotesk,
 	% Calibri, Carlito, and finally Latin Modern Sans
-	\IfFileExists{./graphics/HostGrotesk-Regular.ttf}{%
+	\IfFileExists{./fonts/Host_Grotesk/HostGrotesk-Regular.ttf}{%
 		\MUL@settextfont{HostGrotesk}{%
-			Path = ./graphics/,%
+			Path = ./fonts/Host_Grotesk/,%
 			Extension = .ttf,%
 			UprightFont = *-Regular,%
 			ItalicFont = *-Italic,%
@@ -525,10 +559,10 @@
   \newfontfamily\funnelfont{Funnel Display}%
   \funneldisplayavailabletrue%
 }{%
-	\IfFileExists{./graphics/FunnelDisplay-Regular.ttf}{%
-		\IfFileExists{./graphics/FunnelDisplay-Bold.ttf}{%
+	\IfFileExists{./fonts/Funnel_Display/FunnelDisplay-Regular.ttf}{%
+		\IfFileExists{./fonts/Funnel_Display/FunnelDisplay-Bold.ttf}{%
 			\newfontfamily\funnelfont[%
-				Path = ./graphics/,%
+				Path = ./fonts/Funnel_Display/,%
 				UprightFont = FunnelDisplay-Regular.ttf,%
 				BoldFont = FunnelDisplay-Bold.ttf%
 			]{FunnelDisplay}%
@@ -554,7 +588,8 @@
 \setbeamerfont{MULperson name}{size=\LARGE, series=\bfseries, family=\funneldisplay}%
 \setbeamerfont{MULperson role}{size=\large, series=\mdseries, family=\funneldisplay}%
 \setbeamerfont{MULfinal}{size=\Huge, series=\bfseries, family=\funneldisplay}%
-\setbeamerfont{MULfinal email}{size=\small, series=\mdseries}%
+\setbeamerfont{MULfinal title}{size=\large, series=\bfseries, family=\funneldisplay}%
+\setbeamerfont{MULfinal info}{size=\small, series=\mdseries}%
 \setbeamerfont{foot}{size=\tiny, family=\sffamily}%
 %
 %

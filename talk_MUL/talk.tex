@@ -16,7 +16,8 @@
 	DEslogan,% German slogan (overrides the slogan of ENlocalization)
 	lightTitle,% light title slide (darkTitle for the dark version)
 	hideSidebar,% no sidebar (showSidebar for a sidebar with the table of contents)
-	classicFont% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
+% 	classicFont% Latin Modern Sans (brandFont for Host Grotesk, the MUL brand font)
+	brandFont
 ]{mul-beamer}
 \hypersetup{pdfpagemode=FullScreen}% open the PDF in full-screen mode
 %
@@ -33,6 +34,11 @@
 	\aff{1}Department of Materials Science, Montanuniversität Leoben, Austria\\
 	\aff{2}Name of the second institution, City, Country}
 \email{name.surname@unileoben.ac.at}
+% website on the closing slide (default unileoben.ac.at), e.g. of the group:
+% \website[https://www.unileoben.ac.at/...]{www.unileoben.ac.at/...}
+% QR code on the closing slide, e.g. linking to the group website or a paper
+% (static QR codes can be created at https://www.tu-chemnitz.de/urz/apps/qrcode/index.html.en; see README.md)
+\setQRcode[unileoben.ac.at]{graphics/qr/qrcode_unileoben.png}
 \conference{Name of the Conference}
 \date{1 January 2026}
 % optional: title of the agenda slide (\agendaframe), default Inhalt/Outline by localization

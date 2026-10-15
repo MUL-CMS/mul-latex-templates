@@ -25,6 +25,8 @@ Two starting points are provided; copy the whole `talk_MUL` folder (e.g. upload 
 
 Both include `functionality_demo.tex` (via `\input{functionality_demo}`), a set of slides demonstrating the functionality of the class. Remove that line (and the file, together with `figs/demo_*.tex`) when writing your own slides.
 
+Folders: `figs/` for your figures, `graphics/` for logos, backgrounds, and QR codes, `fonts/` for the bundled fonts (Funnel Display, Host Grotesk).
+
 Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in the `makefile` to your own file name), or run `latexmk -xelatex talk.tex`. On Overleaf, select *Menu → Compiler → XeLaTeX*.
 
 ---
@@ -83,7 +85,7 @@ E.g. `\documentclass[ENlocalization, DElogo, DEslogan]{mul-beamer}` gives Englis
 - `classicFont`
   Latin Modern Sans (beamer default) for text, and for letters, digits, and operator names (`\sin`, `\mathrm{}`) in formulas (default).
 - `brandFont`
-  Host Grotesk (MUL brand font) for text, and for letters, digits, and operator names in formulas. Fallbacks if the bundled font files in `graphics/` are missing: installed Host Grotesk, Calibri, Carlito, Latin Modern Sans.
+  Host Grotesk (MUL brand font) for text, and for letters, digits, and operator names in formulas. Fallbacks if the bundled font files in `fonts/Host_Grotesk/` are missing: installed Host Grotesk, Calibri, Carlito, Latin Modern Sans.
 
 Note: the MUL style guide prescribes Host Grotesk for body text. This class nevertheless uses Latin Modern Sans by default, as a deliberate choice for the appearance of (scientific) slides; use `brandFont` to follow the style guide.
 
@@ -206,7 +208,20 @@ Example:
 ```
 
 ### `\finalframe[<text>]`
-Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`; `\setThanksText{<text>}` (in the preamble) changes the default text.
+Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, and
+- the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization; `\finalframe[Questions?]` for another text, `\setThanksText{<text>}` in the preamble for another default),
+- for talks (not in lecture mode) the title and the authors (without affiliations),
+- the e-mail address (`\email{}`) and the website (`\website{}`),
+- the QR code set by `\setQRcode` (if any),
+- a white footer band with the claim and the author line (short author | organisational unit, as in `defaultFootings`).
+
+### `\website[<url>]{<text>}`
+Website shown (as a link) on the closing slide; default `unileoben.ac.at`. `<url>` defaults to `https://<text>`, e.g. `\website{www.unileoben.ac.at}` or `\website[https://www.unileoben.ac.at/...]{Group website}`; `\website{}` removes it.
+
+### `\setQRcode[<caption>]{<image file>}`
+QR code on the closing slide (bottom right, on a white background), with an optional caption above, e.g. `\setQRcode[Paper]{graphics/qr/paper.png}`. The QR code can link e.g. to the group website or to a published paper.
+
+Creating QR codes: use a generator of **static** QR codes (the link is encoded directly, no redirection service), e.g. <https://www.tu-chemnitz.de/urz/apps/qrcode/index.html.en>: enter the link in the field *Text*, *Create QR Code*, and download it as PNG (directly usable) or SVG (put it into `graphics/`; `make` converts it to PDF using Inkscape). Keep dark modules on a light background. QR codes in the MUL design (with the signet) can be requested from the MUL graphics department (style guide, p. 41). The demo QR code `graphics/qr/qrcode_unileoben.png` links to <https://www.unileoben.ac.at>.
 
 ### `\setTitleLogo{<logo>}{<white logo>}`
 Replaces the logo on the title page (`<logo>`) and on the dark slides (`<white logo>`), e.g. `\setTitleLogo{graphics/logo-mul}{graphics/logo-mul-white}` for the German logo; see also the options `DElogo`/`ENlogo`.
@@ -269,7 +284,7 @@ The class follows the MUL style guide (Brandbook 2026) and the official PowerPoi
 ## Technical Notes
 
 - Requires **XeLaTeX** or **LuaLaTeX** (due to `fontspec` usage).
-- Uses *Funnel Display* for headings if available, and *Host Grotesk* for text with the option `brandFont`; both are bundled in `graphics/` (SIL Open Font License 1.1).
+- Uses *Funnel Display* for headings if available, and *Host Grotesk* for text with the option `brandFont`; both are bundled in `fonts/` (SIL Open Font License 1.1).
 - Includes MUL logos and uses a 16:9 aspect ratio layout.
 
 ---
