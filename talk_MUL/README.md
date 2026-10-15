@@ -67,6 +67,12 @@ Compile with XeLaTeX or LuaLaTeX: `make` builds both documents (set `MAIN` in th
 
 The slogan can be removed from the title page and footer with `\renewcommand{\MULsloganText}{}`.
 
+### Title Slide
+- `lightTitle`
+  Light background, turquoise title, grey claim (default).
+- `darkTitle`
+  Dark background (see `\setDarkBackground`), white logo and text, claim in Light-Green, as the dark title slide of the MUL PowerPoint master. Note that additions by `\additionsToTitlePage` (e.g. partner logos) need to be readable on the dark background.
+
 ### Fonts
 - `classicFont`
   Latin Modern Sans (beamer default) for text, and for letters, digits, and operator names (`\sin`, `\mathrm{}`) in formulas (default).
@@ -94,7 +100,8 @@ In formulas, Greek letters and other symbols are always taken from Computer Mode
   DElocalization,
   defaultFootings,
   showResults,
-  classicFont
+  classicFont,
+  lightTitle
 ]{mul-beamer}
 ```
 
@@ -191,7 +198,7 @@ Example:
 Adds a closing slide (between frames) in the dark style of the MUL PowerPoint master: dark background with white logo, the text (default: *Danke für Ihre Aufmerksamkeit!* / *Thank you for your attention!*, depending on the localization), the e-mail address set by `\email{}`, and a white footer band with the claim. E.g. `\finalframe[Questions?]`.
 
 ### `\setDarkBackground{<file>}`
-Background image of the dark slides (`\finalframe`). Two are provided: `graphics/background_dark_cms.jpg` (default, matching the CMS title page) and `graphics/background_dark.jpg` (from the official PowerPoint master).
+Background image of the dark slides (`\finalframe`, title slide with `darkTitle`). Two are provided: `graphics/background_dark_cms.jpg` (default, matching the CMS title page) and `graphics/background_dark.jpg` (from the official PowerPoint master).
 
 ### `\lastslide`
 Placed between frames, it sets the total number of slides (`slideTotalNumber`) to the number of the preceding frame, so that following (e.g. backup) slides are not counted.

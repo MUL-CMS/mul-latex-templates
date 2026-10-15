@@ -19,6 +19,9 @@
 \def\MUL@footings@empty{empty}
 \def\MUL@footings@default{default}
 \def\MUL@footings@lecture{lecture}
+% MULDarkTitle: true for the dark version of the title page
+\newif\ifMULDarkTitle
+\MULDarkTitlefalse
 % MULBrandFont: true if Host Grotesk (MUL brand font) is used as text font
 \newif\ifMULBrandFont
 \MULBrandFontfalse
@@ -74,6 +77,11 @@
 %
 % class option showResults
 \DeclareOption{showResults}{\MULShowResultstrue}%
+% class option lightTitle: light title page (light background, turquoise title)
+\DeclareOption{lightTitle}{\MULDarkTitlefalse}%
+% class option darkTitle: dark title page (dark background, white logo and text)
+\DeclareOption{darkTitle}{\MULDarkTitletrue}%
+%
 % class option brandFont: Host Grotesk as text font (MUL brand font)
 \DeclareOption{brandFont}{\MULBrandFonttrue}%
 % class option classicFont: Latin Modern Sans as text font (beamer default; class default)
@@ -85,7 +93,7 @@
 % pass all other options to beamer
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}%
 % default behavior
-\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults, classicFont}%
+\ExecuteOptions{beamer, slideSingleNumber, showothersubsections, showSidebar, DElocalization, defaultFootings, showResults, classicFont, lightTitle}%
 \ProcessOptions%
 % other general options for the beamer class
 \PassOptionsToClass{%
@@ -317,22 +325,36 @@
 \setbeamertemplate{title page}{%
 	\begin{tikzpicture}[overlay, remember picture]%
 		\path[use as bounding box] (current page.south west) rectangle (current page.north east);%
+		% light or dark version (class options lightTitle/darkTitle)
+		\ifMULDarkTitle%
+			\def\MUL@titlebackground{\MULdarkBackground}%
+			\def\MUL@titlelogo{\MULtitleLogoWhite}%
+			\def\MUL@titlecolor{\color{white}}%
+			\colorlet{MUL@addresscolor}{white}%
+			\colorlet{MUL@slogancolor}{MULsloganDarkColor}%
+		\else%
+			\def\MUL@titlebackground{graphics/background_title_cms.jpg}%
+			\def\MUL@titlelogo{\MULtitleLogo}%
+			\def\MUL@titlecolor{\usebeamercolor{title}\color{fg}}%
+			\colorlet{MUL@addresscolor}{MULaddress}%
+			\colorlet{MUL@slogancolor}{MULsloganTitleColor}%
+		\fi%
 		% background, logo and slogan
-		\node at (current page.center) {\includegraphics[width=\paperwidth]{graphics/background_title_cms.jpg}};%
-		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MULtitleLogo}};%
+		\node at (current page.center) {\includegraphics[width=\paperwidth]{\MUL@titlebackground}};%
+		\node[anchor=north east, shift={(-0.04\paperheight,-0.04\paperheight)}] at (current page.north east) {\includegraphics[width=0.084\paperwidth]{\MUL@titlelogo}};%
 		\ifdefempty{\MULsloganText}{}{%
-			\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MULsloganTitleColor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
+			\node[anchor=south west, shift={(-.02\paperwidth, 0.00\paperheight)}] at (current page.south west) {\usebeamerfont{MULslogan in title}{\color{MUL@slogancolor}\resizebox{1.02\paperwidth}{!}{\MULsloganText}}};%
 		}%
 		% title
 		\node[anchor=south, shift={(0,0.02\paperwidth)}] at (current page.center) {\parbox{0.9\paperwidth}{%
 			\centering%
-			\usebeamerfont{title}{\usebeamercolor{title}\color{fg}\bfseries\funneldisplay\inserttitle}%
+			\usebeamerfont{title}{\MUL@titlecolor\bfseries\funneldisplay\inserttitle}%
 		}};%
 		% affiliations, email, conference name, date
 		\node[anchor=north, shift={(0,0\paperwidth)}] at (current page.center) {\parbox{0.9\paperwidth}{%
 			\centering%
-			\usebeamerfont{author}{\color{MULaddress}\insertauthor}\par\medskip%
-			\usebeamerfont{institute}{\color{MULaddress}
+			\usebeamerfont{author}{\color{MUL@addresscolor}\insertauthor}\par\medskip%
+			\usebeamerfont{institute}{\color{MUL@addresscolor}
 				\insertinstitute\par\smallskip
 				\ifdefempty{\insertemail}{}{\href{mailto:\insertemail}{\insertemail}\par\bigskip}%
 				% conference name only (in lecture mode it holds section names)
@@ -384,6 +406,8 @@
 % slogan (claim) on the title page: discreet grey (deliberate deviation from
 % the PowerPoint master, which uses turquoise; see README)
 \colorlet{MULsloganTitleColor}{white!83!black}%
+% slogan (claim) on the dark title page: Light-Green on Turquoise (allowed by the style guide)
+\colorlet{MULsloganDarkColor}{digital_LightGreen}%
 % slogan in the footer band: white on Turquoise (allowed by the style guide)
 \colorlet{MULsloganSlideColor}{digital_White}%
 %
