@@ -2,7 +2,20 @@
 
 Each version below is frozen and available as a git tag (`letter-v<version>`); only the current version's files are kept in the working tree (flat, directly in `letter_MUL/`). Archived versions' own `README.md` can be read by checking out their tag, e.g. `git show letter-v1.0-2019:letter_MUL/README.md`.
 
-## [v2.0-2025](README.md) (current)
+## [v3.0-2026](README.md) (current)
+
+pdfLaTeX. Layout of the official MUL letterhead (Word templates *Briefpapier allgemein*, 2025 rebranding).
+
+- Fixed positions as in the Word templates: logo and sender block, address field for window envelopes, date and contact person (`\contact`), claim with rule on the first page, page numbers from page 2 on (`2/3` bottom right as in v2.0, or `▪ 2 von 3 ▪` centred as in the templates with `pageNumbersTemplate`), fold and punch marks (105/148.5/210 mm, on by default)
+- New options: `calibri` (default; Carlito) / `helvetica`; `ENlocalization` (default) / `DElocalization` (logo, claim, labels, date format, babel language), with `DElogo`/`ENlogo` and `DEclaim`/`ENclaim` (aliases `DEslogan`/`ENslogan`) to set the language of the logo and the claim separately; `foldMarks`/`noFoldMarks`; page-number options spelled correctly (`noPageNumbers`, `pageNumbers`, `pageNumbersMofN`; old names kept), `pageNumbersClassic`/`pageNumbersTemplate`
+- Sender block: name, unit (bold), university name, address, …; the university name follows the language of the logo (*Montanuniversität Leoben* / *TU Leoben*; `\university` to change it)
+- New commands: `\sendername`, `\university`, `\phone`, `\mobile`, `\web[<url>]{<text>}` (links now work), `\unitlogo`, `\setLogo`, `\setSlogan`, `\contact`, `\closing`, `\signature`, `\enclosures`; `\receiver` with an optional note line
+- Math in the text font (`mathastext`, Carlito or Helvetica instead of Computer Modern); `amsmath` loaded by the class; Pythagoras example in `letter.tex` and `letter_de.tex`
+- Brand colours `digital_*` (Turquoise `#00727D` instead of `#006E6E`), black text, subject in Turquoise small caps
+- Anonymised for Overleaf: placeholders instead of personal data, no department logo by default (`graphics/logo-dms.pdf` as an example for `\unitlogo` in `letter.tex`); English and German examples (`letter.tex`, `letter_de.tex`)
+- Logos (German and English) from `talk_MUL`, in `graphics/`; claim graphics (Funnel Display) generated from `design_resources/office/letter_MUL/claim/`
+
+## v2.0-2025 (tag `letter-v2.0-2025`)
 
 pdfLaTeX. Major update based on the 2025 university rebranding. Credits: David Holec and Dominik Gehringer.
 

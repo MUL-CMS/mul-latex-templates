@@ -1,0 +1,78 @@
+% ====================================================================
+%  Beispielbrief (Deutsch) mit der Klasse 'mul-letter' (v3.0)
+%  Sample letter (German) using the 'mul-letter' class (v3.0)
+%  English version: letter.tex
+%
+%  Compile with pdfLaTeX (Overleaf: default compiler), e.g.
+%    latexmk -pdf letter_de.tex
+%  Two runs are needed for the positions of the page elements and
+%  the total page number (latexmk and Overleaf do this automatically).
+%
+%  Class options (defaults first), see README.md:
+%    ENlocalization / DElocalization   language, logo, claim, labels
+%    DElogo / ENlogo, DEclaim / ENclaim  language of the logo or the claim,
+%                                      overwriting the localization, e.g.
+%                                      [DElocalization, ENlogo, ENclaim]
+%    calibri / helvetica               text font
+%    pageNumbersMofN / pageNumbers / noPageNumbers   from page 2 on
+%    pageNumbersClassic / pageNumbersTemplate   "2/3" right / "▪ 2 von 3 ▪" centred
+%    foldMarks / noFoldMarks           fold and punch marks
+%    headerOnlyFirstPage / headerEveryPage
+%    normalAddress / condensedAddress  sender block (Helvetica only)
+% ====================================================================
+
+\documentclass[DElocalization, helvetica, pageNumbersMofN, pageNumbersTemplate]{mul-letter}
+
+\usepackage{lipsum}
+
+% Absender (neben dem Logo); leere Angaben werden weggelassen
+\department{Organisationseinheit}
+\sendername{Vorname Nachname}
+\address{Franz-Josef-Straße 18, A-8700 Leoben}
+\phone{+43 3842 402 0000}
+% \mobile{+43 664 80898 0000}
+% \university{...}  % Zeile unter der Organisationseinheit; Standard nach der Sprache des Logos:
+%                   % Montanuniversität Leoben (DElogo) / TU Leoben (ENlogo)
+\mail{vorname.nachname@unileoben.ac.at}
+\web{www.unileoben.ac.at}
+% Logo der Organisationseinheit (optional, oben rechts, höchstens 42,6 x 16,1 mm),
+% z. B. das Logo des Departments Materials Science in graphics/:
+% \unitlogo{graphics/logo-dms.pdf}
+
+% Datum und Sachbearbeiter*in
+\contact{Vorname Nachname}
+% \date{01.01.2026}       % festes Datum statt des heutigen
+% \placeInDate{Wien}      % Ort vor dem Datum (Standard: Leoben)
+
+\begin{document}
+
+\receiver{%
+  Firma / Institution\\
+  Titel Vorname Nachname\\
+  Straße Hausnummer\\
+  PLZ Ort
+}
+
+\subject{Betreff}
+
+Sehr geehrte Damen und Herren,
+
+\lipsum[1-3]
+
+Formeln werden in der Schriftart des Textes gesetzt, z.\,B. der Satz des
+Pythagoras $a^2 + b^2 = c^2$ für ein rechtwinkliges Dreieck mit den Katheten
+$a$, $b$ und der Hypotenuse $c$; für $a = 3$ und $b = 4$ gilt
+\[
+  c = \sqrt{a^2 + b^2} = \sqrt{3^2 + 4^2} = 5.
+\]
+
+\lipsum[4-6]
+
+\closing{Glück auf!}
+
+\enclosures{%
+  Beilage 1\\
+  Beilage 2
+}
+
+\end{document}
