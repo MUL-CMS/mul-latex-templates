@@ -1,21 +1,15 @@
-MAIN = letter
+MAIN = letter letter_de
 
-.PHONY: clean
+.PHONY: all pdf clean
 
-all:	$(MAIN).pdf
+all:	pdf
 
-pdf:	$(MAIN).pdf
+build:	all
 
-%.pdf:	%.tex
+pdf:	$(addsuffix .pdf,$(MAIN))
+
+%.pdf:	%.tex mul-letter.cls
 	latexmk -pdf $<
-# 	latexmk -lualatex -synctex=1 $<
-# 	ps2pdf $<
-# 
-# %.ps:	%.dvi	
-# 	dvips $<
-# 
-# %.dvi:	%.tex
-# 	latexmk
 
 clean:
 	latexmk -c

@@ -53,9 +53,9 @@ Older versions (v0.1-pre2019, v1.0-2019, v2.0-2022) have been archived: their fo
 
 ## letter_MUL
 
-Current version: **v2.0-2025**, pdfLaTeX, major update based on the 2025 rebranding.
+Current version: **v3.0-2026**, pdfLaTeX, layout of the official MUL letterhead (Word templates, 2025 rebranding), Calibri (Carlito) or Helvetica, German/English localization, anonymised for Overleaf.
 
-Older versions (v0.1-2012-2018, v1.0-2019, v1.1-2020) have been archived: their folders were removed from the working tree and frozen as git tags (`letter-v<version>`, e.g. `git checkout letter-v1.0-2019`). See [`letter_MUL/CHANGELOG.md`](letter_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
+Older versions (v0.1-2012-2018, v1.0-2019, v1.1-2020, v2.0-2025) have been archived: their folders were removed from the working tree and frozen as git tags (`letter-v<version>`, e.g. `git checkout letter-v1.0-2019`). See [`letter_MUL/CHANGELOG.md`](letter_MUL/CHANGELOG.md) for the full version history, and each tagged version's own `README.md` for usage details specific to that version.
 
 
 ## thesis_MUL

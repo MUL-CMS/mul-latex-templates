@@ -1,0 +1,18 @@
+% Claim graphic for letter_MUL (footer of the first page), German version.
+% Compile with XeLaTeX in this folder and copy the PDF to letter_MUL/graphics/:
+%   xelatex claim-de.tex && cp claim-de.pdf ../../../../letter_MUL/graphics/
+% Font: Funnel Display Bold (bundled in talk_MUL/fonts); colour: Turquoise at 25 %,
+% as the claim of the Word templates. \vphantom{Vg} gives the German and English
+% graphics the same height, so that both are scaled alike in mul-letter.cls.
+\documentclass[border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\definecolor{digital_Turquoise}{RGB}{0,114,125}
+\newfontfamily\funnel[
+  Path = ../../../../talk_MUL/fonts/Funnel_Display/,
+  UprightFont = FunnelDisplay-Regular.ttf,
+  BoldFont = FunnelDisplay-Bold.ttf
+]{FunnelDisplay}
+\begin{document}
+{\funnel\bfseries\fontsize{16pt}{16pt}\selectfont\color{digital_Turquoise!25}\vphantom{Vg}Versetz’ Berge}
+\end{document}
