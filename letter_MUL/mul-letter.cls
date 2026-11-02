@@ -56,6 +56,7 @@
 \DeclareOption{DElocalization}{%
   \def\MUL@language{ngerman}%
   \def\MUL@logo{graphics/logo-mul}%
+  \def\MUL@university{Montanuniversität Leoben}%
   \def\MUL@claim{graphics/claim-de}%
   \def\MUL@claimtext{Versetz’ Berge}%
   \def\MUL@placeInDate{Leoben, }%
@@ -72,6 +73,7 @@
 \DeclareOption{ENlocalization}{%
   \def\MUL@language{english}%
   \def\MUL@logo{graphics/logo-mul-en}%
+  \def\MUL@university{TU Leoben}%
   \def\MUL@claim{graphics/claim-en}%
   \def\MUL@claimtext{Move mountains}%
   \def\MUL@placeInDate{Leoben, }%
@@ -87,9 +89,16 @@
 }%
 % language of the logo and of the claim, independent of the localization: these
 % options are declared after DE/ENlocalization, hence always processed after them
-% (independent of the order in \documentclass) and overwrite their logo/claim
-\DeclareOption{DElogo}{\def\MUL@logo{graphics/logo-mul}}%
-\DeclareOption{ENlogo}{\def\MUL@logo{graphics/logo-mul-en}}%
+% (independent of the order in \documentclass) and overwrite their logo/claim;
+% the university name in the sender block follows the language of the logo
+\DeclareOption{DElogo}{%
+  \def\MUL@logo{graphics/logo-mul}%
+  \def\MUL@university{Montanuniversität Leoben}%
+}%
+\DeclareOption{ENlogo}{%
+  \def\MUL@logo{graphics/logo-mul-en}%
+  \def\MUL@university{TU Leoben}%
+}%
 \DeclareOption{DEclaim}{%
   \def\MUL@claim{graphics/claim-de}%
   \def\MUL@claimtext{Versetz’ Berge}%
@@ -134,6 +143,10 @@
   \RequirePackage{helvet}%
   \renewcommand{\familydefault}{\sfdefault}%
 \fi%
+% math in the text font (Latin letters, digits, basic symbols; Greek letters and
+% large operators stay Computer Modern); amsmath has to be loaded before mathastext
+\RequirePackage{amsmath}%
+\RequirePackage[italic]{mathastext}%
 % German via ngerman.ldf (package babel-german) if installed, otherwise via babel's
 % own locale data (\babelprovide), e.g. on a minimal Debian/Ubuntu TeX Live
 \IfFileExists{ngerman.ldf}{%
@@ -230,6 +243,8 @@
 \newcommand{\department}[1]{\def\MUL@department{#1}}%
 \newcommand{\sendername}[1]{\def\MUL@sendername{#1}}%
 \newcommand{\head}[1]{\def\MUL@sendername{#1}}% v2.0 name
+% university name, below the unit (set by the language of the logo)
+\newcommand{\university}[1]{\def\MUL@university{#1}}%
 \newcommand{\address}[1]{\def\MUL@address{#1}}%
 \def\MUL@phone{}%
 \newcommand{\phone}[1]{\def\MUL@phone{#1}}%
@@ -334,13 +349,15 @@
   \ifMUL@calibri\bfseries\else\ifMUL@condensed\fontseries{bc}\selectfont\else\bfseries\fi\fi%
 }%
 %
-% sender block: unit (bold), name, address, phone, mobile, e-mail, web; empty lines omitted
+% sender block: name, unit (bold), university, address, phone, mobile, e-mail, web;
+% empty lines omitted
 \newif\ifMUL@firstline%
 \newcommand{\MUL@addline}[1]{\ifMUL@firstline\global\MUL@firstlinefalse\else\\\fi#1}%
 \newcommand{\MUL@senderblock}{%
   \global\MUL@firstlinetrue%
-  \ifdefempty{\MUL@department}{}{\MUL@addline{{\MUL@bold\MUL@department}}}%
   \ifdefempty{\MUL@sendername}{}{\MUL@addline{\MUL@sendername}}%
+  \ifdefempty{\MUL@department}{}{\MUL@addline{{\MUL@bold\MUL@department}}}%
+  \ifdefempty{\MUL@university}{}{\MUL@addline{\MUL@university}}%
   \ifdefempty{\MUL@address}{}{\MUL@addline{\MUL@address}}%
   \ifdefempty{\MUL@phone}{}{\MUL@addline{\MUL@phonelabel\ \MUL@phone}}%
   \ifdefempty{\MUL@mobile}{}{\MUL@addline{\MUL@mobilelabel\ \MUL@mobile}}%

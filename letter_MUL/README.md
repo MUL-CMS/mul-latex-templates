@@ -21,7 +21,7 @@ Defaults are marked with *.
 
 - **Localization:** `ENlocalization`* / `DElocalization` — language (babel, hyphenation), MUL logo, claim (*Move mountains* / *Versetz’ Berge*), labels (Contact/Sachbearbeiter\*in, Phone/Tel., Mobile/Mobil, of/von, Enclosures/Beilagen), date format (`2 November 2026` / `02.11.2026`), and the placeholders of the sender block.
 - **Logo and claim language:** `DElogo` / `ENlogo` and `DEclaim` / `ENclaim` set the language of the MUL logo and of the claim separately, overwriting the localization (independent of their order in `\documentclass`), e.g. `\documentclass[ENlocalization, DElogo]{mul-letter}` for an English letter with the German logo (as in `letter.tex`). `DEslogan` / `ENslogan` are aliases of `DEclaim` / `ENclaim`.
-- **Font:** `calibri`* (12 pt, as the Word templates; set with Carlito, which is metrically compatible with Calibri) / `helvetica` (11 pt).
+- **Font:** `calibri`* (12 pt, as the Word templates; set with Carlito, which is metrically compatible with Calibri) / `helvetica` (11 pt). Math is set in the same font (package `mathastext`: Latin letters italic, digits and basic symbols upright; Greek letters and large operators remain Computer Modern); `amsmath` is loaded by the class.
 - **Page numbers** (from page 2 on; the first page carries the claim): `pageNumbersMofN`* / `pageNumbers` / `noPageNumbers`, in the style `pageNumbersClassic`* (as in v2.0: `2/3` or `2`, bottom right) or `pageNumbersTemplate` (as in the Word templates: `▪ 2 von 3 ▪` or `▪ 2 ▪`, 8 pt, centred).
 - **Fold marks:** `foldMarks`* / `noFoldMarks` — marks at 105 mm and 210 mm (DIN 5008, form B) and the punch mark at 148.5 mm, on every page.
 - **Header:** `headerOnlyFirstPage`* / `headerEveryPage` (logo and sender block on all pages; the text then starts lower on the following pages).
@@ -33,8 +33,9 @@ Other options are passed to the `article` class. The font size is set by the fon
 
 Sender block (preamble or before the text; empty entries are omitted):
 
-- `\department{<unit>}` — first line, bold (placeholder: *Organisational unit* / *Organisationseinheit*)
-- `\sendername{<name>}` — second line (placeholder: *First name Last name* / *Vorname Nachname*)
+- `\department{<unit>}` — below the name, bold (placeholder: *Organisational unit* / *Organisationseinheit*)
+- `\sendername{<name>}` — first line (placeholder: *First name Last name* / *Vorname Nachname*)
+- `\university{<name>}` — below the unit; follows the language of the logo: *Montanuniversität Leoben* (German logo) / *TU Leoben* (English logo); `\university{}` removes it
 - `\address{<address>}` — one line (default: Franz-Josef-Straße 18, 8700 Leoben, Austria; German: …, A-8700 Leoben)
 - `\phone{<number>}`, `\mobile{<number>}`, `\mail{<e-mail>}` — empty by default
 - `\web[<url>]{<text>}` — default `www.unileoben.ac.at`; `<url>` defaults to `<text>` (with `https://` added if missing); `\web{}` removes it
